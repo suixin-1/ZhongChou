@@ -52,7 +52,7 @@ public class ProjectController {
 		c.setPsName(psName);
 		c.setUsName(usName);
 		int psType=0;	
-		if(pstName!=null || psName!=null ||usName !=null || psType!=0){
+		if(pstName!=null || psName!=null ||usName !=null || psTyp!=null){
 			if(psTyp.equals("项目状态")){
 				psType=99;
 				c.setPsType(99);
@@ -226,16 +226,17 @@ public class ProjectController {
 @RequestMapping("/selectComment")
 
 public String selectComment(HttpServletRequest res){
+	
 	String ids  = res.getParameter("id");
 	int id=Integer.parseInt(ids);
+	Projects findById = projectService.findById(id);
 	List<Comment> c=projectService.selectComment(id);
-	for (Comment comment : c) {
-		
-		System.out.println(comment);
-	}
+	
+	
 	res.setAttribute("list", c);
+	res.setAttribute("fbd",findById );
 
-return "commentxq1";	
+return "project-comment";	
 }
 
 }

@@ -10,7 +10,7 @@
           <h1 class="page-header">${fbd.psName}</h1>
 		
 			<ul class="nav nav-tabs">
-		  <li role="presentation" class="active"><a href="product-info1.html">基本信息</a></li>
+		  <li role="presentation" class="active"><a href="javascript:ToClickSubmit2('selectById?id=${fbd.psId}')">基本信息</a></li>
 		  <li role="presentation"><a href="javascript:ToClickSubmit2('selectMessage?id=${fbd.psId}')">项目信息</a></li>
 		  <li role="presentation"><a href="javascript:ToClickSubmit2('selectComment?id=${fbd.psId}')">项目评论</a></li>
 		  <li role="presentation"><a href="javascript:ToClickSubmit2('selectSchedule?id=${fbd.psId}')">项目进度</a></li>

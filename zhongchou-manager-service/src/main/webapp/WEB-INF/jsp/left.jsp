@@ -13,7 +13,7 @@
             <li class="active"><a href="javascript:ToClick('inde')">首页</a></li>
         </ul>
 		<ul class="nav nav-sidebar">
-            <li><a href="javascript:ToClick('selectAll?page=1')">所有项目*</a></li>
+            <li><a href="javascript:ToClick('selectAll')">所有项目*</a></li>
             <li><a href="javascript:ToClick('selectType')">项目审核</a></li>
             <li><a href="javascript:ToClick('comment?page=1')">项目评论</a></li>
             <li><a href="javascript:ToClick('classify?page=1')">项目分类</a></li>

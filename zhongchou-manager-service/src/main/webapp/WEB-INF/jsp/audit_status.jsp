@@ -20,6 +20,7 @@
     	所有待审核项目列表
     </div>
   </div>
+  
   <div class="panel-body">
    
           <div class="table-responsive ">
@@ -46,7 +47,7 @@
                   <td>${p.psName}</td>   
                   <td><fmt:formatDate value="${p.psEndtime}" pattern="yyyy-MM-dd" /></td>                  
                   <td>${p.usName}</td>
-                  <td><%-- ${p.psType} --%>待审核</td>
+                  <td>待审核</td>
                  <td>
                   	<a href="javascript:ToClickSubmit2('updateById?id=${p.psId}')">审核同过</a>&nbsp;
                   	<a href="javascript:ToClickSubmit3('updateByPsId?id=${p.psId}')">审核不同过</a>

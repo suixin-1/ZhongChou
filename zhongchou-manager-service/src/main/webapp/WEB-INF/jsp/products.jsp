@@ -43,7 +43,7 @@
 			   </select>
 			  </div>
 			  &nbsp;&nbsp;
-			  <button class="btn btn-default btn-primary" onclick="javascript:ToClickSubmit2('selectByKey')">查询</button>
+			  <button class="btn btn-default btn-primary" onclick="javascript:ToClickSubmit2('selectAll')">查询</button>
 			</div>
     </div>
    </div>
@@ -83,9 +83,7 @@
                   <td>${p.usName}</td>
                   <td>
                   	<a href="javascript:ToClick('selectById?id=${p.usId}')">详情</a>
-                  	<!--<a href="#" title="查看项目详情"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>-->
-                  	<!--&nbsp;&nbsp;
-                  	<a href="#" title="编辑项目信息"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>-->
+                  	
                   </td>
                 </tr>
                 

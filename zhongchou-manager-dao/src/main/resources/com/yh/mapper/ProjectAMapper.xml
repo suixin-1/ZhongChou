@@ -15,11 +15,10 @@
               ps_getmoney psGetmoney,
               ps_money psMoney,
               us_name usName,
-              us_id usId
+              ps_us_id usId
 
 		      from `projects` p left join `projectstype` pr on pr.pst_id=p.ps_pst_id  left join `user` `u` on  p.ps_us_id  = `u`.us_id 
-		  <!-- 0代表待审核 -->
-		  		where p.ps_type=0
+		  
 		  
 	</select>
 	<select id="selectByKey" resultType="com.yh.pojo.ProjectA" parameterType="com.yh.pojo.Condition">
@@ -32,7 +31,7 @@
               ps_getmoney psGetmoney,
               ps_money psMoney,
               us_name usName,
-              us_id usId
+              ps_us_id usId
 		      from `projects` p left join `projectstype` pr on pr.pst_id=p.ps_pst_id  left join `user` `u` on  p.ps_us_id  = `u`.us_id 
 		  
 		<where>
