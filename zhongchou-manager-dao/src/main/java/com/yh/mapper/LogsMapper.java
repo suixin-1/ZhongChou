@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface LogsMapper {
+	
+	
     int countByExample(LogsExample example);
 
     int deleteByExample(LogsExample example);

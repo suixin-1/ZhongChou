@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%><%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,6 +12,23 @@
 <body>
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<h1 class="page-header">用户日志</h1>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="form-inline">
+					<!-- <div class="form-group">
+						<input type="text" class="form-control" id="exampleInputName2"
+							placeholder="请输入用户名字">
+					</div> -->
+					<div class="form-group">
+						<input type="text" class="form-control" id="logUsId"
+							placeholder="请输入用户ID">
+					</div>
+					&nbsp;&nbsp;
+					<button class="btn btn-default btn-primary"
+						onclick="javascript:ToClickSubmit2('logsList')">查询</button>
+				</div>
+			</div>
+		</div>
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -21,21 +38,27 @@
 
 				<div class="table-responsive ">
 					<table class="table table-striped table-bordered">
+					
 						<thead>
 							<tr>
-								<th>日志id</th>
+								<!-- <th>日志id</th> -->
 								<th>用户ID</th>
 								<th>日志内容</th>
+								<th>登录时间</th>
 								<th>操作</th>
 							</tr>
 						</thead>
 						<c:forEach items="${list }" var="logs">
 							<TR>
 
-								<TD>${logs.logId }</TD>
+								<%-- <TD>${logs.logId }</TD> --%> 
 								<TD>${logs.logUsId }</TD>
 								<TD>${logs.logContent }</TD>
-								<TD><a href="javascript:ToClick('goLogsUpdate?id=${logs.logId}')">详情</a> | <a
+								<td><fmt:formatDate value="${logs.logDate}" pattern="yyyy-MM-dd" /></td>
+									
+								<TD><a
+									href="javascript:ToClick('goLogsUpdate?id=${logs.logId}')">详情</a>
+									| <a
 									href="javascript:TologsDelete('logsDelete?id=${logs.logId }')">删除</a></TD>
 
 							</TR>
@@ -118,43 +141,77 @@
 		}
 
 	}
+	
+	 function ToClickSubmit2(url){
+	    	/* $("#p_id").val();
+	        $("#p_name").val();
+	        $("#p_des").val();
+	        $("#p_time").val();
+	        $("#p_status").val(); */
+	        
+	        var list={"logUsId":$("#logUsId").val(),"logContent":$("#logContent").val()/* ,"logDate":$("#logDate").val() */};
+	        
+	        $.ajax({
+				//请求方式
+	            type : "POST",
+	            //请求的媒体类型
+	           	//contentType: "text/html;charset=UTF-8",
+	            //请求地址
+	            url : "/"+url,
+	            //数据，json字符串
+	            //data : "p_id="+$("#p_id").val()+"&p_name="+$("#p_name").val()+"&p_des="+ $("#p_des").val()+"&p_status="+$("#p_status").val(),
+	          	data : list,
+	            //请求成功
+	            success : function(result) {
+	               //console.log(result);
+	                //$("#myModal").css("display:none");
+	                
+	               $("#include").html(result);
+	            }
+	            //请求失败，包含具体的错误信息
+	            /* error : function(e){
+	                console.log(e.status);
+	                console.log(e.responseText);
+	            } */
+			},true);
+	    }
 
-	function TologsDelete(url){
+	function TologsDelete(url) {
 		$.ajax({
 			//请求方式
 			type : "GET",
 			//请求的媒体类型
 			contentType : "text/html;charset=UTF-8",
 			//请求地址
-			url : "/"+url,
+			url : "/" + url,
 			//数据，json字符串
 			//data : list,
 			//请求成功
-			dataType:"json",
+			dataType : "json",
 			success : function(result) {
 				//console.log(result);
-				if(result.status==200){
+				if (result.status == 200) {
 					$.ajax({
 						//请求方式
-			            type : "POST",
-			            //请求的媒体类型
-			            contentType: "text/html;charset=UTF-8",
-			            //请求地址
-			            url : "/logsList",
-			            //数据，json字符串
-			            //data : JSON.stringify(list),
-			            //请求成功
-			            success : function(result) {
-			                //console.log(result);
-			                $("#include").html(result);
-			            }
-			            //请求失败，包含具体的错误信息
-			            /* error : function(e){
-			                console.log(e.status);
-			                console.log(e.responseText);
-			            } */
-					},true);
-				}else if(result.status==500){
+						type : "POST",
+						//请求的媒体类型
+						contentType : "text/html;charset=UTF-8",
+						//请求地址
+						url : "/logsList",
+						//数据，json字符串
+						//data : JSON.stringify(list),
+						//请求成功
+						success : function(result) {
+							//console.log(result);
+							$("#include").html(result);
+						}
+					//请求失败，包含具体的错误信息
+					/* error : function(e){
+					    console.log(e.status);
+					    console.log(e.responseText);
+					} */
+					}, true);
+				} else if (result.status == 500) {
 					alert(result.msg);
 				}
 				//$("#include").html(result);
@@ -166,7 +223,7 @@
 		} */
 		}, true);
 	}
-	
+
 	function account_admin(pages) {
 		var list = {
 			"count" : $("#count").val(),

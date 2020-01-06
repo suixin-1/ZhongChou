@@ -16,6 +16,8 @@ import com.alibaba.dubbo.common.json.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yh.pojo.Logs;
+import com.yh.pojo.LogsExample;
+import com.yh.pojo.LogsExample.Criteria;
 import com.yh.pojo.User;
 import com.yh.pojo.zhongchouResult;
 import com.yh.service.LogsService;
@@ -55,10 +57,29 @@ public class LogsController {
 		}
 
 		PageHelper.startPage(page,coun);
+		
+		String logContent = req.getParameter("logContent");
+		String logUsId = req.getParameter("logUsId");
+		
+		if(logUsId!=null){
+			int usId = Integer.parseInt(logUsId);
+			/*Logs logs = new Logs();
+			logs.setLogContent(logContent);
+			logs.setLogUsId(usId);*/
+			System.out.println(usId+"?111111111111111111");
+			List<Logs> lists = logsService.selectLogsByUid(usId);
+			PageInfo<Logs> info = new PageInfo<>(lists);
+			req.setAttribute("pb", info);
+			req.setAttribute("list",lists);
+			
+		}else{
 		List<Logs> list = logsService.selectLogsAll();
 		PageInfo<Logs> info = new PageInfo<>(list);
 		req.setAttribute("pb", info);
 		req.setAttribute("list", list);
+
+		}
+		
 		
 		return "logsList";
 

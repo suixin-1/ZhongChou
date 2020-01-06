@@ -15,7 +15,8 @@ public interface LogsService {
 	
    //查询列表
    List<Logs> selectLogsAll();
-   
+   //根据用户id模糊查询
+   List<Logs> selectLogsByUid(int logUsId);
    
    //根据id查询用户日志信息
    Logs selectLogsById(Integer logId);

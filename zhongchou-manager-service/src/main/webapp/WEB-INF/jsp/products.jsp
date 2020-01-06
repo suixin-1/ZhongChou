@@ -43,7 +43,7 @@
 			   </select>
 			  </div>
 			  &nbsp;&nbsp;
-			  <button class="btn btn-default btn-primary" onclick="javascript:ToClickSubmit2('selectByKey')">查询</button>
+			  <button class="btn btn-default btn-primary" onclick="javascript:ToClickSubmit2('selectAll')">查询</button>
 			</div>
     </div>
    </div>

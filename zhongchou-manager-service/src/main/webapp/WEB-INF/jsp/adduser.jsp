@@ -76,6 +76,7 @@
 									<input class="form-control" id="u_usPhone" name="usPhone"
 										type="text" value="${usermanage.usPhone}" />
 								</div>
+								</div>
 
 								<div class="form-group ">
 									<label for="u_usAddress" class="control-label col-lg-2">用户地址<span

@@ -42,4 +42,11 @@ public class Logs {
     public void setLogDate(Date logDate) {
         this.logDate = logDate;
     }
+
+	@Override
+	public String toString() {
+		return "Logs [logId=" + logId + ", logUsId=" + logUsId + ", logContent=" + logContent + ", logDate=" + logDate
+				+ "]";
+	}
+    
 }
