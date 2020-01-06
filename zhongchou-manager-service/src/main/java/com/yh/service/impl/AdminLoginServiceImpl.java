@@ -35,7 +35,9 @@ public class AdminLoginServiceImpl implements AdminloginService {
 
 		return zhongchouResult.ok(200, list.get(0));
 	}
-
+/**
+ * 添加管理员用户名验证
+ */
 	@Override
 	public zhongchouResult findAdmin(String adminName) {
 		//
@@ -48,6 +50,23 @@ public class AdminLoginServiceImpl implements AdminloginService {
 		}
 
 		return zhongchouResult.build(500,"用户名不可用！");
+	}
+/**
+ * 修改管理员旧密码验证
+ */
+	@Override
+	public zhongchouResult updateAdminPwdbyNameandPwd(String name, String pwd ) {
+		Admin admin = new Admin();
+		admin.setAdminName(name);
+		admin.setAdminPassword(pwd);
+		AdminExample example = new AdminExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andAdminNameEqualTo(name);
+		int selective = adminMapper.updateByExampleSelective(admin, example);
+		if(selective>0){
+			return zhongchouResult.build(200, "管理员密码修改成功！");
+		}		
+		return zhongchouResult.build(500, "管理员密码修改失败！");
 	}
 
 

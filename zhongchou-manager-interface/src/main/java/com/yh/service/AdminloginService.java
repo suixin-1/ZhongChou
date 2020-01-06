@@ -13,4 +13,7 @@ public interface AdminloginService {
 	
 	//根据用户名查询
 	zhongchouResult findAdmin(String adminName);
+	
+	//根据管理员账户密码修改密码
+	zhongchouResult updateAdminPwdbyNameandPwd(String adminName,String adminPassword);
 }
