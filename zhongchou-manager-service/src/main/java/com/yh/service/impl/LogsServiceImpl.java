@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yh.mapper.ClogsMapper;
 import com.yh.mapper.LogsMapper;
 import com.yh.mapper.UserMapper;
 import com.yh.pojo.Logs;
@@ -24,6 +25,9 @@ public class LogsServiceImpl implements LogsService {
 	private LogsMapper logsMapper;
 	
 	@Autowired
+	private ClogsMapper clogsMapper;
+	
+	@Autowired
 	private UserMapper userMapper;
 	
 	
@@ -33,6 +37,11 @@ public class LogsServiceImpl implements LogsService {
 		LogsExample example = new LogsExample();
 		List<Logs> list = logsMapper.selectByExample(example);
 		return list;
+	}
+	@Override
+	public List<Logs> selectLogsByUid(int logUsId) {
+		List<Logs> selectLogsByUid = clogsMapper.selectLogsByUid(logUsId);
+		return selectLogsByUid;
 	}
 	
 	
@@ -79,6 +88,11 @@ public class LogsServiceImpl implements LogsService {
 		
 		return zhongchouResult.build(500, "删除失败");
 	}
+	
+
+
+
+	
 
 
 
