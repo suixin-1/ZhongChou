@@ -69,5 +69,68 @@ public class AdminLoginController {
 		return "";
 		
 	}
+	
+	/**
+	 * 跳转到管理员账号修改界面
+	 * @author zhangdi
+	 *
+	 */
+	@RequestMapping("/admin/setting_admin")
+	public String toupdateAdmin(HttpServletRequest req){
 
+		return "setting_admin";
+	}
+	/**
+	 * 管理员原密码验证
+	 * @author zhangdi
+	 *
+	 */
+	@RequestMapping(value="/verify_admin", produces = {"application/json;charset=UTF-8"})
+	@ResponseBody
+	public String verifyAdmin(HttpServletRequest req){
+		String username = req.getParameter("username");
+		String pwd = req.getParameter("password");
+		zhongchouResult findAdmin = adminloginService.findAdmin(username, pwd);	
+		if(findAdmin.getStatus()==200){
+			findAdmin.setMsg("密码正确");
+		}else{
+			findAdmin.setMsg("密码输入不正确");
+		}
+		String json = "";
+		try {
+			json = JSON.json(findAdmin);
+		} catch (IOException e) {
+		
+		}
+		return json;
+
+	}
+	
+	
+	/**
+	 * 管理员密码修改
+	 * @author zhangdi
+	 *
+	 */
+	@RequestMapping(value="/setting_admin", produces = {"application/json;charset=UTF-8"})
+	@ResponseBody
+	public String updateAdmin(HttpServletRequest req){
+		String uname = req.getParameter("username");
+		String pwd = req.getParameter("password");
+		System.out.println(uname);
+		System.out.println(pwd);
+		zhongchouResult result = adminloginService.updateAdminPwdbyNameandPwd(uname, pwd);
+		if(result.getStatus()==200){
+			result.setMsg("密码修改成功！");
+		}else{
+			result.setMsg("密码修改失败！");
+		}
+		String json = "";
+		try {
+			json = JSON.json(result);
+		} catch (IOException e) {
+		
+		}
+		return json;
+	}
 }
