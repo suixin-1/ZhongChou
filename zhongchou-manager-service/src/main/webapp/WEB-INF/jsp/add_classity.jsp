@@ -62,17 +62,45 @@
 				            //data : "p_id="+$("#p_id").val()+"&p_name="+$("#p_name").val()+"&p_des="+ $("#p_des").val()+"&p_status="+$("#p_status").val(),
 				          	data : list,
 				            //请求成功
-				            success : function(result) {
-				                //console.log(result);
-				                $("#myModal").css("display:none");
-				                
-				                $("#include").html(result);
-				            }
-				            //请求失败，包含具体的错误信息
-				            /* error : function(e){
-				                console.log(e.status);
-				                console.log(e.responseText);
-				            } */
+				          	 dataType:"json",
+					            success : function(result) {
+					                //console.log(result);
+					                
+					                if(result.status==200){
+					                	alert(result.msg);
+					                	$.ajax({
+					        				//请求方式
+					        	            type : "GET",
+					        	            //请求的媒体类型
+					        	            contentType: "text/html;charset=UTF-8",
+					        	            //请求地址
+					        	            url : "/classify",
+					        	            //数据，json字符串
+					        	            //data : JSON.stringify(list),
+					        	            //请求成功
+					        	            success : function(result) {
+					        	                //console.log(result);
+					        	                $("#include").html(result);
+					        	            }
+					        	            //请求失败，包含具体的错误信息
+					        	            /* error : function(e){
+					        	                console.log(e.status);
+					        	                console.log(e.responseText);
+					        	            } */
+					        			},true);
+					                	
+					                	
+					                }else if(result.status==500){
+					                	alert(result.msg);
+					                }
+					                
+					                //$("#include").html(result);
+					            }
+					            //请求失败，包含具体的错误信息
+					            /* error : function(e){
+					                console.log(e.status);
+					                console.log(e.responseText);
+					            } */
 						},true);
 				    }
                     </script>

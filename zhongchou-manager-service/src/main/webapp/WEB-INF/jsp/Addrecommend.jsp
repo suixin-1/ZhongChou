@@ -117,16 +117,45 @@ function getdelAddCLR(id,psid,pstid){
 		            url : "/CLAddRecommend?ps_id="+psid+"&pst_id="+pstid,
 		          	//data : list,
 		            //请求成功
-		            success : function(result) {
-
-		                
-		                $("#include").html(result);
-		            }
-		            //请求失败，包含具体的错误信息
-		            /* error : function(e){
-		                console.log(e.status);
-		                console.log(e.responseText);
-		            } */
+		          	 dataType:"json",
+			            success : function(result) {
+			                //console.log(result);
+			                
+			                if(result.status==200){
+			                	alert(result.msg);
+			                	$.ajax({
+			        				//请求方式
+			        	            type : "GET",
+			        	            //请求的媒体类型
+			        	            contentType: "text/html;charset=UTF-8",
+			        	            //请求地址
+			        	            url : "/Addrecommend",
+			        	            //数据，json字符串
+			        	            //data : JSON.stringify(list),
+			        	            //请求成功
+			        	            success : function(result) {
+			        	                //console.log(result);
+			        	                $("#include").html(result);
+			        	            }
+			        	            //请求失败，包含具体的错误信息
+			        	            /* error : function(e){
+			        	                console.log(e.status);
+			        	                console.log(e.responseText);
+			        	            } */
+			        			},true);
+			                	
+			                	
+			                }else if(result.status==500){
+			                	alert(result.msg);
+			                }
+			                
+			                //$("#include").html(result);
+			            }
+			            //请求失败，包含具体的错误信息
+			            /* error : function(e){
+			                console.log(e.status);
+			                console.log(e.responseText);
+			            } */
 				},true);
  		  } else {
  		   alert();

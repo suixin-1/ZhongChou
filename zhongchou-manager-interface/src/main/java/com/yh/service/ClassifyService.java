@@ -3,6 +3,8 @@ package com.yh.service;
 import java.util.List;
 
 import com.yh.pojo.Projectstype;
+import com.yh.pojo.ProjectstypeExample;
+import com.yh.pojo.zhongchouResult;
 /**
  * 
  * @author Administrator
@@ -10,6 +12,14 @@ import com.yh.pojo.Projectstype;
  */
 public interface ClassifyService {
 
+
+	
+	/**
+	 * 查询全部方法
+	 * @return
+	 */
+	
+	
 public List<Projectstype> selectClassify();
 /**
  * 
@@ -30,7 +40,7 @@ public boolean delClassify(int pstId);
  * @param record
  * @return
  */
-public boolean addClassify(Projectstype record);
+public zhongchouResult addClassify(Projectstype record);
 /**
  * 项目分类  查看详情方法
  * @param id

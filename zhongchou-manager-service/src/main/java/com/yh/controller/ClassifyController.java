@@ -1,5 +1,7 @@
 package com.yh.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,11 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.dubbo.common.json.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mysql.fabric.xmlrpc.base.Data;
 import com.yh.pojo.Projectstype;
+import com.yh.pojo.ProjectstypeExample;
+import com.yh.pojo.zhongchouResult;
+import com.yh.pojo.ProjectstypeExample.Criteria;
 import com.yh.service.ClassifyService;
 
 /**
@@ -99,16 +106,28 @@ public class ClassifyController {
 	public String addgoto(){
 		return "add_classity";
 	}
-	@RequestMapping("/add")
+	
+	@RequestMapping(value="/add", produces = {"application/json;charset=UTF-8"})
+	@ResponseBody
 	public String addclassify(HttpServletRequest request,Projectstype record){
-	
-		Date d=new Date();
-		record.setPstStardate(d);
-		record.setPstType(0);
-	boolean addClassify = classifyService.addClassify(record);
-	
-	
-	String classify = classify(request);
-	return classify;
-	}
+			System.out.println("--------------");
+			Date d=new Date();
+			record.setPstStardate(d);
+			record.setPstType(0);
+			try {
+				request.setCharacterEncoding("UTF-8");
+				
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			zhongchouResult addQuestionall = classifyService.addClassify(record);
+			String json = "";
+			try {
+				json = JSON.json(addQuestionall);
+			} catch (IOException e) {
+			
+			}
+			return json;
+
+		}
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.yh.mapper.ProjectstypeMapper;
 import com.yh.pojo.Projectstype;
 import com.yh.pojo.ProjectstypeExample;
+import com.yh.pojo.zhongchouResult;
+import com.yh.pojo.ProjectstypeExample.Criteria;
 import com.yh.service.ClassifyService;
 
 @Service
@@ -41,16 +43,25 @@ public class classityServiceImpl implements ClassifyService{
 		return true;
 	}
 	@Override
-	public boolean addClassify(Projectstype record) {
-		int insert = projectstypeMapper.insert(record);
-		if(insert==0){
-			return false;
+	public zhongchouResult addClassify(Projectstype record) {
+		String pstName = record.getPstName();
+		ProjectstypeExample example = new ProjectstypeExample();
+        Criteria createCriteria = example.createCriteria();
+		createCriteria.andPstDescEqualTo(pstName);
+		List<Projectstype> selectByExample = projectstypeMapper.selectByExample(example);
+		if(selectByExample.isEmpty()){
+			int i = projectstypeMapper.insert(record);
+			if(i>0){
+				return zhongchouResult.build(200, "添加分类成功");
+			}
+			return zhongchouResult.build(500, "添加分类失败");		
 		}
-		return true;
+		return zhongchouResult.build(500, "添加分类失败,name已有");
 	}
 	@Override
 	public Projectstype selectByClssietyID(int id) {
 		return projectstypeMapper.selectByPrimaryKey(id);
 	}
+
 
 }
