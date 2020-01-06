@@ -32,4 +32,17 @@ insert into recommend (r_ps_id, r_pst_id)
     values (#{r_ps_id},#{r_pst_id})
     
   </insert>
+  
+    <select id="selectaddRecommend" resultType="com.yh.pojo.CLRecommend">
+SELECT
+r_id,
+r_ps_id,
+ps_name,
+r_pst_id,
+pst_name
+ FROM recommend 
+ LEFT JOIN projects ON r_ps_id=ps_id 
+ LEFT JOIN projectstype ON r_pst_id=pst_id where r_ps_id=${r_ps_id}
+</select>
+  
 </mapper>

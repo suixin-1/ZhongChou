@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import com.yh.mapper.CLRecommendMapper;
 import com.yh.pojo.CLAddrecommend;
 import com.yh.pojo.CLRecommend;
+import com.yh.pojo.Projectstype;
+import com.yh.pojo.ProjectstypeExample;
+import com.yh.pojo.zhongchouResult;
+import com.yh.pojo.ProjectstypeExample.Criteria;
 import com.yh.service.CLRecommendService;
 /**
  * 
@@ -34,11 +38,16 @@ public class CLRecommendServiceimpl implements CLRecommendService{
 		return  cLRecommendMapper.selectAddRecommend();
 	}
 	@Override
-	public int insert(CLRecommend recommend) {
-		int insert = cLRecommendMapper.insert(recommend);
-		return insert;
-	}
-
-	
-
+	public zhongchouResult insert(CLRecommend recommend) {
+		int r_ps_id = recommend.getR_ps_id();
+		List<CLRecommend> selectaddRecommend = cLRecommendMapper.selectaddRecommend(r_ps_id);
+		if(selectaddRecommend.isEmpty()){
+			int i = cLRecommendMapper.insert(recommend);
+			if(i>0){
+				return zhongchouResult.build(200, "添加分类成功");
+			}
+			return zhongchouResult.build(500, "添加分类失败");		
+		}
+		return zhongchouResult.build(500, "添加分类失败,name已有");
+}
 }

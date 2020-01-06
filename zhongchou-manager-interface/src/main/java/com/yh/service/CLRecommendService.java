@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.yh.pojo.CLAddrecommend;
 import com.yh.pojo.CLRecommend;
+import com.yh.pojo.zhongchouResult;
 /**
  * 项目推荐  接口
  * @author Administrator
@@ -36,5 +37,5 @@ public interface CLRecommendService {
 	  * @return
 	  */
 	 
-	 int insert(CLRecommend recommend); 
+	 public zhongchouResult insert(CLRecommend recommend); 
 }

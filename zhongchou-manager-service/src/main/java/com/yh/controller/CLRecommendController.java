@@ -1,5 +1,7 @@
 package com.yh.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,12 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.dubbo.common.json.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yh.pojo.CLAddrecommend;
 import com.yh.pojo.CLRecommend;
 import com.yh.pojo.ClComment;
+import com.yh.pojo.zhongchouResult;
 import com.yh.service.CLRecommendService;
 /**
  * 项目推荐 Controller
@@ -91,16 +96,28 @@ public class CLRecommendController {
 		return "Addrecommend";
 	}
 	
-	@RequestMapping("/CLAddRecommend")
+	@RequestMapping(value="/CLAddRecommend", produces = {"application/json;charset=UTF-8"})
+	@ResponseBody
 	public String AddRecommend(HttpServletRequest request){
 	int ps_id =Integer.parseInt(request.getParameter("ps_id")); 
 	int pst_id =Integer.parseInt( request.getParameter("pst_id"));
 	CLRecommend recommend=new CLRecommend();
 	recommend.setR_ps_id(ps_id);
 	recommend.setR_pst_id(pst_id);;
-	int insert = CLR.insert(recommend);
-	
-		return selectAddRecommend(request);
+	try {
+		request.setCharacterEncoding("UTF-8");
+		
+	} catch (UnsupportedEncodingException e) {
+		e.printStackTrace();
 	}
+	 zhongchouResult insert = CLR.insert(recommend);
+	String json = "";
+	try {
+		json = JSON.json(insert);
+	} catch (IOException e) {
 	
+	}
+	return json;
+
+}
 }
