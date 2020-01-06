@@ -14,7 +14,7 @@
 
 		
 			<ul class="nav nav-tabs">
-		  <li role="presentation" class="active"><a href="product-info1.html">基本信息</a></li>
+		  <li role="presentation" class="active"><a href="javascript:ToClickSubmit2('selectById?id=${fbd.psId}')">基本信息</a></li>
 		  <li role="presentation"><a href="javascript:ToClickSubmit2('selectMessage?id=${fbd.psId}')">项目信息</a></li>
 		  <li role="presentation"><a href="javascript:ToClickSubmit2('selectComment?id=${fbd.psId}')">项目评论</a></li>
 		  <li role="presentation"><a href="javascript:ToClickSubmit2('selectSchedule?id=${fbd.psId}')">项目进度</a></li>
@@ -75,7 +75,28 @@
 			</div>
 			      
 			        </div>
-			     
+			  <script> 
+			        function ToClickSubmit2(url){
+				    
+				        
+				       
+				        
+				        $.ajax({
+							//请求方式
+				            type : "POST",
+				           
+				            url :"/"+url,
+				            
+				            //	data : list,
+				            //请求成功
+				            success : function(result) {
+				               
+				               $("#include").html(result);
+				            }
+				           
+						},true);
+				    }
+			        </script>    
 			       
 </body>
 </html>
