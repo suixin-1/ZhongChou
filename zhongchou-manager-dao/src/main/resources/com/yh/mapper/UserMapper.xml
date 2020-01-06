@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yh.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.yh.pojo.User" >
+    <id column="us_id" property="usId" jdbcType="INTEGER" />
+    <result column="us_email" property="usEmail" jdbcType="VARCHAR" />
+    <result column="us_name" property="usName" jdbcType="VARCHAR" />
+    <result column="us_password" property="usPassword" jdbcType="VARCHAR" />
+    <result column="us_money" property="usMoney" jdbcType="DOUBLE" />
+    <result column="us_idcard" property="usIdcard" jdbcType="VARCHAR" />
+    <result column="us_phone" property="usPhone" jdbcType="VARCHAR" />
+    <result column="us_address" property="usAddress" jdbcType="VARCHAR" />
+    <result column="us_role" property="usRole" jdbcType="INTEGER" />
+    <result column="us_sex" property="usSex" jdbcType="VARCHAR" />
+    <result column="us_code" property="usCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    us_id, us_email, us_name, us_password, us_money, us_idcard, us_phone, us_address, 
+    us_role, us_sex, us_code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yh.pojo.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where us_id = #{usId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where us_id = #{usId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yh.pojo.UserExample" >
+    delete from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yh.pojo.User" >
+    insert into user (us_id, us_email, us_name, 
+      us_password, us_money, us_idcard, 
+      us_phone, us_address, us_role, 
+      us_sex, us_code)
+    values (#{usId,jdbcType=INTEGER}, #{usEmail,jdbcType=VARCHAR}, #{usName,jdbcType=VARCHAR}, 
+      #{usPassword,jdbcType=VARCHAR}, #{usMoney,jdbcType=DOUBLE}, #{usIdcard,jdbcType=VARCHAR}, 
+      #{usPhone,jdbcType=VARCHAR}, #{usAddress,jdbcType=VARCHAR}, #{usRole,jdbcType=INTEGER}, 
+      #{usSex,jdbcType=VARCHAR}, #{usCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yh.pojo.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="usId != null" >
+        us_id,
+      </if>
+      <if test="usEmail != null" >
+        us_email,
+      </if>
+      <if test="usName != null" >
+        us_name,
+      </if>
+      <if test="usPassword != null" >
+        us_password,
+      </if>
+      <if test="usMoney != null" >
+        us_money,
+      </if>
+      <if test="usIdcard != null" >
+        us_idcard,
+      </if>
+      <if test="usPhone != null" >
+        us_phone,
+      </if>
+      <if test="usAddress != null" >
+        us_address,
+      </if>
+      <if test="usRole != null" >
+        us_role,
+      </if>
+      <if test="usSex != null" >
+        us_sex,
+      </if>
+      <if test="usCode != null" >
+        us_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="usId != null" >
+        #{usId,jdbcType=INTEGER},
+      </if>
+      <if test="usEmail != null" >
+        #{usEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="usName != null" >
+        #{usName,jdbcType=VARCHAR},
+      </if>
+      <if test="usPassword != null" >
+        #{usPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usMoney != null" >
+        #{usMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="usIdcard != null" >
+        #{usIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="usPhone != null" >
+        #{usPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="usAddress != null" >
+        #{usAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="usRole != null" >
+        #{usRole,jdbcType=INTEGER},
+      </if>
+      <if test="usSex != null" >
+        #{usSex,jdbcType=VARCHAR},
+      </if>
+      <if test="usCode != null" >
+        #{usCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yh.pojo.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user
+    <set >
+      <if test="record.usId != null" >
+        us_id = #{record.usId,jdbcType=INTEGER},
+      </if>
+      <if test="record.usEmail != null" >
+        us_email = #{record.usEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usName != null" >
+        us_name = #{record.usName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usPassword != null" >
+        us_password = #{record.usPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usMoney != null" >
+        us_money = #{record.usMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.usIdcard != null" >
+        us_idcard = #{record.usIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usPhone != null" >
+        us_phone = #{record.usPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usAddress != null" >
+        us_address = #{record.usAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usRole != null" >
+        us_role = #{record.usRole,jdbcType=INTEGER},
+      </if>
+      <if test="record.usSex != null" >
+        us_sex = #{record.usSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usCode != null" >
+        us_code = #{record.usCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user
+    set us_id = #{record.usId,jdbcType=INTEGER},
+      us_email = #{record.usEmail,jdbcType=VARCHAR},
+      us_name = #{record.usName,jdbcType=VARCHAR},
+      us_password = #{record.usPassword,jdbcType=VARCHAR},
+      us_money = #{record.usMoney,jdbcType=DOUBLE},
+      us_idcard = #{record.usIdcard,jdbcType=VARCHAR},
+      us_phone = #{record.usPhone,jdbcType=VARCHAR},
+      us_address = #{record.usAddress,jdbcType=VARCHAR},
+      us_role = #{record.usRole,jdbcType=INTEGER},
+      us_sex = #{record.usSex,jdbcType=VARCHAR},
+      us_code = #{record.usCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yh.pojo.User" >
+    update user
+    <set >
+      <if test="usEmail != null" >
+        us_email = #{usEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="usName != null" >
+        us_name = #{usName,jdbcType=VARCHAR},
+      </if>
+      <if test="usPassword != null" >
+        us_password = #{usPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usMoney != null" >
+        us_money = #{usMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="usIdcard != null" >
+        us_idcard = #{usIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="usPhone != null" >
+        us_phone = #{usPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="usAddress != null" >
+        us_address = #{usAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="usRole != null" >
+        us_role = #{usRole,jdbcType=INTEGER},
+      </if>
+      <if test="usSex != null" >
+        us_sex = #{usSex,jdbcType=VARCHAR},
+      </if>
+      <if test="usCode != null" >
+        us_code = #{usCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where us_id = #{usId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yh.pojo.User" >
+    update user
+    set us_email = #{usEmail,jdbcType=VARCHAR},
+      us_name = #{usName,jdbcType=VARCHAR},
+      us_password = #{usPassword,jdbcType=VARCHAR},
+      us_money = #{usMoney,jdbcType=DOUBLE},
+      us_idcard = #{usIdcard,jdbcType=VARCHAR},
+      us_phone = #{usPhone,jdbcType=VARCHAR},
+      us_address = #{usAddress,jdbcType=VARCHAR},
+      us_role = #{usRole,jdbcType=INTEGER},
+      us_sex = #{usSex,jdbcType=VARCHAR},
+      us_code = #{usCode,jdbcType=VARCHAR}
+    where us_id = #{usId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yh.mapper.ProCMapper" >
+  <resultMap id="BaseResultMap" type="com.yh.pojo.ProC" >
+    <id column="pro_c_id" property="proCId" jdbcType="INTEGER" />
+    <result column="pro_us_id" property="proUsId" jdbcType="INTEGER" />
+    <result column="pro_c_vedio" property="proCVedio" jdbcType="VARCHAR" />
+    <result column="pro_c_story" property="proCStory" jdbcType="VARCHAR" />
+    <result column="pro_c_support" property="proCSupport" jdbcType="VARCHAR" />
+    <result column="pro_c_repay" property="proCRepay" jdbcType="VARCHAR" />
+    <result column="pro_c_aboutme" property="proCAboutme" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pro_c_id, pro_us_id, pro_c_vedio, pro_c_story, pro_c_support, pro_c_repay, pro_c_aboutme
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yh.pojo.ProCExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_c
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pro_c
+    where pro_c_id = #{proCId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pro_c
+    where pro_c_id = #{proCId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yh.pojo.ProCExample" >
+    delete from pro_c
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yh.pojo.ProC" >
+    insert into pro_c (pro_c_id, pro_us_id, pro_c_vedio, 
+      pro_c_story, pro_c_support, pro_c_repay, 
+      pro_c_aboutme)
+    values (#{proCId,jdbcType=INTEGER}, #{proUsId,jdbcType=INTEGER}, #{proCVedio,jdbcType=VARCHAR}, 
+      #{proCStory,jdbcType=VARCHAR}, #{proCSupport,jdbcType=VARCHAR}, #{proCRepay,jdbcType=VARCHAR}, 
+      #{proCAboutme,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yh.pojo.ProC" >
+    insert into pro_c
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="proCId != null" >
+        pro_c_id,
+      </if>
+      <if test="proUsId != null" >
+        pro_us_id,
+      </if>
+      <if test="proCVedio != null" >
+        pro_c_vedio,
+      </if>
+      <if test="proCStory != null" >
+        pro_c_story,
+      </if>
+      <if test="proCSupport != null" >
+        pro_c_support,
+      </if>
+      <if test="proCRepay != null" >
+        pro_c_repay,
+      </if>
+      <if test="proCAboutme != null" >
+        pro_c_aboutme,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="proCId != null" >
+        #{proCId,jdbcType=INTEGER},
+      </if>
+      <if test="proUsId != null" >
+        #{proUsId,jdbcType=INTEGER},
+      </if>
+      <if test="proCVedio != null" >
+        #{proCVedio,jdbcType=VARCHAR},
+      </if>
+      <if test="proCStory != null" >
+        #{proCStory,jdbcType=VARCHAR},
+      </if>
+      <if test="proCSupport != null" >
+        #{proCSupport,jdbcType=VARCHAR},
+      </if>
+      <if test="proCRepay != null" >
+        #{proCRepay,jdbcType=VARCHAR},
+      </if>
+      <if test="proCAboutme != null" >
+        #{proCAboutme,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yh.pojo.ProCExample" resultType="java.lang.Integer" >
+    select count(*) from pro_c
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pro_c
+    <set >
+      <if test="record.proCId != null" >
+        pro_c_id = #{record.proCId,jdbcType=INTEGER},
+      </if>
+      <if test="record.proUsId != null" >
+        pro_us_id = #{record.proUsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.proCVedio != null" >
+        pro_c_vedio = #{record.proCVedio,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proCStory != null" >
+        pro_c_story = #{record.proCStory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proCSupport != null" >
+        pro_c_support = #{record.proCSupport,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proCRepay != null" >
+        pro_c_repay = #{record.proCRepay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proCAboutme != null" >
+        pro_c_aboutme = #{record.proCAboutme,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pro_c
+    set pro_c_id = #{record.proCId,jdbcType=INTEGER},
+      pro_us_id = #{record.proUsId,jdbcType=INTEGER},
+      pro_c_vedio = #{record.proCVedio,jdbcType=VARCHAR},
+      pro_c_story = #{record.proCStory,jdbcType=VARCHAR},
+      pro_c_support = #{record.proCSupport,jdbcType=VARCHAR},
+      pro_c_repay = #{record.proCRepay,jdbcType=VARCHAR},
+      pro_c_aboutme = #{record.proCAboutme,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yh.pojo.ProC" >
+    update pro_c
+    <set >
+      <if test="proUsId != null" >
+        pro_us_id = #{proUsId,jdbcType=INTEGER},
+      </if>
+      <if test="proCVedio != null" >
+        pro_c_vedio = #{proCVedio,jdbcType=VARCHAR},
+      </if>
+      <if test="proCStory != null" >
+        pro_c_story = #{proCStory,jdbcType=VARCHAR},
+      </if>
+      <if test="proCSupport != null" >
+        pro_c_support = #{proCSupport,jdbcType=VARCHAR},
+      </if>
+      <if test="proCRepay != null" >
+        pro_c_repay = #{proCRepay,jdbcType=VARCHAR},
+      </if>
+      <if test="proCAboutme != null" >
+        pro_c_aboutme = #{proCAboutme,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pro_c_id = #{proCId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yh.pojo.ProC" >
+    update pro_c
+    set pro_us_id = #{proUsId,jdbcType=INTEGER},
+      pro_c_vedio = #{proCVedio,jdbcType=VARCHAR},
+      pro_c_story = #{proCStory,jdbcType=VARCHAR},
+      pro_c_support = #{proCSupport,jdbcType=VARCHAR},
+      pro_c_repay = #{proCRepay,jdbcType=VARCHAR},
+      pro_c_aboutme = #{proCAboutme,jdbcType=VARCHAR}
+    where pro_c_id = #{proCId,jdbcType=INTEGER}
+  </update>
+</mapper>

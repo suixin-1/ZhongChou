@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yh.mapper.ClCommentMapper" >
+  <select id="selectComment" resultType="com.yh.pojo.ClComment">
+select 
+cm_id cmId,
+cm_us_id cmUsId,
+cm_ps_id cmPsId,
+cm_content cmContent,
+us_name usname,
+ps_name psname
+from comments LEFT  JOIN `user` on  `cm_us_id`=`us_id` LEFT JOIN projects ON cm_ps_id=`ps_id` GROUP BY cm_ps_id
+
+</select>
+ <select id="selectCommentxq" resultType="com.yh.pojo.ClComment" parameterType="com.yh.pojo.ClComment">
+select 
+cm_id  cmId,
+cm_us_id cmUsId,
+cm_ps_id cmPsId,
+cm_content cmContent,
+us_name usname,
+ps_name psname
+from comments LEFT  JOIN `user` on  `cm_us_id`=`us_id` LEFT JOIN projects ON cm_ps_id=`ps_id` WHERE cm_ps_id=${cmPsId}
+
+</select>
+ <delete id="delcomment" parameterType="java.lang.Integer" >
+     delete from comments
+    where cm_id = #{cmId}
+  </delete>
+</mapper>
