@@ -10,7 +10,9 @@
   	<module>zhongchou-manager-pojo</module>
   	<module>zhongchou-manager-dao</module>
   	<module>zhongchou-manager-interface</module>
+  	<module>zhongchou-web</module>
   	<module>zhongchou-manager-service</module>
+  	<module>zhongchou-manager-controller</module>
   </modules>
   
   

@@ -1,6 +1,8 @@
 package com.yh.pojo;
 
-public class Questionall {
+import java.io.Serializable;
+
+public class Questionall implements Serializable{
     private Integer questionid;
 
     private String questionname;

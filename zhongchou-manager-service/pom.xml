@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.yh</groupId>
@@ -6,10 +8,19 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>zhongchou-manager-service</artifactId>
-  <packaging>war</packaging>
-  
+  <name>zhongchou-manager-service</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
-  	<dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
   		<groupId>com.yh</groupId>
 	    <artifactId>zhongchou-manager-dao</artifactId>
 	    <version>0.0.1-SNAPSHOT</version>
@@ -19,20 +30,8 @@
 	    <artifactId>zhongchou-manager-interface</artifactId>
 	    <version>0.0.1-SNAPSHOT</version>
   	</dependency>
-  	
-  			<dependency>
-				<groupId>org.freemarker</groupId>
-				<artifactId>freemarker</artifactId>
-			</dependency>
-			
-			<!-- 静态页面 -->
-			<dependency>
-			      <groupId>org.springframework</groupId>
-			      <artifactId>spring-context-support</artifactId>		     
-		    </dependency>
-  	
-  	
-  	<!-- Spring -->
+    
+    <!-- Spring -->
 	<dependency>
 		<groupId>org.springframework</groupId>
 		<artifactId>spring-context</artifactId>
@@ -61,40 +60,7 @@
 		<groupId>org.springframework</groupId>
 		<artifactId>spring-context-support</artifactId>
 	</dependency>
-	<!-- JSP相关 -->
-			<dependency>
-				<groupId>jstl</groupId>
-				<artifactId>jstl</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>servlet-api</artifactId>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>jsp-api</artifactId>
-				<scope>provided</scope>
-			</dependency>
-	<!-- dubbo相关 -->
-	<dependency>
-		<groupId>com.alibaba</groupId>
-		<artifactId>dubbo</artifactId>
-		<exclusions>
-			<exclusion>
-				<artifactId>spring</artifactId>
-				<groupId>org.springframework</groupId>
-			</exclusion>
-		</exclusions>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.zookeeper</groupId>
-		<artifactId>zookeeper</artifactId>
-	</dependency>
-	<dependency>
-		<groupId>com.github.sgroschupf</groupId>
-		<artifactId>zkclient</artifactId>
-	</dependency>
+    
+    
   </dependencies>
-  
 </project>
