@@ -1,4 +1,6 @@
 package com.yh.service.user.Impl;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +17,9 @@ public class UserMoneyServiceImpl implements UserMoneyService {
 /**
  * 查看用户资金
  */
-	public User selectusermoney(int usId) {
+	public List<User> selectusermoney() {
 		UserExample example = new UserExample();
-		System.out.println(example);
-		User selectByPrimaryKey = usermapper.selectByPrimaryKey(usId);
-		System.out.println(selectByPrimaryKey);
-		return selectByPrimaryKey;
+		return usermapper.selectByExample(example);
 	}
 
 }

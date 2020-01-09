@@ -22,6 +22,7 @@ import com.yh.pojo.Projectstype;
 import com.yh.pojo.ProjectstypeExample;
 import com.yh.pojo.User;
 import com.yh.pojo.UserExample;
+import com.yh.pojo.zhongchouResult;
 import com.yh.service.ProjectService;
 
 @Service
@@ -45,7 +46,6 @@ public List<ProjectA> selectAll(){
 }
 @Override
 public List<ProjectA> selectByKey(Condition c) {
-	
 	return projectAMapper.selectByKey(c);
 }
 @Override
@@ -54,7 +54,9 @@ public User selectById(int id) {
 	com.yh.pojo.UserExample.Criteria createCriteria = example.createCriteria();
 	createCriteria.andUsIdEqualTo(id);
 	List<User> list = userMapper.selectByExample(example);
-	return list.get(0) ;
+	//如果没有值会报错
+	
+	return list.get(0);
 }
 @Override
 public Projects findById(int id) {
@@ -97,6 +99,24 @@ public int updateByPsId(int id) {
 public List<Comment> selectComment(int id) {
 	
 	return projectAMapper.selectComment(id);
+}
+//查询待审核项目
+@Override
+public List<ProjectA> selectByKeyByPsType() {
+	
+	return projectAMapper.selectByKeyByPsType();
+}
+//根据用户id查询项目
+@Override
+public zhongchouResult selectByUserId(Integer usId) {
+	ProjectsExample example = new ProjectsExample();
+	Criteria criteria = example.createCriteria();
+	criteria.andPsUsIdEqualTo(usId);
+	List<Projects> list = projectsMapper.selectByExample(example);
+	if(list.size()<=0){
+		return zhongchouResult.build(500, "你还没有发布项目");
+	}
+	return zhongchouResult.ok(200, "你的发布项目",list);
 }
 
 }

@@ -9,8 +9,10 @@ import com.yh.pojo.ProjectA;
 import com.yh.pojo.Projects;
 import com.yh.pojo.Projectstype;
 import com.yh.pojo.User;
+import com.yh.pojo.zhongchouResult;
 
 public interface ProjectService {
+	
 	List<ProjectA> selectAll();
 	List<ProjectA> selectByKey(Condition c);
 	User selectById(int id);
@@ -20,4 +22,9 @@ public interface ProjectService {
 	int updateById(int id);
 	int updateByPsId(int id);
 	List<Comment> selectComment(int id);
+	//查询待审核项目
+	List<ProjectA> selectByKeyByPsType();
+	
+	//根据用户id查询项目
+	zhongchouResult selectByUserId(Integer usId);
 }

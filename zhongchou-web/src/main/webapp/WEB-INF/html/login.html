@@ -12,20 +12,70 @@
     <link rel="stylesheet" href="css/ace.min.css" type="text/css"/>
 </head>
 <script>
-  window.onload=function(){
-	var obtn=document.getElementById('btn'); //登录按钮
-	var obox=document.getElementById('box');
-	var obg=document.getElementById('bg');
-	obtn.onclick=function(){
+  function login(){
+	//var obtn=document.getElementById('btn'); //登录按钮
+	var username=document.getElementById('username'); //用户名
+	var password=document.getElementById('password'); //密码
+	
+		//username = $(username).val();
+		//alert($(username).val().length);
+		if(username.value.length<=0){
+			alert("请输入你注册的邮箱");
+			return false;
+		}
+		var reg = /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/;
+		var isTrue = reg.test(username.value);
 		
-		obox.style.display="block";
-		obg.style.display="block";
+		var Tlist={"isTrue":isTrue,"username":username.value,"password":password.value};
+		
+		if(isTrue){
+			//alert("是邮箱");
+			//isTrue 为TRUE是邮箱  FALSE  是手机号
+			//alert(Tlist);
+			a("login",Tlist)
+			
+		/* obox.style.display="block";
+		obg.style.display="block"; */
 		// 用这个效果在IE6显示不全，因为body。html。document高度不全，那么就要，html，body{ width：100%； height100%；最只要是height；
 		//不满足要求上网找特特效}
+	}else{
+		alert("是手机号")
+		a("login",Tlist);
 	}
+		
+		
+		
+	function a(url,list){
+		$.ajax({
+			//请求方式
+	        type : "post",
+	        
+	        //post  ?isTrue="+isTrue+"&username="+username.value+"&password="+password.value
+	        
+	        //请求的媒体类型
+	        //contentType: "text/plain",
+	        //请求地址
+	        url : "/"+url,
+	        //数据，json字符串
+	        //data : JSON.stringify(list),
+	        data:list,
+	        //请求成功
+	        dataType:"json",
+	        success : function(result) {
+	            console.log(result);
+	            if(result.status==200){
+	            	document.getElementById("goIndex").click();
+	            }else{
+	            	alert(result.msg);
+	            }
+	        }
+		},true);
+	}
+		
 }
 </script>
 <body>
+<a href="index" id="goIndex" type="hidden"></a>
 <div id="header">
     <div class="heade-con">
         <div class="logo"><a href=""><img src="images/LOGO.png"/></a></div>
@@ -46,7 +96,7 @@
         </div>
         <div class="index-login">
             <a class="index-login1" href="login.html">登录</a>
-            <a href="">注册</a>
+            <a href="reg.html">注册</a>
         </div>
     </div>
 </div>
@@ -84,7 +134,7 @@
                             <label class="block clearfix">
 														<span class="block input-icon input-icon-left">
                                                             <i class="ace-icon fa fa-user"></i>
-															<input type="text" class="form-control" placeholder="邮箱或手机号码" />
+															<input type="text" id="username" class="form-control" placeholder="邮箱" />
 
 														</span>
                             </label>
@@ -92,7 +142,7 @@
                             <label class="block clearfix">
 														<span class="block input-icon input-icon-left">
                                                             <i class="ace-icon fa fa-lock"></i>
-															<input type="password" class="form-control" placeholder="请输入密码" />
+															<input type="password" id="password" class="form-control" placeholder="请输入密码" />
 
 														</span>
                             </label>
@@ -105,7 +155,7 @@
                                     <span class="lbl"> 记住</span>
                                 </label>
 
-                                <button type="button" class="width-35 pull-right btn btn-sm btn-primary">
+                                <button type="button" onclick="login()" id="btn" class="width-35 pull-right btn btn-sm btn-primary">
                                     <i class="ace-icon fa fa-key"></i>
                                     <span class="bigger-110">登录</span>
                                 </button>

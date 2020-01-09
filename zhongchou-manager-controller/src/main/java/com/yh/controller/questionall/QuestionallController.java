@@ -65,7 +65,7 @@ public class QuestionallController {
 	}
 	
 	@RequestMapping(value="/addQuestionall", produces = {"application/json;charset=UTF-8"})
-	//@ResponseBody
+	@ResponseBody
 	public String addQuestionall(HttpServletRequest req){
 		try {
 			req.setCharacterEncoding("UTF-8");
@@ -181,6 +181,21 @@ public class QuestionallController {
 		String json = "";
 		try {
 			json = JSON.json(addQuestionother);
+		} catch (IOException e) {
+		
+		}
+		return json;
+	}
+	
+	//删除父问题
+	@RequestMapping(value="/DeleteQuestionother", produces = {"application/json;charset=UTF-8"})
+	@ResponseBody
+	public String DeleteQuestionother(HttpServletRequest req){
+		String questionid = req.getParameter("questionid");
+		zhongchouResult result = questionallService.deleteQuestionotherById(Integer.parseInt(questionid));
+		String json = "";
+		try {
+			json = JSON.json(result);
 		} catch (IOException e) {
 		
 		}

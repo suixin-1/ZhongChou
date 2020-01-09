@@ -89,6 +89,12 @@
 				<artifactId>quartz</artifactId>
 				<version>${quartz.version}</version>
 			</dependency>
+			<!-- 邮件依赖 -->
+		    <dependency>
+			     <groupId>com.sun.mail</groupId>
+			     <artifactId>javax.mail</artifactId>
+			     <version>1.5.2</version>
+			</dependency>
 			<!-- 单元测试 -->
 			<dependency>
 				<groupId>junit</groupId>
