@@ -23,7 +23,6 @@ public class IndexController {
 	
 	@RequestMapping("/")
 	public String index(){
-		System.out.println("ssssssss");
 		return "index";
 	}
 	
