@@ -1,5 +1,7 @@
 package com.yh.service.user;
 
+import java.util.List;
+
 import com.yh.pojo.User;
 
 /**
@@ -13,6 +15,6 @@ public interface UserMoneyService {
  * @param usId
  * @return
  */
-	User selectusermoney(int usId);
+	List<User> selectusermoney();
 	
 }

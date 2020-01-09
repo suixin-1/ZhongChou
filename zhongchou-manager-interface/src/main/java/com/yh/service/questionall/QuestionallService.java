@@ -19,4 +19,6 @@ public interface QuestionallService {
 	zhongchouResult updateQuestionother(String questionothername, String questionanswer,int questionotherid);
 
 	zhongchouResult addQuestionother(String questionothername, String questionanswer, int parseInt);
+
+	zhongchouResult deleteQuestionotherById(int parseInt);
 }

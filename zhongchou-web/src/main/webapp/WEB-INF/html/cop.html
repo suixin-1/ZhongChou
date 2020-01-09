@@ -7,6 +7,10 @@
 <link href="css/base.css" rel="stylesheet" type="text/css">
 <link href="css/reg.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/headbott.css" type="text/css"/>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    
 </head>
 
 <body>
@@ -23,17 +27,17 @@
                 <li><a href="new_info.html" style="">发布项目</a></li>
             </ul>
         </div>
-        <div class="search">
+        <div class="search" style="left:664px;">
             <form action="">
                 <input type="text" class="search-txt" value="" placeholder="找项目">
                 <input type="submit" class="search-but" value="">
             </form>
         </div>
-        <div class="index-login">
+        <div class="index-login" id="index-login">
         	
             <a href="login.html">登录</a>
             <span style="color: white;">|</span>
-            <a href="user.html">注册</a>
+            <a href="reg.html">注册</a>
         </div>
     </div>
 </div>
@@ -41,17 +45,27 @@
 
 <div id="cop">
    <div class="cop-mian">
-      <div class="cop_part1">
-         <h1 class="title">法律法规</h1>
+   
+   	<!-- <ul id="ceshi">
+		<li v-for="value in items">
+			<ul>
+				<li>{{ name }}</li>
+				<li v-for="(name,value,index) in value">{{ name }}</li>
+			</ul>
+		</li>
+	</ul> -->
+   
+      <div v-for="item in items">
+         <h1 class="title">{{ item.questionname }}</h1>
          <ul class="Newlist">
-            <li><a href="#">金融新政策</a></li>
-            <li><a href="#">新型式下的中小企业融资策略</a></li>
+            <li v-for="questTher in item.questionotherList"><a href="#" target="_blank">{{questTher.questionothername}}</a></li>
+            <!-- <li><a href="#">新型式下的中小企业融资策略</a></li>
             <li><a href="#">企业融资途径</a></li>
             <li><a href="#">中小企业融资方式</a></li>
-            <li><a href="#">【干货】武媚娘如何完成五轮融资成就周氏企业帝国</a></li>
+            <li><a href="#">【干货】武媚娘如何完成五轮融资成就周氏企业帝国</a></li> -->
          </ul>
       </div>
-      <div class="cop_part2">
+      <!-- <div class="cop_part2">
       <h1 class="title">众筹项目</h1>
          <ul class="Newlist">
             <li><a href="#">金融新政策</a></li>
@@ -60,29 +74,66 @@
             <li><a href="#">中小企业融资方式</a></li>
             <li><a href="#">【干货】武媚娘如何完成五轮融资成就周氏企业帝国</a></li>
          </ul>
-        </div>
-      <div class="cop_part3">
-        <h1 class="title">个人账户</h1>
-         <ul class="Newlist">
-            <li><a href="#">金融新政策</a></li>
-            <li><a href="#">新型式下的中小企业融资策略</a></li>
-            <li><a href="#">企业融资途径</a></li>
-            <li><a href="#">中小企业融资方式</a></li>
-            <li><a href="#">【干货】武媚娘如何完成五轮融资成就周氏企业帝国</a></li>
-         </ul>
-      </div>
-      <div class="cop_part4">
-        <h1 class="title">资金问题</h1>
-         <ul class="Newlist">
-            <li><a href="#">金融新政策</a></li>
-            <li><a href="#">新型式下的中小企业融资策略</a></li>
-            <li><a href="#">企业融资途径</a></li>
-            <li><a href="#">中小企业融资方式</a></li>
-            <li><a href="#">【干货】武媚娘如何完成五轮融资成就周氏企业帝国</a></li>
-         </ul>
-      </div>
+        </div>-->
    </div>
 </div>
+
+<script type="text/javascript">
+	$.ajax({
+		//请求方式
+	    type : "POST",
+	    //请求的媒体类型
+	    contentType: "text/html;charset=UTF-8",
+	    //请求地址
+	    url : "questionall",
+	    //数据，json字符串
+	    //data : JSON.stringify(list),
+	    //请求成功
+	    dataType:"json",
+	    success : function(result) {
+	        console.log(result);
+	        if(result.status==200){
+	        	/* var ceshi = $("#ceshi");
+	        	var data = result.data;
+	        	for(var i=0;i<data.length;i++){
+	        		ceshi.append("<tr><td>"+data[i].questionid+"</td><td>"+data[i].questionname+"</td></tr>");*/
+		        	if(result.msg!="成功"){
+	            		$("#index-login").html(result.msg);
+	            	}
+	        	} 
+	        	new Vue({
+	        		el:"#cop",
+	        		data:{
+	        			items:result.data
+	        		}
+	        	});
+	        	
+	        	
+	        	var cop_mian_div = $(".cop-mian>div");
+	        	for(var i=0;i<cop_mian_div.length;i++){
+	        		$(cop_mian_div[i]).addClass("cop_part"+(i+1));
+	        		
+	        		var cop_mian_div_a = $(".cop_part"+(i+1)+">.Newlist>li>a");
+	        		//alert(cop_mian_div_a.length);
+	        		
+	        		//console.log(result.data[1].questionotherList[1].questionanswer);
+	        		
+	        		for(var j=0;j<cop_mian_div_a.length;j++){
+	        			$(cop_mian_div_a[j]).attr("href",result.data[i].questionotherList[i].questionanswer);
+	        		}
+	        		
+	        		
+	        	}
+	        	
+	        	
+	        //}
+	       // $("#include").html(result);
+	    }
+	},true);
+
+</script>
+
+
 <div id="bottom">
     <div class="bot-con1">
         <ul>

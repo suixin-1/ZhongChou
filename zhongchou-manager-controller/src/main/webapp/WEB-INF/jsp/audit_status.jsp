@@ -169,7 +169,7 @@
 				    		    //请求的媒体类型
 				    		    contentType: "text/html;charset=UTF-8",
 				    		    //请求地址
-				    		    url : "/selectAll",
+				    		    url : "/selectType",
 				    		    //数据，json字符串
 				    		    data : list,
 				    		    //请求成功

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,7 +42,7 @@
 									<TD id="questionname">${questionname}</TD> <input type="hidden" id="questionid" value="${ZWT.questionid }"/>
 									<TD>${ZWT.questionothername}</TD>
 									<TD>${ZWT.questionanswer}</TD>
-									<TD>${ZWT.questiondate}</TD>
+									<TD><fmt:formatDate value="${ZWT.questiondate}" pattern="yyyy-MM-dd" /></TD>
 									
 									<td><a href="javascript:ToClick('ToupdateQuestionother?id=${ZWT.questionotherid}&questionname=${questionname}')">详情/修改</a> <!--<a href="#" title="查看项目详情"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>-->
 										<!--&nbsp;&nbsp;

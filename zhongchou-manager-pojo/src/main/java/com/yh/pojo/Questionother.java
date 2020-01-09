@@ -1,8 +1,9 @@
 package com.yh.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Questionother {
+public class Questionother implements Serializable{
     private Integer questionotherid;
 
     private Integer questionid;

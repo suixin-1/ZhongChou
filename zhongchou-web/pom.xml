@@ -37,7 +37,11 @@
 			      <artifactId>spring-context-support</artifactId>		     
 		    </dependency>
 		    
-		    
+		    <!-- 邮件依赖 -->
+		    <dependency>
+			     <groupId>com.sun.mail</groupId>
+			     <artifactId>javax.mail</artifactId>
+			</dependency>
 		    
 		<!-- Spring -->
 		<dependency>
@@ -68,6 +72,16 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
+
+		<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jsp-api</artifactId>
+				<scope>provided</scope>
+		</dependency>
+
+
+		
+
 		<!-- dubbo相关 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -87,12 +101,6 @@
 			<groupId>com.github.sgroschupf</groupId>
 			<artifactId>zkclient</artifactId>
 		</dependency>
-		<!-- jsp -->
-		    <dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>jsp-api</artifactId>
-				<scope>provided</scope>
-			</dependency>
 		    
   </dependencies>
   
