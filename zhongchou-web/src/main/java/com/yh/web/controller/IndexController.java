@@ -23,7 +23,7 @@ public class IndexController {
 	
 	@RequestMapping("/")
 	public String index(){
-		System.out.println("ssssssss");
+		
 		return "index";
 	}
 	
@@ -33,7 +33,7 @@ public class IndexController {
 		List<Questionall> list = questionallService.selectQuestionallAll();
 		zhongchouResult result = zhongchouResult.ok(200, "成功", list);
 		
-		System.out.println(result);
+		
 		
 		
 		String json="";

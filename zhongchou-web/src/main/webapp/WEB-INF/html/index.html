@@ -25,8 +25,9 @@
                 <li><a href="gyzc-list.html">公益众筹</a></li>
                 <li><a href="cop.html">常见问题</a></li>
                 <li><a href="ly-list.html">众筹资讯</a></li>
-                <li><a href="new_info.html" style="">发布项目</a></li>
+                <li><a href="toProduct">发布项目</a></li>
             </ul>
+            issueProject
         </div>
         <div class="search">
             <form action="">
@@ -76,7 +77,7 @@
 	        //请求的媒体类型
 	        contentType: "text/html;charset=UTF-8",
 	        //请求地址
-	        url : "localhost:8080/questionall",
+	        url : "/questionall",
 	        //数据，json字符串
 	        //data : JSON.stringify(list),
 	        //请求成功
@@ -88,12 +89,10 @@
 	            	var data = result.data;
 	            	for(var i=0;i<data.length;i++){
 	            		ceshi.append("<tr><td>"+data[i].questionid+"</td><td>"+data[i].questionname+"</td></tr>");
-	            		//var tr = ceshi.children("tr:last-child");
-	            		/* tr.append("<td>"+data[i].questionid+"</td>");
-	            		tr.append("<td>"+data[i].questionname+"</td>"); */
+	            		
 	            	}
 	            }
-	           // $("#include").html(result);
+	           
 	        }
 		},true);
 	
@@ -629,6 +628,31 @@
 	        prevEl: '.swiper-button-prev',
 	      },
 	    });
+	    function ToClickSubmit2(url){
+	    	/* $("#p_id").val();
+	        $("#p_name").val();
+	        $("#p_des").val();
+	        $("#p_time").val();
+	        $("#p_status").val(); */
+	        
+	       
+	        $.ajax({
+				//请求方式
+	            type : "POST",
+	            //请求的媒体类型
+	           	//contentType: "text/html;charset=UTF-8",
+	            //请求地址
+	            url : "/"+url,
+	         
+	          	data : list,
+	           
+	            success : function(result) {
+	             
+	               $("#include").html(result);
+	            }
+	           
+			},true);
+	    }
   </script>
 
 </body>

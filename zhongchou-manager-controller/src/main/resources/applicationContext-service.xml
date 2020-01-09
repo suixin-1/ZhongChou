@@ -29,7 +29,9 @@
 	<!-- 用dubbo协议在20880端口暴露服务 -->
 	<dubbo:protocol name="dubbo" port="20880" />
 	<!-- 声明需要暴露的服务接口 -->
+	<bean id="issueServiceImpl" class="com.yh.service.Impl.IssueServiceImpl"></bean>
 	<dubbo:service interface="com.yh.service.questionall.QuestionallService" ref="questionallServiceImpl" />
+	<dubbo:service interface="com.yh.service.IssueService" ref="issueServiceImpl" />
 	<!-- <dubbo:service interface="com.yh.service.ItemParamService" ref="itemParamServiceImpl" />
 	<dubbo:service interface="com.yh.service.ItemService" ref="itemServiceImpl" /> -->
 </beans>
