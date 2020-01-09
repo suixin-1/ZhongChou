@@ -3,6 +3,7 @@ package com.yh.service.user;
 import java.util.List;
 
 import com.yh.pojo.User;
+import com.yh.pojo.zhongchouResult;
 
 /**
  * 用户
@@ -20,8 +21,7 @@ public interface UserService {
 	
 	List<User> getUser();
 	
-	
-	
+		
 
 	/**
 	 * 添加用户
@@ -44,5 +44,5 @@ public interface UserService {
 	 * 修改用户信息
 	 */
 	Integer updatauser(User user);
-	
+
 }

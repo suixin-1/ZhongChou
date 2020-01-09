@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.yh.mapper.UserMapper;
 import com.yh.pojo.User;
 import com.yh.pojo.UserExample;
+import com.yh.pojo.UserExample.Criteria;
+import com.yh.pojo.zhongchouResult;
 import com.yh.service.user.UserService;
 
 @Service
@@ -73,5 +75,8 @@ public class UserServiceImpl implements UserService {
 		int updateByExample = usermapper.updateByExample(user,example);*/
 		return updateByPrimaryKeySelective;
 	}
+
+
+
 
 }

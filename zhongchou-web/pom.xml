@@ -36,8 +36,12 @@
 			      <groupId>org.springframework</groupId>
 			      <artifactId>spring-context-support</artifactId>		     
 		    </dependency>
-		    
-		    
+		    <!-- jsp -->
+		    <dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jsp-api</artifactId>
+				<scope>provided</scope>
+			</dependency>
 		    
 		<!-- Spring -->
 		<dependency>

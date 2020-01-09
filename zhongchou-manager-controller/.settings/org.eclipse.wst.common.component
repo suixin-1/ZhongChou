@@ -13,6 +13,9 @@
         <dependent-module archiveName="zhongchou-manager-interface-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/zhongchou-manager-interface/zhongchou-manager-interface">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="zhongchou-manager-service-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/zhongchou-manager-service/zhongchou-manager-service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="zhongchou-manager-controller"/>
         <property name="java-output-path" value="/zhongchou-manager-controller/target/classes"/>
     </wb-module>
