@@ -21,8 +21,7 @@ public interface UserService {
 	
 	List<User> getUser();
 	
-	
-	
+		
 
 	/**
 	 * 添加用户
@@ -45,9 +44,13 @@ public interface UserService {
 	 * 修改用户信息
 	 */
 	Integer updatauser(User user);
+
+
+
 	
 	/**
 	 * 根据用户名和密码查询
 	 */
 	zhongchouResult selectUserByNameAndPwd(String username,String password);
+
 }

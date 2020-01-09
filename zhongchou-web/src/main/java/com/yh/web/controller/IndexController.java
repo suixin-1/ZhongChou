@@ -1,3 +1,7 @@
+
+	
+
+
 package com.yh.web.controller;
 
 import java.io.IOException;
@@ -377,4 +381,28 @@ public class IndexController {
 		}
 		return json;
 	}
+  //跳转到众筹资讯页面
+	@RequestMapping("/ly-list")
+	public String toLylist(){
+		return "ly-list";
+	}
+	
+	//众筹资讯查询方法
+	@RequestMapping(value="/information", produces = {"application/json;charset=UTF-8"})
+	@ResponseBody
+	public String information( ){
+		List<Projects> list = projectService.selectProjectsAll();
+		zhongchouResult result = zhongchouResult.ok(200, "成功" ,list);	
+		String json="";
+		try {
+			json = JSON.json(result);
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		return json;
+	}
+  
 }
+
+

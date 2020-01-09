@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/ace.min.css" type="text/css"/>
 </head>
 <script>
+
   function login(){
 	//var obtn=document.getElementById('btn'); //登录按钮
 	var username=document.getElementById('username'); //用户名
@@ -73,6 +74,7 @@
 	}
 		
 }
+
 </script>
 <body>
 <a href="index" id="goIndex" type="hidden"></a>
@@ -134,7 +136,9 @@
                             <label class="block clearfix">
 														<span class="block input-icon input-icon-left">
                                                             <i class="ace-icon fa fa-user"></i>
+
 															<input type="text" id="username" class="form-control" placeholder="邮箱" />
+
 
 														</span>
                             </label>
@@ -155,7 +159,9 @@
                                     <span class="lbl"> 记住</span>
                                 </label>
 
+
                                 <button type="button" onclick="login()" id="btn" class="width-35 pull-right btn btn-sm btn-primary">
+
                                     <i class="ace-icon fa fa-key"></i>
                                     <span class="bigger-110">登录</span>
                                 </button>

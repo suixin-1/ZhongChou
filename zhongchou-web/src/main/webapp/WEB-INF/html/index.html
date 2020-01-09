@@ -28,8 +28,10 @@
                 <li><a class="vcolor" href="index.html">首页</a></li>
                 <li><a href="gyzc-list">公益众筹</a></li>
                 <li><a href="cop.html">常见问题</a></li>
+
                 <li><a href="ly-list.html">众筹资讯</a></li>
                 <li><a href="toProduct">发布项目</a></li>
+
             </ul>
             issueProject
         </div>
@@ -41,10 +43,11 @@
         </div>
         <div class="index-login" id="index-login">
         	
-            <a href="login.html">登录</a>
+            <a href="/gologin">登录</a>
             <span style="color: white;">|</span>
-            <a href="reg.html">注册</a>
-
+            <a href="/toreg">注册</a>
+            <span style="color: white;">|</span>
+            <a href="/toinformation"></a>
         </div>
     </div>
 </div>
@@ -86,7 +89,9 @@
 	        contentType: "text/html;charset=UTF-8",
 	        //请求地址
 
+
 	        url : "questionall",
+
 
 	        //数据，json字符串
 	        //data : JSON.stringify(list),
@@ -126,9 +131,11 @@
         <div  class="index-mrjx_right">
             <div id="CLselectCLindexRe" class="index-pruduct">
                 <ul>
+
                     <li v-for="item in items">
                         <div class="index-plidiv1"><a :href="'toproduct-detail?psId=' + item.R_ps_id "><img src="images/pruduct2_34.jpg" width="237px" height="155px" alt=""/></a>
                         <div class="index-p_dkz">{{item.ps_type}}</div>
+
                         </div>  <p>
                         <!-- <a :href="toproduct-detail?r_ps_id='+item.r_ps_id'">{{item.ps_name}}</a> -->
                       <!--  <a :href="[child.module+'/'+child.id]">{{ item.ps_name }} </a> -->

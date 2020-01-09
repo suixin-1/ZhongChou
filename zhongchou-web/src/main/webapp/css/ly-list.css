@@ -8,7 +8,7 @@
 .ly-list_conlcon .conlcon_bg{background:#DC5031;color:#fff}
 .ly-list_conf{float:right;width:780px;position: relative;height:570px;}
 
-.ly-l_csp{position: absolute;left:0px;top:0px;border:1px #dddddd solid;}
+.ly-l_csp{position: absolute;left:0px;top:0px;}
 .ly-l_clistt{width: 220px;position: absolute;right:0px;top:0px;}
 .ly-l_clistttit{border-top:2px #313a41 solid; color:#313a41;padding:10px 5px;font-size:14px;font-weight: 800;
     color: #000;}

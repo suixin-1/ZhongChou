@@ -14,6 +14,7 @@ import com.yh.pojo.zhongchouResult;
 public interface ProjectService {
 	
 	List<ProjectA> selectAll();
+	List<Projects> selectProjectsAll();
 	List<ProjectA> selectByKey(Condition c);
 	List<Projects> selectProjectsAll();
 	User selectById(int id);
