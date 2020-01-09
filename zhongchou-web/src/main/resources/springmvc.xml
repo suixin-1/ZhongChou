@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -21,16 +22,7 @@
 	</bean> -->
 		  <!-- <mvc:resources location="/js/" mapping="/js/**"/>  
       <mvc:resources location="/css/" mapping="/css/**"/> -->
-      <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" />
-    <!-- 以.html为后缀名访问，默认返回数据类型是 text/html， 所以要修改返回的数据类型 -->
-    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean"> 
-        <property name="mediaTypes">  
-            <map>  
-                <entry key="html" value="application/json;charset=UTF-8"/> 
-            </map>  
-        </property> 
-    </bean>
-
+      
     <!-- html是没有前缀的 -->
     <!-- freemarker config -->
    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
@@ -47,10 +39,16 @@
     
     <dubbo:application name="zhongchou-manager-web"/>
         <dubbo:registry protocol="zookeeper" address="172.16.23.200:2181" />
+
         <dubbo:reference interface="com.yh.service.questionall.QuestionallService" id="questionallService"></dubbo:reference>
+  
+        <dubbo:reference interface="com.yh.service.CLindex.CLindexReService" id="cLindexReService"></dubbo:reference>
+        <dubbo:reference interface="com.yh.service.user.UserService" id="userService" timeout="3000"></dubbo:reference>
+        <dubbo:reference interface="com.yh.service.ProjectService" id="projectService" timeout="3000"></dubbo:reference>
+  
+        <dubbo:reference interface="com.yh.service.ClassifyService" id="classifyService"></dubbo:reference>
+        <dubbo:reference interface="com.yh.service.SelectProjectsByPsIdService" id="selectProjectsByPsIdService"></dubbo:reference>
        
-		<dubbo:reference interface="com.yh.service.ProjectService" id="projectService"></dubbo:reference>
-        <!-- <dubbo:reference interface="com.yh.service.ItemParamService" id="itemParamService"></dubbo:reference>
-        <dubbo:reference interface="com.yh.service.ItemService" id="itemService"></dubbo:reference>
-        <dubbo:reference interface="com.yh.search.service.SearchItemService" id="searchItemService"> -->  	
+        <dubbo:reference interface="com.yh.service.IssueService" id="issueService" />
+
 </beans>

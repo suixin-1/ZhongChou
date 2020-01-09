@@ -1,12 +1,18 @@
 package com.yh.pojo;
 
+
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class ProjectsExample {
-    protected String orderByClause;
+public class ProjectsExample implements Serializable{
+   
+	
+
+	protected String orderByClause;
 
     protected boolean distinct;
 

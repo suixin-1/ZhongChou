@@ -75,6 +75,20 @@ public class UserServiceImpl implements UserService {
 		int updateByExample = usermapper.updateByExample(user,example);*/
 		return updateByPrimaryKeySelective;
 	}
+	
+	//根据用户名和密码查询
+	@Override
+	public zhongchouResult selectUserByNameAndPwd(String username,String password) {
+		UserExample example = new UserExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andUsEmailEqualTo(username);
+		criteria.andUsPasswordEqualTo(password);
+		List<User> list = usermapper.selectByExample(example);
+		if(list.isEmpty()){
+			return zhongchouResult.ok(500, "登录失败", list);
+		}
+		return zhongchouResult.ok(200, "登录成功", list);
+	}
 
 
 

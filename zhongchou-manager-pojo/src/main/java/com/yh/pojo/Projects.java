@@ -223,4 +223,17 @@ public class Projects implements Serializable{
     public void setPsGetpeople(Integer psGetpeople) {
         this.psGetpeople = psGetpeople;
     }
+
+	@Override
+	public String toString() {
+		return "Projects [psId=" + psId + ", psUsId=" + psUsId + ", psCustName=" + psCustName + ", psCustPhone="
+				+ psCustPhone + ", psCustAddress=" + psCustAddress + ", psPstId=" + psPstId + ", psFile=" + psFile
+				+ ", psName=" + psName + ", psGoal=" + psGoal + ", psAddress=" + psAddress + ", psMoney=" + psMoney
+				+ ", psDays=" + psDays + ", psVideo=" + psVideo + ", psStory=" + psStory + ", psSupport=" + psSupport
+				+ ", psRepay=" + psRepay + ", psAboutme=" + psAboutme + ", psType=" + psType + ", psStarttime="
+				+ psStarttime + ", psEndtime=" + psEndtime + ", psGetmoney=" + psGetmoney + ", psGetpeople="
+				+ psGetpeople + "]";
+	}
+    
+    
 }

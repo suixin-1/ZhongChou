@@ -1,3 +1,4 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -36,11 +37,11 @@
 			      <groupId>org.springframework</groupId>
 			      <artifactId>spring-context-support</artifactId>		     
 		    </dependency>
-		    <!-- jsp -->
+		    
+		    <!-- 邮件依赖 -->
 		    <dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>jsp-api</artifactId>
-				<scope>provided</scope>
+			     <groupId>com.sun.mail</groupId>
+			     <artifactId>javax.mail</artifactId>
 			</dependency>
 		    
 		<!-- Spring -->
@@ -72,6 +73,13 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
+		<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jsp-api</artifactId>
+				<scope>provided</scope>
+		</dependency>
+
+
 		<!-- dubbo相关 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -107,4 +115,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
