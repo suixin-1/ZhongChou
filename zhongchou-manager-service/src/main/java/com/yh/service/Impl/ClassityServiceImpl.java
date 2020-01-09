@@ -13,7 +13,7 @@ import com.yh.pojo.ProjectstypeExample.Criteria;
 import com.yh.service.ClassifyService;
 
 @Service
-public class classityServiceImpl implements ClassifyService{
+public class ClassityServiceImpl implements ClassifyService{
 	
 	@Autowired
 	private ProjectstypeMapper projectstypeMapper;

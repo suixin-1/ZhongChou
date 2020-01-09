@@ -6,4 +6,11 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>zhongchou-manager-pojo</artifactId>
+ <dependencies>
+ 	<!-- 邮件依赖 -->
+		    <dependency>
+			     <groupId>com.sun.mail</groupId>
+			     <artifactId>javax.mail</artifactId>
+			</dependency>
+ </dependencies>
 </project>

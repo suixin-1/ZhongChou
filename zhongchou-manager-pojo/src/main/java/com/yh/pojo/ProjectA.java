@@ -1,8 +1,9 @@
 package com.yh.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ProjectA {
+public class ProjectA implements Serializable{
    private String pstName;
    private String psName;
    private  Date psStarttime;

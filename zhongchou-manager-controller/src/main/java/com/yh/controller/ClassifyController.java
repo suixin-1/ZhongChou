@@ -2,8 +2,6 @@ package com.yh.controller;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +30,7 @@ import com.yh.service.ClassifyService;
 @Controller
 public class ClassifyController {
 	@Autowired
-	private ClassifyService classifyService;
+	private ClassifyService ClassifyServiceImpl;
 	
 	@RequestMapping("/save")
 	public String saveclassify(HttpServletRequest request,String p_id,String p_name,HttpServletRequest req){
@@ -51,7 +49,7 @@ public class ClassifyController {
 		record.setPstId(pstId);
 		record.setPstDesc(pstDesc);
 		record.setPstType(pstType);
-		boolean updateClassify = classifyService.updateClassify(record);
+		boolean updateClassify = ClassifyServiceImpl.updateClassify(record);
 
 		String classify = classify(request);
 		return classify;
@@ -79,7 +77,7 @@ public class ClassifyController {
 		PageHelper.startPage(page,coun);
 		
 
-		List<Projectstype> selectClassify = classifyService.selectClassify();
+		List<Projectstype> selectClassify = ClassifyServiceImpl.selectClassify();
 		 PageInfo<Projectstype> pageInfo = new PageInfo<Projectstype>(selectClassify);
 		request.setAttribute("Projectstype", selectClassify);
 		 request.setAttribute("pb", pageInfo);
@@ -87,7 +85,7 @@ public class ClassifyController {
 	}
 	@RequestMapping("/delbyId")
 	public String delclassify(int pstId,HttpServletRequest request){
-		boolean delClassify = classifyService.delClassify(pstId);
+		boolean delClassify = ClassifyServiceImpl.delClassify(pstId);
 		
 		String classify = classify(request);
 		return classify;
@@ -97,7 +95,7 @@ public class ClassifyController {
 	public String motaikuang(HttpServletRequest request){
 		String parameter = request.getParameter("id");
 		int id = Integer.parseInt(parameter);
-		Projectstype projectstype = classifyService.selectByClssietyID(id);
+		Projectstype projectstype = ClassifyServiceImpl.selectByClssietyID(id);
 		request.setAttribute("projectstype", projectstype);
 		return "motaikuang";
 	}
@@ -120,7 +118,7 @@ public class ClassifyController {
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-			zhongchouResult addQuestionall = classifyService.addClassify(record);
+			zhongchouResult addQuestionall = ClassifyServiceImpl.addClassify(record);
 			String json = "";
 			try {
 				json = JSON.json(addQuestionall);

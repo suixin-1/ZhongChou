@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.yh.mapper.UserMapper;
 import com.yh.pojo.User;
 import com.yh.pojo.UserExample;
+import com.yh.pojo.UserExample.Criteria;
+import com.yh.pojo.zhongchouResult;
 import com.yh.service.user.UserService;
 
 @Service
@@ -72,6 +74,20 @@ public class UserServiceImpl implements UserService {
 		createCriteria.andUsIdcardEqualTo(usId+"");
 		int updateByExample = usermapper.updateByExample(user,example);*/
 		return updateByPrimaryKeySelective;
+	}
+	
+	//根据用户名和密码查询
+	@Override
+	public zhongchouResult selectUserByNameAndPwd(String username,String password) {
+		UserExample example = new UserExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andUsEmailEqualTo(username);
+		criteria.andUsPasswordEqualTo(password);
+		List<User> list = usermapper.selectByExample(example);
+		if(list.isEmpty()){
+			return zhongchouResult.ok(500, "登录失败", list);
+		}
+		return zhongchouResult.ok(200, "登录成功", list);
 	}
 
 }
