@@ -23,7 +23,7 @@ import com.yh.service.ProjectService;
 @Controller
 public class ProjectController {
 	@Autowired
-	private ProjectService projectService;
+	private ProjectService projectServiceImpl;
 	@RequestMapping("/selectAll")
 	public String selectAll(HttpServletRequest res){
 		String count = res.getParameter("count");
@@ -75,13 +75,13 @@ public class ProjectController {
 						psType=5;
 						c.setPsType(5);
 						}
-			List<ProjectA> p= projectService.selectByKey(c);
+			List<ProjectA> p= projectServiceImpl.selectByKey(c);
 			PageInfo<ProjectA> pageInfo = new PageInfo<ProjectA>(p);
 			res.setAttribute("pb", pageInfo);
 			res.setAttribute("list", p);
 		}else{
 			
-			List<ProjectA> selectAll = projectService.selectAll();
+			List<ProjectA> selectAll = projectServiceImpl.selectAll();
 			PageInfo<ProjectA> pageInfo = new PageInfo<ProjectA>(selectAll);
 			res.setAttribute("pb", pageInfo);
 			res.setAttribute("list", selectAll);
@@ -97,14 +97,14 @@ public class ProjectController {
 		String ids  = res.getParameter("id");
 		int id=Integer.parseInt(ids);
 		
-		Projects findById = projectService.findById(id);
+		Projects findById = projectServiceImpl.findById(id);
 		
-		User selectById = projectService.selectById(id);
+		User selectById = projectServiceImpl.selectById(id);
 		
-		ProA selectByPstId = projectService.selectByPstId(id);
+		ProA selectByPstId = projectServiceImpl.selectByPstId(id);
 		
 		Integer psPstId = findById.getPsPstId();
-		Projectstype selectByUsId = projectService.selectByUsId(psPstId);
+		Projectstype selectByUsId = projectServiceImpl.selectByUsId(psPstId);
 		
 		res.setAttribute("fbd", findById);
 		res.setAttribute("sbd", selectById);
@@ -135,7 +135,7 @@ public class ProjectController {
 			coun = Integer.parseInt(count);
 		}
 		PageHelper.startPage(page,coun);
-		List<ProjectA> selectAll = projectService.selectAll();
+		List<ProjectA> selectAll = projectServiceImpl.selectAll();
 		//List<ProjectA>  sd = new ArrayList<>();
 		/*for (ProjectA projectA : selectAll) {
 			if(projectA.getPsType().equals("0")){
@@ -158,8 +158,8 @@ public class ProjectController {
 	public String  updateById(HttpServletRequest res){
 		String ids  = res.getParameter("id");
 		int id=Integer.parseInt(ids);
-		int updateById = projectService.updateById(id);
-		List<ProjectA> selectAll = projectService.selectAll();
+		int updateById = projectServiceImpl.updateById(id);
+		List<ProjectA> selectAll = projectServiceImpl.selectAll();
 		List<ProjectA>  sd = new ArrayList<>();
 		for (ProjectA projectA : selectAll) {
 			if(projectA.getPsType().equals("0")){
@@ -175,8 +175,8 @@ public class ProjectController {
 	public String  updateByPsId(HttpServletRequest res){
 		String ids  = res.getParameter("id");
 		int id=Integer.parseInt(ids);
-		int updateById = projectService.updateByPsId(id);
-		List<ProjectA> selectAll = projectService.selectAll();
+		int updateById = projectServiceImpl.updateByPsId(id);
+		List<ProjectA> selectAll = projectServiceImpl.selectAll();
 		List<ProjectA>  sd = new ArrayList<>();
 		for (ProjectA projectA : selectAll) {
 			if(projectA.getPsType().equals("0")){
@@ -194,7 +194,7 @@ public class ProjectController {
 		String ids  = res.getParameter("id");
 		int id=Integer.parseInt(ids);
 		
-		Projects findById = projectService.findById(id);
+		Projects findById = projectServiceImpl.findById(id);
 					
 			res.setAttribute("fbd",findById );
 
@@ -207,14 +207,14 @@ public class ProjectController {
 	String ids  = res.getParameter("id");
 	int id=Integer.parseInt(ids);
 	
-	Projects findById = projectService.findById(id);
+	Projects findById = projectServiceImpl.findById(id);
 	
-	User selectById = projectService.selectById(id);
+	User selectById = projectServiceImpl.selectById(id);
 	
-	ProA selectByPstId = projectService.selectByPstId(id);
+	ProA selectByPstId = projectServiceImpl.selectByPstId(id);
 	
 	Integer psPstId = findById.getPsPstId();
-	Projectstype selectByUsId = projectService.selectByUsId(psPstId);
+	Projectstype selectByUsId = projectServiceImpl.selectByUsId(psPstId);
 	
 	res.setAttribute("fbd", findById);
 	res.setAttribute("sbd", selectById);
@@ -229,8 +229,8 @@ public String selectComment(HttpServletRequest res){
 	
 	String ids  = res.getParameter("id");
 	int id=Integer.parseInt(ids);
-	Projects findById = projectService.findById(id);
-	List<Comment> c=projectService.selectComment(id);
+	Projects findById = projectServiceImpl.findById(id);
+	List<Comment> c=projectServiceImpl.selectComment(id);
 	
 	
 	res.setAttribute("list", c);

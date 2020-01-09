@@ -1,381 +1,379 @@
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="Keywords" content="关键词,关键词">
-    <meta name="description" content="">
-    <title></title>
-    <script type="text/javascript" src="js/jquery-1.42.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/select-widget-min.js"></script>
-    <link rel="stylesheet" href="css/drop-down.css" />
-    <link rel="stylesheet" href="css/base.css" type="text/css"/>
-    <link rel="stylesheet" href="css/headbott.css" type="text/css"/>
-    <link rel="stylesheet" href="css/product-list.css" type="text/css"/>
+<meta charset="UTF-8">
+<meta name="Keywords" content="关键词,关键词">
+<meta name="description" content="">
+<title></title>
+<script type="text/javascript" src="js/jquery-1.42.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/select-widget-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<link rel="stylesheet" href="css/drop-down.css" />
+<link rel="stylesheet" href="css/base.css" type="text/css" />
+<link rel="stylesheet" href="css/headbott.css" type="text/css" />
+<link rel="stylesheet" href="css/product-list.css" type="text/css" />
 </head>
 
 <body>
-<div id="header">
-    <div class="heade-con">
-    <div class="logo"><a href=""><img src="images/LOGO.png"/></a></div>
-        <div class="nav posa">
-            <ul>
-                <li><a  href="index.html">首页</a></li>
-                <li><a class="vcolor" href="gyzc-list.html">公益众筹</a></li>
-                <li><a href="cop.html">常见问题</a></li>
-                <li><a href="ly-list.html">众筹资讯</a></li>
-                <li><a href="new_info.html" style="">发布项目</a></li>
-            </ul>
-        </div>
-        <div class="search">
-            <form action="">
-                <input type="text" class="search-txt" value="" placeholder="找项目">
-                <input type="submit" class="search-but" value="">
-            </form>
-        </div>
-        <div class="index-login">
-        	
-            <a href="login.html">登录</a>
-            <span style="color: white;">|</span>
-            <a href="user.html">注册</a>
-        </div>
-    </div>
-</div>
+	<div id="header">
+		<div class="heade-con">
+			<div class="logo">
+				<a href=""><img src="images/LOGO.png" /></a>
+			</div>
+			<div class="nav posa">
+				<ul>
+					<li><a href="index.html">首页</a></li>
+					<li><a class="vcolor" href="gyzc-list">公益众筹</a></li>
+					<li><a href="cop.html">常见问题</a></li>
+					<li><a href="ly-list.html">众筹资讯</a></li>
+					<li><a href="new_info.html" style="">发布项目</a></li>
+				</ul>
+			</div>
+			<div class="search">
+				<form action="">
+					<input type="text" class="search-txt" value="" placeholder="找项目">
+					<input type="submit" class="search-but" value="">
+				</form>
+			</div>
+			<div class="index-login">
 
-<div class="product-con">
-<h1 class="product-con_tit">公益众筹</h1>
-    <div class="product-con_nav">
-        <a class="lnav_bg" href=""><i><img src="images/ii_04.png" alt=""/></i>全部</a>
-        <a href=""><i><img src="images/ii_06.png" alt=""/></i>教育助学</a>
-        <a href=""><i><img src="images/ii_08.png" alt=""/></i>爱心环保</a>
-        <a href=""><i><img src="images/ii_10.png" alt=""/></i>扶贫助困</a>
-        <a href=""><i><img src="images/ii_12.png" alt=""/></i>公益创业</a>
-        <a href=""><i><img src="images/ii_14.png" alt=""/></i>公益活动</a>
-           <div class="select-li">
-               <span>状态:</span>
-               <select name="drop2" class="ui-select">
-               <option value="">全部</option>
-               <option value="1">全部2</option>
-               <option value="2">全部4</option>
-               <option value="3">全部5</option>
-           </select>
-           </div>
-        <div class="select-li2">
-               <span>排序:</span>
-               <select name="drop2" class="ui-select">
-               <option value="">全部</option>
-               <option value="1">全部2</option>
-               <option value="2">全部4</option>
-               <option value="3">全部5</option>
-           </select>
-           </div>
+				<a href="login.html">登录</a> <span style="color: white;">|</span> <a
+					href="user.html">注册</a>
+			</div>
+		</div>
+	</div>
 
-    </div>
+	<div class="product-con">
+		<h1 class="product-con_tit">公益众筹</h1>
+		<div class="product-con_nav" id="zhanshi">
+			 <ul> 
+				<li><a class="lnav_bg" href=""><i><img
+							src="images/ii_04.png" alt="" /></i>全部</a> <a v-for="item in items"
+					href="'GyzcByPsId?id=' + item.psPstId "><i><img
+							src="images/ii_06.png" alt="" /></i>{{item.pstName}}</a></li>
 
-    <div class="product-list-l">
-        <ul>
-            <li class="zcz">
-                <div class="product-list-lpic">
-                    <a href="product-detail.html"><img src="images/prr-dduu_27.jpg" alt=""/></a>
-                    <div class="product_one">制作中</div>
-                </div>
-                <p><a href="">NGDS新游戏手柄 手机一秒变游戏机</a></p>
-                <div class="product-list-lmin">
-                    <dl>
-                        <dt>133.3%</dt>
-                        <dd>达成率</dd>
-                    </dl><dl>
-                    <dt>88888.3</dt>
-                    <dd>已筹金额</dd>
-                </dl><dl>
-                    <dt>8515</dt>
-                    <dd>支持人数</dd>
-                </dl>
-                </div>
-            </li>
-            <li class="yrz">
-                <div class="product-list-lpic">
-                    <a href=""><img src="images/prr-dduu_27.jpg" alt=""/></a>
-                    <div class="product_one">预热中</div>
-                </div>
-                <p><a href="">NGDS新游戏手柄 手机一秒变游戏机</a></p>
-                <div class="product-list-lmin">
-                    <dl>
-                        <dt>133.3%</dt>
-                        <dd>达成率</dd>
-                    </dl><dl>
-                    <dt>88888.3</dt>
-                    <dd>已筹金额</dd>
-                </dl><dl>
-                    <dt>8515</dt>
-                    <dd>支持人数</dd>
-                </dl>
-                </div>
-            </li>
+			 </ul> 
+       </div>
+       
+       	<script type="text/javascript">
+		$.ajax({
+			//请求方式
+			type : "POST",
+			//请求的媒体类型
+			contentType : "text/html;charset=UTF-8",
+			//请求地址
+			url : "/Gyzc",
+			//数据，json字符串
+			//data : JSON.stringify(list),
+			//请求成功
+			dataType : "json",
+			success : function(result) {
+				console.log(result.data);
+				new Vue({
+					el : "#zhanshi",
+					data : {
+						items : result.data
+					}
+				});
+			}
+		}, true);
+		
+	</script>
+	 
+	</div>
+	<!-- 根据众筹id查询项目  -->
+	<!-- <div id="selectCLindexRecg1" class="product-list-l">
+			<li v-for="c in items" class="zc">
+				<div class="product-list-lpic">
+					<a href="product-detail.html"><img src="images/prr-dduu_27.jpg"
+						alt="" /></a>
+					<div class="product_one">	
+					众筹中	
+					</div>
+				</div>
+				<p>
+					<a href="">{{c.psName}}</a>
+				</p>
+				<div class="product-list-lmin">
+					<dl>
+						<dt>{{c.psGetmoney/b.psMoney}}</dt>
+						<dd>达成率</dd>
+					</dl>
+					<dl>
+						<dt>{{c.psGetmoney}}</dt>
+						<dd>已筹金额</dd>
+					</dl>
+					<dl>
+						<dt>{{c.psGetpeople}}</dt>
+						<dd>支持人数</dd>
+					</dl>
+				</div>
+			</li>
+		</div>
+		
+		<script type="text/javascript">
+			$.ajax({
+				//请求方式
+				type : "POST",
+				//请求的媒体类型
+				contentType : "text/html;charset=UTF-8",
+				//请求地址
+				url : "/GyzcByPsId",
+				//数据，json字符串
+				//data : JSON.stringify(list),
+				//请求成功
+				dataType : "json",
+				success : function(result) {
+					console.log(result.data);
+/* 					 if(b.psType=0){b.psType="待审核";}else if(b.psType=1){b.psType="待上架";}else if(b.psType=2){b.psType="众筹中";}else if(b.psType=3){b.psType="众筹成功";}else if(b.psType=4){b.psType="众筹失败";}else if(b.psType=5){b.psType="审核未通过"; }
+ */					new Vue({
+						el : "#selectCLindexRecg1",
+						data : {
+							items : result.data
+						}
+					});
+				}
 
-            <li class="cz">
-                <div class="product-list-lpic">
-                    <a href=""><img src="images/prr-dduu_27.jpg" alt=""/></a>
-                    <div class="product_one">项目成功</div>
-                </div>
-                <p><a href="">NGDS新游戏手柄 手机一秒变游戏机</a></p>
-                <div class="product-list-lmin">
-                    <dl>
-                        <dt>133.3%</dt>
-                        <dd>达成率</dd>
-                    </dl><dl>
-                    <dt>88888.3</dt>
-                    <dd>已筹金额</dd>
-                </dl><dl>
-                    <dt>8515</dt>
-                    <dd>支持人数</dd>
-                </dl>
-                </div>
-            </li>
-            <li class="zcz">
-                <div class="product-list-lpic">
-                    <a href=""><img src="images/prr-dduu_27.jpg" alt=""/></a>
-                    <div class="product_one">筹款中</div>
-                </div>
-                <p><a href="">NGDS新游戏手柄 手机一秒变游戏机</a></p>
-                <div class="product-list-lmin">
-                    <dl>
-                        <dt>133.3%</dt>
-                        <dd>达成率</dd>
-                    </dl><dl>
-                    <dt>88888.3</dt>
-                    <dd>已筹金额</dd>
-                </dl><dl>
-                    <dt>8515</dt>
-                    <dd>支持人数</dd>
-                </dl>
-                </div>
-            </li><li class="cz">
-                <div class="product-list-lpic">
-                    <a href=""><img src="images/prr-dduu_27.jpg" alt=""/></a>
-                    <div class="product_one">筹款中</div>
-                </div>
-                <p><a href="">NGDS新游戏手柄 手机一秒变游戏机</a></p>
-                <div class="product-list-lmin">
-                    <dl>
-                        <dt>133.3%</dt>
-                        <dd>达成率</dd>
-                    </dl><dl>
-                    <dt>88888.3</dt>
-                    <dd>已筹金额</dd>
-                </dl><dl>
-                    <dt>8515</dt>
-                    <dd>支持人数</dd>
-                </dl>
-                </div>
-            </li><li class="yrz">
-                <div class="product-list-lpic">
-                    <a href=""><img src="images/prr-dduu_27.jpg" alt=""/></a>
-                    <div class="product_one">筹款中</div>
-                </div>
-                <p><a href="">NGDS新游戏手柄 手机一秒变游戏机</a></p>
-                <div class="product-list-lmin">
-                    <dl>
-                        <dt>133.3%</dt>
-                        <dd>达成率</dd>
-                    </dl><dl>
-                    <dt>88888.3</dt>
-                    <dd>已筹金额</dd>
-                </dl><dl>
-                    <dt>8515</dt>
-                    <dd>支持人数</dd>
-                </dl>
-                </div>
-            </li><li class="yrz">
-                <div class="product-list-lpic">
-                    <a href=""><img src="images/prr-dduu_27.jpg" alt=""/></a>
-                    <div class="product_one">筹款中</div>
-                </div>
-                <p><a href="">NGDS新游戏手柄 手机一秒变游戏机</a></p>
-                <div class="product-list-lmin">
-                    <dl>
-                        <dt>133.3%</dt>
-                        <dd>达成率</dd>
-                    </dl><dl>
-                    <dt>88888.3</dt>
-                    <dd>已筹金额</dd>
-                </dl><dl>
-                    <dt>8515</dt>
-                    <dd>支持人数</dd>
-                </dl>
-                </div>
-            </li><li class="zcz">
-                <div class="product-list-lpic">
-                    <a href=""><img src="images/prr-dduu_27.jpg" alt=""/></a>
-                    <div class="product_one">筹款中</div>
-                </div>
-                <p><a href="">NGDS新游戏手柄 手机一秒变游戏机</a></p>
-                <div class="product-list-lmin">
-                    <dl>
-                        <dt>133.3%</dt>
-                        <dd>达成率</dd>
-                    </dl><dl>
-                    <dt>88888.3</dt>
-                    <dd>已筹金额</dd>
-                </dl><dl>
-                    <dt>8515</dt>
-                    <dd>支持人数</dd>
-                </dl>
-                </div>
-            </li><li class="zcz">
-                <div class="product-list-lpic">
-                    <a href=""><img src="images/prr-dduu_27.jpg" alt=""/></a>
-                    <div class="product_one">筹款中</div>
-                </div>
-                <p><a href="">NGDS新游戏手柄 手机一秒变游戏机</a></p>
-                <div class="product-list-lmin">
-                    <dl>
-                        <dt>133.3%</dt>
-                        <dd>达成率</dd>
-                    </dl><dl>
-                    <dt>88888.3</dt>
-                    <dd>已筹金额</dd>
-                </dl><dl>
-                    <dt>8515</dt>
-                    <dd>支持人数</dd>
-                </dl>
-                </div>
-            </li><li class="yrz">
-                <div class="product-list-lpic">
-                    <a href=""><img src="images/prr-dduu_27.jpg" alt=""/></a>
-                    <div class="product_one">筹款中</div>
-                </div>
-                <p><a href="">NGDS新游戏手柄 手机一秒变游戏机</a></p>
-                <div class="product-list-lmin">
-                    <dl>
-                        <dt>133.3%</dt>
-                        <dd>达成率</dd>
-                    </dl><dl>
-                    <dt>88888.3</dt>
-                    <dd>已筹金额</dd>
-                </dl><dl>
-                    <dt>8515</dt>
-                    <dd>支持人数</dd>
-                </dl>
-                </div>
-            </li><li class="zcz">
-                <div class="product-list-lpic">
-                    <a href=""><img src="images/prr-dduu_27.jpg" alt=""/></a>
-                    <div class="product_one">筹款中</div>
-                </div>
-                <p><a href="">NGDS新游戏手柄 手机一秒变游戏机</a></p>
-                <div class="product-list-lmin">
-                    <dl>
-                        <dt>133.3%</dt>
-                        <dd>达成率</dd>
-                    </dl><dl>
-                    <dt>88888.3</dt>
-                    <dd>已筹金额</dd>
-                </dl><dl>
-                    <dt>8515</dt>
-                    <dd>支持人数</dd>
-                </dl>
-                </div>
-            </li>
-            <li class="cz">
-                <div class="product-list-lpic">
-                    <a href=""><img src="images/prr-dduu_27.jpg" alt=""/></a>
-                    <div class="product_one">筹款中</div>
-                </div>
-                <p><a href="">NGDS新游戏手柄 手机一秒变游戏机</a></p>
-                <div class="product-list-lmin">
-                    <dl>
-                        <dt>133.3%</dt>
-                        <dd>达成率</dd>
-                    </dl><dl>
-                    <dt>88888.3</dt>
-                    <dd>已筹金额</dd>
-                </dl><dl>
-                    <dt>8515</dt>
-                    <dd>支持人数</dd>
-                </dl>
-                </div>
-            </li>
-        </ul>
-    </div>
-<div class="product-ym">
+			}, true);
+		</script> -->
+		 
 
-        <a class="product-ym_bg" href="">1</a>
-        <a href="">2</a>
-        <span>...</span>
-        <a href="">43</a>
-        <a href="">44</a>
-        <a href="">45</a>
-    <a class="product-ym_xyy" href="">下一页&gt;</a>
-    </ul>
-</div>
-</div>
-<div id="bottom">
-    <div class="bot-con1">
-        <ul>
-            <li class="bot-con1-li1">我们已经做到 </li>
-            <li>单项支持人数<span class="inde-span1"></span></li>
-            <li>单项筹款金额<span class="inde-span2"></span></li>
-            <li>累计筹款金额<span class="inde-span3"></span></li>
-        </ul>
-    </div>
-    <div class="bot-con1 bot-con2">
-        <ul>
-            <li class="bot-con1-li1">发起项目流程 </li>
-            <li><span class="inde-span4"></span>发起人创建项目</li>
-            <li><span class="inde-span5"></span>项目获得支持</li>
-            <li><span class="inde-span6"></span>发起人发放回报</li>
-            <li><span class="inde-span7"></span>用户收到回报</li>
-        </ul>
-    </div>
-    <div class="bottom-ggt"><a href=""><img src="images/bottbom_68.jpg" alt=""/></a></div>
-    <div class="zc-yqlink">
-        <ul>
-            <li><a href="">阿里巴巴集团</a></li>
-            <li><a href="">淘宝网</a></li>
-            <li><a href="">天猫</a></li>
-            <li><a href="">聚划算</a></li>
-            <li><a href="">全球速卖通</a></li>
-            <li><a href="">阿里巴巴国际交易市场</a></li>
-            <li><a href="">1688</a></li>
-            <li><a href="">阿里妈妈</a></li>
-            <li><a href="">阿里旅行</a></li>
-            <li><a href="">阿里云计算</a></li>
-            <li><a href="">阿里巴巴集团</a></li>
-            <li><a href="">淘宝网</a></li>
-            <li><a href="">天猫</a></li>
-            <li><a href="">聚划算</a></li>
-            <li><a href="">全球速卖通</a></li>
-            <li><a href="">阿里巴巴国际交易市场</a></li>
-            <li><a href="">1688</a></li>
-            <li><a href="">阿里妈妈</a></li>
-            <li><a href="">阿里云计算</a></li>
-        </ul>
-    </div>
-    <div class="footer-bd">
 
-            <a href=" ">关于淘宝</a>
-            <a href=" ">合作伙伴</a>
-            <a href=" ">营销中心</a>
-            <a href=" ">廉正举报</a>
-            <a href=" ">联系客服</a>
-            <a href=" ">开放平台</a>
-            <a href=" ">诚征英才</a>
-            <a href=" ">联系我们</a>
-            <a href=" ">网站地图</a>
-            <a href=" ">法律声明</a>　　　
-            <em>© 2003-2015 Taobao.com 版权所有</em><br>
+		
 
-       <br>
-            <span>网络文化经营许可证：<a href=" ">浙网文[2013]0268-027号</a></span>
-            <b>|</b>
-            <span data-spm-protocol="i">增值电信业务经营许可证：<a href="">浙B2-20080224-1</a></span>
-            <b>|</b>
-            <span>信息网络传播视听节目许可证：1109364号</span>
-            <b>|</b>
-            <span>举报电话:0571-81683755</span>
-    </div>
-</div>
+		<div id="selectCLindexRecg" class="product-list-l" style="width:1040px;margin:auto">
+			<li v-for="b in items" class="zcz">
+				<div class="product-list-lpic">
+					<a href="product-detail.html"><img src="images/prr-dduu_27.jpg"
+						alt="" /></a>
+					<div class="product_one">	
+					众筹中	
+					</div>
+				</div>
+				<p>
+					<a :href="'toproduct-detail?psId=' + b.psId">{{b.psName}}</a>
+					<!-- <a href="'toproduct-detail?psId=' + b.psId ">{{b.psName}}</a> -->
+				</p>
+				<div class="product-list-lmin">
+					<dl>
+						<dt>{{b.psGetmoney/b.psMoney}}</dt>
+						<dd>达成率</dd>
+					</dl>
+					<dl>
+						<dt>{{b.psGetmoney}}</dt>
+						<dd>已筹金额</dd>
+					</dl>
+					<dl>
+						<dt>{{b.psGetpeople}}</dt>
+						<dd>支持人数</dd>
+					</dl>
+				</div>
+			</li>
+		</div>
+
+
+		<script type="text/javascript">
+			$.ajax({
+				//请求方式
+				type : "POST",
+				//请求的媒体类型
+				contentType : "text/html;charset=UTF-8",
+				//请求地址
+				url : "/GyzcList",
+				//数据，json字符串
+				//data : JSON.stringify(list),
+				//请求成功
+				dataType : "json",
+				success : function(result) {
+					console.log(result.data);
+/* 					 if(b.psType=0){b.psType="待审核";}else if(b.psType=1){b.psType="待上架";}else if(b.psType=2){b.psType="众筹中";}else if(b.psType=3){b.psType="众筹成功";}else if(b.psType=4){b.psType="众筹失败";}else if(b.psType=5){b.psType="审核未通过"; }
+ */					new Vue({
+						el : "#selectCLindexRecg",
+						data : {
+							items : result.data
+						}
+					});
+				}
+
+			}, true);
+		</script>
+
+
+		<!-- <div id="pagination" class="product-ym">
+			<a class="product-ym_bg" href="#">1</a>
+			<a href="#">2</a>
+			<span>...</span>
+			<a href="#">43</a>
+			<a href="#">44</a> 
+			<a href="#">45</a> 
+			<a class="product-ym_xyy" href="#">下一页&gt;</a>
+
+		</div>
+	</div> -->
+	
+<!-- 	<script type="text/javascript">
+    
+    var pageOptions = {pageTotal:10,curPage:7,paginationId:''};
+    dynamicPagingFunc(pageOptions);
+    
+    function dynamicPagingFunc(pageOptions){
+        var pageTotal = pageOptions.pageTotal || 1;
+        var curPage = pageOptions.curPage||1;
+        var doc = document;
+        var paginationId = doc.getElementById(''+pageOptions.paginationId+'') || doc.getElementById('pagination');
+        var html = '';
+        if(curPage>pageTotal){
+            curPage =1;
+        }
+        /*总页数小于5，全部显示*/
+        if(pageTotal<=5){
+            html = appendItem(pageTotal,curPage,html);
+            paginationId.innerHTML = html;
+        }
+        /*总页数大于5时，要分析当前页*/
+        if(pageTotal>5){
+            if(curPage<=4){
+                html = appendItem(pageTotal,curPage,html);
+                paginationId.innerHTML = html;
+            }else if(curPage>4){
+                html = appendItem(pageTotal,curPage,html);
+                paginationId.innerHTML = html;
+            }
+        }
+    }
+    
+    function appendItem(pageTotal,curPage,html){
+        var starPage = 0;
+        var endPage = 0;
+        
+        html+='<a id="prevBtn">&lt;</a>';
+        
+        if(pageTotal<=5){
+            starPage = 1;
+            endPage = pageTotal;    
+        }else if(pageTotal>5 && curPage<=4){
+            starPage = 1;
+            endPage = 4;
+            if(curPage==4){
+                endPage = 5;
+            }
+        }else{
+            if(pageTotal==curPage){
+                starPage = curPage-3;
+                endPage = curPage;
+            }else{
+                starPage = curPage-2;
+                endPage = curPage+1;
+            }
+            html += '<a id="first">1</a><span>...</span>';
+        }
+        
+        for(let i = starPage;i <= endPage;i++){
+            if(i==curPage){
+                html += '<a id="first">'+i+'</a>';
+            }else{
+                html += '<a href="#">'+i+'</a>';
+            }
+        }
+        
+        if(pageTotal<=5){
+            html+='<a href="#" id="nextBtn">&gt;</a>';
+        }else{
+            if(curPage<pageTotal-2){ 
+                html += '<span>...</span>';
+            }
+            if(curPage<=pageTotal-2){
+                html += '<a href="#">'+pageTotal+'</a>';
+            }
+            html+='<a href="#" id="nextBtn">&gt;</a>';
+        }
+        return html;
+    }
+    
+</script> -->
+	
+	
+	<div id="bottom">
+		<div class="bot-con1">
+			<ul>
+				<li class="bot-con1-li1">我们已经做到</li>
+				<li>单项支持人数<span class="inde-span1"></span></li>
+				<li>单项筹款金额<span class="inde-span2"></span></li>
+				<li>累计筹款金额<span class="inde-span3"></span></li>
+			</ul>
+		</div>
+		<div class="bot-con1 bot-con2">
+			<ul>
+				<li class="bot-con1-li1">发起项目流程</li>
+				<li><span class="inde-span4"></span>发起人创建项目</li>
+				<li><span class="inde-span5"></span>项目获得支持</li>
+				<li><span class="inde-span6"></span>发起人发放回报</li>
+				<li><span class="inde-span7"></span>用户收到回报</li>
+			</ul>
+		</div>
+		<div class="bottom-ggt">
+			<a href=""><img src="images/bottbom_68.jpg" alt="" /></a>
+		</div>
+		<div class="zc-yqlink">
+			<ul>
+				<li><a href="">阿里巴巴集团</a></li>
+				<li><a href="">淘宝网</a></li>
+				<li><a href="">天猫</a></li>
+				<li><a href="">聚划算</a></li>
+				<li><a href="">全球速卖通</a></li>
+				<li><a href="">阿里巴巴国际交易市场</a></li>
+				<li><a href="">1688</a></li>
+				<li><a href="">阿里妈妈</a></li>
+				<li><a href="">阿里旅行</a></li>
+				<li><a href="">阿里云计算</a></li>
+				<li><a href="">阿里巴巴集团</a></li>
+				<li><a href="">淘宝网</a></li>
+				<li><a href="">天猫</a></li>
+				<li><a href="">聚划算</a></li>
+				<li><a href="">全球速卖通</a></li>
+				<li><a href="">阿里巴巴国际交易市场</a></li>
+				<li><a href="">1688</a></li>
+				<li><a href="">阿里妈妈</a></li>
+				<li><a href="">阿里云计算</a></li>
+			</ul>
+		</div>
+		<div class="footer-bd">
+
+			<a href=" ">关于淘宝</a> <a href=" ">合作伙伴</a> <a href=" ">营销中心</a> <a
+				href=" ">廉正举报</a> <a href=" ">联系客服</a> <a href=" ">开放平台</a> <a
+				href=" ">诚征英才</a> <a href=" ">联系我们</a> <a href=" ">网站地图</a> <a
+				href=" ">法律声明</a> <em>© 2003-2015 Taobao.com 版权所有</em><br> <br>
+			<span>网络文化经营许可证：<a href=" ">浙网文[2013]0268-027号</a></span> <b>|</b> <span
+				data-spm-protocol="i">增值电信业务经营许可证：<a href="">浙B2-20080224-1</a></span>
+			<b>|</b> <span>信息网络传播视听节目许可证：1109364号</span> <b>|</b> <span>举报电话:0571-81683755</span>
+		</div>
+	</div>
 </body>
+<!-- <script type="text/javascript">
+	$.ajax({
+		//请求方式
+		type : "POST",
+		//请求的媒体类型
+		contentType : "text/html;charset=UTF-8",
+		//请求地址
+		url : "/GyzcList",
+		//数据，json字符串
+		//data : JSON.stringify(list),
+		//请求成功
+		dataType : "json",
+		success : function(result) {
+			console.log(result);
+		}
+	});
+</script> -->
+
+
+
+
+
+
 </html>

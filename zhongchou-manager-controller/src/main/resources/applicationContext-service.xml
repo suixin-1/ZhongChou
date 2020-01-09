@@ -30,6 +30,12 @@
 	<dubbo:protocol name="dubbo" port="20880" />
 	<!-- 声明需要暴露的服务接口 -->
 	<dubbo:service interface="com.yh.service.questionall.QuestionallService" ref="questionallServiceImpl" />
+	<bean id="ClassifyServiceImpl" class="com.yh.service.Impl.ClassityServiceImpl"></bean>
+	<dubbo:service interface="com.yh.service.ClassifyService" ref="ClassifyServiceImpl" />
+	<bean id="projectServiceImpl" class="com.yh.service.Impl.ProjectServiceImpl"></bean>
+	<dubbo:service interface="com.yh.service.ProjectService" ref="projectServiceImpl" />
+	<bean id="selectProjectsByPsIdServiceImpl" class="com.yh.service.Impl.SelectProjectsByPsIdServiceImpl"></bean>
+	<dubbo:service interface="com.yh.service.SelectProjectsByPsIdService" ref="selectProjectsByPsIdServiceImpl" />
 	<!-- <dubbo:service interface="com.yh.service.ItemParamService" ref="itemParamServiceImpl" />
 	<dubbo:service interface="com.yh.service.ItemService" ref="itemServiceImpl" /> -->
 </beans>

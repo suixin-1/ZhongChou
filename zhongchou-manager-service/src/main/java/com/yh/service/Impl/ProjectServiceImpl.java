@@ -98,5 +98,12 @@ public List<Comment> selectComment(int id) {
 	
 	return projectAMapper.selectComment(id);
 }
+@Override
+public List<Projects> selectProjectsAll() {
+	ProjectsExample example = new ProjectsExample();
+	List<Projects> selectByExample = projectsMapper.selectByExample(example);
+	return selectByExample;
+}
+
 
 }

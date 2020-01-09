@@ -13,6 +13,7 @@ import com.yh.pojo.User;
 public interface ProjectService {
 	List<ProjectA> selectAll();
 	List<ProjectA> selectByKey(Condition c);
+	List<Projects> selectProjectsAll();
 	User selectById(int id);
 	Projects findById(int id);
 	ProA selectByPstId(int id);
