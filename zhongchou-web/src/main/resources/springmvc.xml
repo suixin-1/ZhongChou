@@ -40,6 +40,7 @@
         <dubbo:registry protocol="zookeeper" address="172.16.23.200:2181" />
 
         <dubbo:reference interface="com.yh.service.questionall.QuestionallService" id="questionallService"></dubbo:reference>
+  
         <dubbo:reference interface="com.yh.service.CLindex.CLindexReService" id="cLindexReService"></dubbo:reference>
         <dubbo:reference interface="com.yh.service.user.UserService" id="userService" timeout="3000"></dubbo:reference>
         <dubbo:reference interface="com.yh.service.ProjectService" id="projectService" timeout="3000"></dubbo:reference>
@@ -47,4 +48,5 @@
         <dubbo:reference interface="com.yh.service.ClassifyService" id="classifyService"></dubbo:reference>
         <dubbo:reference interface="com.yh.service.SelectProjectsByPsIdService" id="selectProjectsByPsIdService"></dubbo:reference>
        
+        <dubbo:reference interface="com.yh.service.IssueService" id="issueService" />
 </beans>

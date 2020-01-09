@@ -72,15 +72,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
-
 		<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>jsp-api</artifactId>
 				<scope>provided</scope>
 		</dependency>
 
-
-		
 
 		<!-- dubbo相关 -->
 		<dependency>

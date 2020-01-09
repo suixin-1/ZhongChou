@@ -44,38 +44,15 @@
 <!--中间核心-->
 <div class="product">
 	<!--头上表格-->
-	<div class="product-table">
-		<div class="product-left">
-			<table class="table table-bordered">
-				<tr class="text-center">
-					<td class="active title-td"><a href="new_product.html">基本信息</a></td>
-					<td class="title-td"><a href="new_info.html">项目信息</a></td>
-					<td class="title-td"><a href="new_detail.html">详细描述</a></td>
-					<td class="title-td"><a href="new_back.html">回报设置</a></td>
-				</tr>
-			</table>
-		</div>
-		<div class="product-right">
-			<table class="table table-bordered">
-				<tr class="text-center">
-					<td class="title-td">预览</td>
-				</tr>
-
-			</table>
-
-		</div>
-	</div>
+	
 	<!--下部foem表单-->
 	<div class="product-form">
 		<!--上标题-->
 		<div class="product-title">
 			<div class="my-h4">
-				<h4>选择你的身份类型</h4>
+				<h4>发布项目详细信息</h4>
 			</div>
-			<div class="btn-save">
-				<button class="btn btn-default">保存草稿</button>
-			</div>
-
+			
 		</div>
 		<div class="clear"></div>
 		<hr>
@@ -83,49 +60,76 @@
 		<div class="choose">
 			<table class="table table-bordered">
 				<tr class="text-center">
-					<td class="choose-td" style="background: #00aced">个人</td>
+					<td class="choose-td" style="background: #00aced">发布项目</td>
 				</tr>
 			</table>
 		</div>
 		<!--表单-->
-		<form>
+		<form   action= "addProject" method="post">
 			<div class="my-form text-center">
 
-				<div class="product-input"><input class="text" type="text" placeholder="请输入中文姓名，2-20个字符"></div>
-				<div class="product-input"><input class="text" type="text" placeholder="二代身份证，请输入数字或字母"></div>
-				<div class="product-input"><input class="text" type="text" placeholder="请输入手机号码"></div>
+				<div class="product-input"><input class="text" type="text" placeholder="请输入中文姓名，2-20个字符" name="usName"></div>
+				<div class="product-input"><input class="text" type="text" placeholder="二代身份证，请输入数字或字母" name="usIdcard"></div>
+				<div class="product-input"><input class="text" type="text" placeholder="请输入手机号码" name="usPhone"></div>
 
-				<div class="product-input"><input class="text" type="text" placeholder="客服联系人"></div>
-				<div class="product-input"><input class="text" type="text" placeholder="客服咨询电话"></div>
-			</div>
-			<div class="product-select">
-				<div class="product-select1">
-					<select class="select1">
-						<option>请选择</option>
-						<option>河南省</option>
-					</select>
-				</div>
-				<div class="product-select2">
-					<select class="select2">
-						<option>请选择</option>
-						<option>郑州市</option>
-						<option>开封市</option>
-					</select>
-				</div>
-			</div>
+				<div class="product-input"><input class="text" type="text" placeholder="客服联系人" name="proAName"></div>
+				<div class="product-input"><input class="text" type="text" placeholder="客服咨询电话" name="proAPhone"></div>
+				<div class="product-input"><input class="text" type="text" placeholder="用户地址" name="usAddress"></div>
 			<div class="product-select">
 				<div class="select-type">
-					<select class="select-cla">
-						<option>公益</option>
-						<option>农业</option>
-						<option>娱乐</option>
-						<option>其他</option>
+					<select class="select-cla" name="pstName">
+						<option>请选择公益类型</option>
+						<option>支教助学</option>
+						<option>妇女家庭</option>
+						<option>绿色环保</option>
+						<option>动物保护</option>
+						<option>扶老助孤</option>
+						<option>儿童关爱</option>
+						
+						
 					</select>
 				</div>
 			</div>
-		</form>
-	</div>
+			
+                <div class="product-info-input"><b>项目标题：</b><input class="text" type="text" placeholder="给自己的项目起个漂亮的名字吧" name="psName"></div>
+                <div class="product-info-input"><b>筹款目的：</b><input class="text" type="text" placeholder="一句话介绍一下你的项目吧" name="psGoal"></div>
+                <div class="product-info-input"><b>项目地点：</b><input class="text" type="text" placeholder="具体位置" name="psAddress"></div>
+				
+                <div class="product-info-input"><b>项目金额：</b><input class="text" type="text" placeholder="请输入金额，最低500" name="psMoney">元</div>
+                <div class="product-info-input"><b>筹资天数：</b><input class="text" type="text" placeholder="" name="psDays">天</div>
+			   <div class="product-info-input"><b>宣传视频：</b><input class="text" type="text" placeholder="请输入视频地址" name="psVideo"></div>
+                <div class="product-info-input"><b>项目故事：</b><input class="text" type="text" placeholder="一句话介绍一下你的项目吧" name="psStory"></div>
+                 <div class="product-info-input"><b>更多支持：</b><input class="text" type="text" placeholder="一句话介绍一下你的项目吧" name="psSupport"></div>
+                <div class="product-info-input"><b>提供回报：</b><input class="text" type="text" placeholder="一句话介绍一下你的项目吧" name="psRepay"></div>
+                <div class="product-info-input"><b>关于我：</b><input class="text" type="text" placeholder="一句话介绍一下你的项目吧 " name="psAboutme"></div>
+				
+            
+			 
+               <div class="product-select">
+				<div class="select-type">
+					<select class="select-cla" name="ryType">
+						<option>请选择回报类型</option>
+						<option value=1>实物回报(回报需邮寄)</option>
+						<option value=0>虚拟回报(回报无需邮寄)</option>
+						
+					</select>
+				</div>
+			</div>
+                 <div class="product-info-input"><b>支持金额：</b><input class="text" type="text" placeholder="输入需要用户支持的金额 " name="ryPaymoney"></div>
+				 <div class="product-info-input"><b>具体规则：</b><input class="text" type="text" placeholder="此项必填：每x名支持者抽取一名中奖者 " name="ryRule"></div>
+				 <div class="product-info-input"><b>回报内容：</b><input class="text" type="text" placeholder="一句话介绍一下你的回报吧 " name="ryContent"></div>
+				 <div class="product-info-input"><b>人数上限：</b><input class="text" type="text" placeholder="0为不需要名额" name="ryNumber"></div>
+				 <div class="product-info-input"><b>回报时间：</b><input class="text" type="text" placeholder="0为开奖后立即发送 " name="ryTime"></div>
+              
+                
+           
+		
+		 </div>
+                <div class="text-center"><button type="submit" class="btn"  >发布 </button></div>
+</form >
+            </div>
 </div>
+
 <!--底部开始-->
 <div id="bottom">
 	<div class="bottom-ggt"><a href=""><img src="images/bottbom_68.jpg" alt=""/></a></div>
