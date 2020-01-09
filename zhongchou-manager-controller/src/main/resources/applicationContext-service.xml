@@ -31,8 +31,8 @@
 	<!-- 声明需要暴露的服务接口 -->
 	<bean id="CLindexReServiceImpl" class="com.yh.service.CLindeximpl.CLindexReServiceImpl"></bean>
 	<dubbo:service interface="com.yh.service.questionall.QuestionallService" ref="questionallServiceImpl" />
+
 		<dubbo:service interface="com.yh.service.CLindex.CLindexReService" ref="CLindexReServiceImpl" />
-	
-	<!-- <dubbo:service interface="com.yh.service.ItemParamService" ref="itemParamServiceImpl" />
-	<dubbo:service interface="com.yh.service.ItemService" ref="itemServiceImpl" /> -->
+	<dubbo:service interface="com.yh.service.user.UserService" ref="userServiceImpl" />
+	<dubbo:service interface="com.yh.service.ProjectService" ref="projectServiceImpl" />
 </beans>

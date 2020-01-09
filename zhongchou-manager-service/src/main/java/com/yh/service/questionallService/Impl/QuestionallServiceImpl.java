@@ -97,4 +97,13 @@ public class QuestionallServiceImpl implements QuestionallService{
 		return zhongchouResult.build(500, "添加失败");
 	}
 
+	@Override
+	public zhongchouResult deleteQuestionotherById(int parseInt) {
+		int i = questionallMapper.deleteByPrimaryKey(parseInt);
+		if(i>0){
+			return zhongchouResult.build(200, "删除成功");
+		}
+		return zhongchouResult.build(500, "删除失败");
+	}
+
 }

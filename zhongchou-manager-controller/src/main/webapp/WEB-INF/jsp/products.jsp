@@ -18,28 +18,25 @@
 			  <div class="form-group">
 			    <input type="text" class="form-control"  placeholder="项目名称" id="psName">
 			  </div>
-			   <div class="form-group">
-			    <input type="text" class="form-control"  placeholder="项目发起人" id="usName">
-			  </div>
 			  <div class="form-group">
 			   <select class=form-control id="psType" >
+			   
 			   	<option >项目状态</option>
 			   	<option >众筹中</option>
 			   	<option >众筹失败</option>
 			   	<option >众筹成功</option>
-			   	<option >待审核</option>
 			   	<option >待上架</option>
 			   	<option >审核未通过</option>
 			   </select>
 			  </div>
 			   <div class="form-group">
 			   <select class=form-control id="pstName">
-			   	<option value="">项目类型</option>
-			   	<option>教育助学</option>
-			   	<option>爱心环保</option>
-			   	<option>扶贫助困</option>
-			   	<option>公益创业</option>
-			   	<option>公益活动</option>
+			   		<option value="0">公益类型</option>
+			   <c:forEach items="${projectstypeAll }" var="p" varStatus="s">
+			   <!-- projectstypeAll -->
+				   	<option value="${p.pstId }">${p.pstName }</option>
+				   	<!-- <option>教育助学</option> -->
+				</c:forEach>
 			   </select>
 			  </div>
 			  &nbsp;&nbsp;
@@ -76,7 +73,9 @@
                   <td>${s.index+1}</td>
                   <td>${p.pstName}</td>
                   <td>${p.psName}</td>
-                  <td>${p.psGetmoney/p.psMoney}%</td>
+                  <td>
+                  <fmt:formatNumber type="number" value="${p.psGetmoney/p.psMoney*100}" pattern="0" maxFractionDigits="0"/>
+                  %</td>
                   <td><fmt:formatDate value="${p.psStarttime}" pattern="yyyy-MM-dd" /></td>
                   <td><fmt:formatDate value="${p.psEndtime}" pattern="yyyy-MM-dd" /></td>
                   <td>${p.psGetmoney}</td>
@@ -160,7 +159,7 @@
 				        $("#p_time").val();
 				        $("#p_status").val(); */
 				        
-				        var list={"pstName":$("#pstName").val(),"psName":$("#psName").val(),"psType":$("#psType").val(),"usName":$("#usName").val()};
+				        var list={"pstName":$("#pstName").val(),"psName":$("#psName").val(),"psType":$("#psType").find("option:selected").text()};
 				        
 				        $.ajax({
 							//请求方式

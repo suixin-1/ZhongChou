@@ -3,6 +3,7 @@ package com.yh.service.user;
 import java.util.List;
 
 import com.yh.pojo.User;
+import com.yh.pojo.zhongchouResult;
 
 /**
  * 用户
@@ -45,4 +46,8 @@ public interface UserService {
 	 */
 	Integer updatauser(User user);
 	
+	/**
+	 * 根据用户名和密码查询
+	 */
+	zhongchouResult selectUserByNameAndPwd(String username,String password);
 }
