@@ -31,11 +31,14 @@ import com.yh.service.ProjectstypeService;
 @Controller
 public class ProjectController {
 	@Autowired
+
+	private ProjectService projectServiceImpl;
+
 	private ProjectService projectService;
 	
 	@Autowired
 	private ProjectstypeService projectstypeService;
-	
+
 	@RequestMapping("/selectAll")
 	public String selectAll(HttpServletRequest res){
 		
@@ -113,6 +116,7 @@ public class ProjectController {
 					psTyp="0";
 					
 				}else if(psTyp.equals("待上架")){
+
 					psTyp="1";
 					
 				}else if(psTyp.equals("审核未通过")){
@@ -145,14 +149,14 @@ public class ProjectController {
 		String ids  = res.getParameter("id");
 		int id=Integer.parseInt(ids);
 		
-		Projects findById = projectService.findById(id);
+		Projects findById = projectServiceImpl.findById(id);
 		
-		User selectById = projectService.selectById(id);
+		User selectById = projectServiceImpl.selectById(id);
 		
-		ProA selectByPstId = projectService.selectByPstId(id);
+		ProA selectByPstId = projectServiceImpl.selectByPstId(id);
 		
 		Integer psPstId = findById.getPsPstId();
-		Projectstype selectByUsId = projectService.selectByUsId(psPstId);
+		Projectstype selectByUsId = projectServiceImpl.selectByUsId(psPstId);
 		
 		res.setAttribute("fbd", findById);
 		res.setAttribute("sbd", selectById);
@@ -203,8 +207,10 @@ public class ProjectController {
 	public String  updateById(HttpServletRequest res){
 		String ids  = res.getParameter("id");
 		int id=Integer.parseInt(ids);
+
 		projectService.updateById(id);
 		List<ProjectA> selectAll = projectService.selectAll();
+
 		List<ProjectA>  sd = new ArrayList<>();
 		for (ProjectA projectA : selectAll) {
 			if(projectA.getPsType().equals("0")){
@@ -239,7 +245,7 @@ public class ProjectController {
 		String ids  = res.getParameter("id");
 		int id=Integer.parseInt(ids);
 		
-		Projects findById = projectService.findById(id);
+		Projects findById = projectServiceImpl.findById(id);
 					
 			res.setAttribute("fbd",findById );
 
@@ -252,14 +258,14 @@ public class ProjectController {
 	String ids  = res.getParameter("id");
 	int id=Integer.parseInt(ids);
 	
-	Projects findById = projectService.findById(id);
+	Projects findById = projectServiceImpl.findById(id);
 	
-	User selectById = projectService.selectById(id);
+	User selectById = projectServiceImpl.selectById(id);
 	
-	ProA selectByPstId = projectService.selectByPstId(id);
+	ProA selectByPstId = projectServiceImpl.selectByPstId(id);
 	
 	Integer psPstId = findById.getPsPstId();
-	Projectstype selectByUsId = projectService.selectByUsId(psPstId);
+	Projectstype selectByUsId = projectServiceImpl.selectByUsId(psPstId);
 	
 	res.setAttribute("fbd", findById);
 	res.setAttribute("sbd", selectById);
@@ -274,8 +280,8 @@ public String selectComment(HttpServletRequest res){
 	
 	String ids  = res.getParameter("id");
 	int id=Integer.parseInt(ids);
-	Projects findById = projectService.findById(id);
-	List<Comment> c=projectService.selectComment(id);
+	Projects findById = projectServiceImpl.findById(id);
+	List<Comment> c=projectServiceImpl.selectComment(id);
 	
 	
 	res.setAttribute("list", c);

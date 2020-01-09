@@ -100,6 +100,15 @@ public List<Comment> selectComment(int id) {
 	
 	return projectAMapper.selectComment(id);
 }
+
+@Override
+public List<Projects> selectProjectsAll() {
+	ProjectsExample example = new ProjectsExample();
+	List<Projects> selectByExample = projectsMapper.selectByExample(example);
+	return selectByExample;
+}
+
+
 //查询待审核项目
 @Override
 public List<ProjectA> selectByKeyByPsType() {
@@ -118,5 +127,6 @@ public zhongchouResult selectByUserId(Integer usId) {
 	}
 	return zhongchouResult.ok(200, "你的发布项目",list);
 }
+
 
 }
