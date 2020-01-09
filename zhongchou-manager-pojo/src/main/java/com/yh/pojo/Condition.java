@@ -5,19 +5,9 @@ private String psName;
 private String usName;
 private int psType;
 private String pstName;
-@Override
-public String toString() {
-	return "Condition [psName=" + psName + ", usName=" + usName + ", psType=" + psType + ", pstName=" + pstName + "]";
-}
+private int psPstId;
 public Condition() {
 	super();
-}
-public Condition(String psName, String usName, int psType, String pstName) {
-	super();
-	this.psName = psName;
-	this.usName = usName;
-	this.psType = psType;
-	this.pstName = pstName;
 }
 public String getPsName() {
 	return psName;
@@ -42,6 +32,25 @@ public String getPstName() {
 }
 public void setPstName(String pstName) {
 	this.pstName = pstName;
+}
+public int getPsPstId() {
+	return psPstId;
+}
+public void setPsPstId(int psPstId) {
+	this.psPstId = psPstId;
+}
+@Override
+public String toString() {
+	return "Condition [psName=" + psName + ", usName=" + usName + ", psType=" + psType + ", pstName=" + pstName
+			+ ", psPstId=" + psPstId + "]";
+}
+public Condition(String psName, String usName, int psType, String pstName, int psPstId) {
+	super();
+	this.psName = psName;
+	this.usName = usName;
+	this.psType = psType;
+	this.pstName = pstName;
+	this.psPstId = psPstId;
 }
 
 }

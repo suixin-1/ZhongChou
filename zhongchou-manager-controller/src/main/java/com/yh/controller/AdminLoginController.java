@@ -43,6 +43,7 @@ public class AdminLoginController {
 		Integer status = findAdmin.getStatus();
 		if(status==200){
 			model.addAttribute("admin", findAdmin);
+			model.addAttribute("inpage", "inde.jsp");
 			return "index";
 		}
 		

@@ -12,9 +12,9 @@ public class HelloController {
 	
 	
 	@RequestMapping("/")
-	public String hello(Model model){
-		model.addAttribute("inpage", "inde.jsp");
-		return "index";
+	public String hello(){
+		
+		return "login";
 	}
 	@RequestMapping("/{url}")
 	public String pagehello(@PathVariable String url){

@@ -35,6 +35,7 @@
 													<TD>${p.questionname }</TD>
 													<TD>
 												 		<a href="javascript:ToClick('ToQuestionother?questionid=${p.questionid}&questionname=${p.questionname }')">查看子问题</a>
+												 		<a href="javascript:DeleteQuestionother('DeleteQuestionother?questionid=${p.questionid }')">删除父问题</a>
 													</TD>
 												</TR>
 												
@@ -136,6 +137,50 @@
 		   		    } */
 		   		},true);
 		   }
+		   
+		   
+		   function DeleteQuestionother(url){
+			   $.ajax({
+					//请求方式
+		            type : "POST",
+		            //请求的媒体类型
+		            contentType: "text/html;charset=UTF-8",
+		            //请求地址
+		            url : "/"+url,
+		            //数据，json字符串
+		            //data : JSON.stringify(list),
+		            //请求成功
+		            dataType:"json",
+		            success : function(result) {
+		                //console.log(result);
+		                //$("#include").html(result);
+		                if(result.status==200){
+		                	alert(result.msg);
+		                	
+		                	$.ajax({
+		        				//请求方式
+		        	            type : "POST",
+		        	            //请求的媒体类型
+		        	            contentType: "text/html;charset=UTF-8",
+		        	            //请求地址
+		        	            url : "/parentQuestionall",
+		        	            //数据，json字符串
+		        	            //data : JSON.stringify(list),
+		        	            //请求成功
+		        	            success : function(result) {
+		        	                //console.log(result);
+		        	                $("#include").html(result);
+		        	            }
+		        			},true);
+		                	
+		                	
+		                }else{
+		                	alert(result.msg);
+		                }
+		            }
+				},true);
+		   }
+		   
 	</script>
         </div>
 </body>

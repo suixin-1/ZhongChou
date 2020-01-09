@@ -14,6 +14,8 @@
     
     <script type="text/javascript" src="js/jquery-1.42.min.js"></script>
     
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 </head>
 <body>
 <div id="header">
@@ -28,13 +30,13 @@
                 <li><a href="new_info.html" style="">发布项目</a></li>
             </ul>
         </div>
-        <div class="search">
+        <div class="search" style="left:664px;">
             <form action="">
                 <input type="text" class="search-txt" value="" placeholder="找项目">
                 <input type="submit" class="search-but" value="">
             </form>
         </div>
-        <div class="index-login">
+        <div class="index-login" id="index-login">
         	
             <a href="login.html">登录</a>
             <span style="color: white;">|</span>
@@ -61,14 +63,17 @@
   </div>
 
 
-<div>
-	<table id="ceshi">
-		
-	</table>
+<!-- <div>
+	<ul id="ceshi">
+		<li v-for="value in items">
+			<ul>
+				<li>{{ name }}</li>
+				<li v-for="(name,value,index) in value">{{ name }}</li>
+			</ul>
+		</li>
+	</ul>
 
-</div>
-	
-
+</div> -->
 	<script type="text/javascript">
 		$.ajax({
 			//请求方式
@@ -76,7 +81,7 @@
 	        //请求的媒体类型
 	        contentType: "text/html;charset=UTF-8",
 	        //请求地址
-	        url : "localhost:8080/questionall",
+	        url : "questionall",
 	        //数据，json字符串
 	        //data : JSON.stringify(list),
 	        //请求成功
@@ -84,14 +89,22 @@
 	        success : function(result) {
 	            console.log(result);
 	            if(result.status==200){
-	            	var ceshi = $("#ceshi");
+	            	/* var ceshi = $("#ceshi");
 	            	var data = result.data;
 	            	for(var i=0;i<data.length;i++){
-	            		ceshi.append("<tr><td>"+data[i].questionid+"</td><td>"+data[i].questionname+"</td></tr>");
-	            		//var tr = ceshi.children("tr:last-child");
-	            		/* tr.append("<td>"+data[i].questionid+"</td>");
-	            		tr.append("<td>"+data[i].questionname+"</td>"); */
+	            		ceshi.append("<tr><td>"+data[i].questionid+"</td><td>"+data[i].questionname+"</td></tr>");	
+	            	} */
+	            	var ceshi1 = new Vue({
+	            		el:"#ceshi",
+	            		data:{
+	            			items:result.data
+	            		}
+	            	})
+	            	
+	            	if(result.msg!="成功"){
+	            		$("#index-login").html(result.msg);
 	            	}
+	            	
 	            }
 	           // $("#include").html(result);
 	        }

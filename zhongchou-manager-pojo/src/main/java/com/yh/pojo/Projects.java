@@ -1,8 +1,9 @@
 package com.yh.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Projects {
+public class Projects implements Serializable{
     private Integer psId;
 
     private Integer psUsId;

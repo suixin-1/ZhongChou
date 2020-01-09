@@ -18,4 +18,7 @@ public interface ProjectAMapper {
 		int updateById(int id);
 		int updateByPsId(int id);
 		List<Comment> selectComment(int id);
+		
+	//查询待审核项目
+	List<ProjectA>  selectByKeyByPsType();
 }
