@@ -45,11 +45,12 @@ public class IndexController {
 	
 	@RequestMapping(value="/" ,produces = {"text/html;charset=UTF-8"})
 	public String index(){
-		
+
 		return "index";
 	}
 	@RequestMapping("/index")
 	public String toindex(){
+
 		return "index";
 	}
 	
