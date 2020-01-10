@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="css/index.css" type="text/css"/>
 	<link rel="stylesheet" href="css/ly-list.css" type="text/css"/>
 	<link rel="stylesheet" href="css/reg.css" type="text/css"/>
+	<script type="text/javascript" src="js/jquery-1.42.min.js"></script>
 	<title></title>
 </head>
 <body>
@@ -25,19 +26,42 @@
 				<li><a class="vcolor" href="new_product.html" style="">发布项目</a></li>
 			</ul>
 		</div>
-		<div class="search">
+		<div class="search" style="left:664px;">
 			<form action="">
 				<input type="text" class="search-txt" value="" placeholder="找项目">
 				<input type="submit" class="search-but" value="">
 			</form>
 		</div>
-		<div class="index-login">
+		<div class="index-login" id="index-login">
 
 			<a href="login.html">登录</a>
 			<span style="color: white;">|</span>
 			<a href="reg.html">注册</a>
 
 		</div>
+		<a href="login.html" id="goIndex" type="hidden"></a>
+		<script type="text/javascript">
+			$.ajax({
+				//请求方式
+		        type : "POST",
+		        //请求的媒体类型
+		        contentType: "text/html;charset=UTF-8",
+		        //请求地址
+		        url : "to_new_product",
+		        //数据，json字符串
+		        //data : JSON.stringify(list),
+		        //请求成功
+		        dataType:"json",
+		        success : function(result) {
+		            console.log(result);
+		            if(result.status==200){
+		            	$("#index-login").html(result.msg); 	
+		            }else if(result.status==500){
+		            	document.getElementById("goIndex").click();
+		            }
+		        }
+			},true);
+		</script>
 	</div>
 </div>
 <!--上不导航栏结束-->
@@ -68,16 +92,16 @@
 		<form   action= "addProject" method="post">
 			<div class="my-form text-center">
 
-				<div class="product-input"><input class="text" type="text" placeholder="请输入中文姓名，2-20个字符" name="usName"></div>
-				<div class="product-input"><input class="text" type="text" placeholder="二代身份证，请输入数字或字母" name="usIdcard"></div>
-				<div class="product-input"><input class="text" type="text" placeholder="请输入手机号码" name="usPhone"></div>
+				<div class="product-input"><b>用户名：</b><input class="text" type="text" placeholder="请输入中文姓名，2-20个字符" name="usName"></div>
+				<div class="product-input"><b>身份证号：</b><input class="text" type="text" placeholder="二代身份证，请输入数字或字母" name="usIdcard"></div>
+				<div class="product-input"><b>手机号：</b><input class="text" type="text" placeholder="请输入手机号码" name="usPhone"></div>
 
-				<div class="product-input"><input class="text" type="text" placeholder="客服联系人" name="proAName"></div>
-				<div class="product-input"><input class="text" type="text" placeholder="客服咨询电话" name="proAPhone"></div>
-				<div class="product-input"><input class="text" type="text" placeholder="用户地址" name="usAddress"></div>
+				<div class="product-input"><b>客服联系人：</b><input class="text" type="text" placeholder="客服联系人" name="proAName"></div>
+				<div class="product-input"><b>客服咨询：</b><input class="text" type="text" placeholder="客服咨询电话" name="proAPhone"></div>
+				<div class="product-input"><b>用户地址：</b><input class="text" type="text" placeholder="用户地址" name="usAddress"></div>
 			<div class="product-select">
 				<div class="select-type">
-					<select class="select-cla" name="pstName">
+						<select class="select-cla" name="pstName">
 						<option>请选择公益类型</option>
 						<option>支教助学</option>
 						<option>妇女家庭</option>
@@ -97,6 +121,9 @@
 				
                 <div class="product-info-input"><b>项目金额：</b><input class="text" type="text" placeholder="请输入金额，最低500" name="psMoney">元</div>
                 <div class="product-info-input"><b>筹资天数：</b><input class="text" type="text" placeholder="" name="psDays">天</div>
+                
+                <div class="product-info-input"><b>项目图片：</b><input class="text" type="text" placeholder="" name="psFile"></div>
+                
 			   <div class="product-info-input"><b>宣传视频：</b><input class="text" type="text" placeholder="请输入视频地址" name="psVideo"></div>
                 <div class="product-info-input"><b>项目故事：</b><input class="text" type="text" placeholder="一句话介绍一下你的项目吧" name="psStory"></div>
                  <div class="product-info-input"><b>更多支持：</b><input class="text" type="text" placeholder="一句话介绍一下你的项目吧" name="psSupport"></div>

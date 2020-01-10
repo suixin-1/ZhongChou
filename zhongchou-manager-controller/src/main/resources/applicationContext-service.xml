@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context" 
@@ -36,7 +35,7 @@
 
 		<dubbo:service interface="com.yh.service.CLindex.CLindexReService" ref="CLindexReServiceImpl" />
 	<dubbo:service interface="com.yh.service.user.UserService" ref="userServiceImpl" />
-	<--<dubbo:service interface="com.yh.service.ProjectService" ref="projectServiceImpl" />-->
+	<!--<dubbo:service interface="com.yh.service.ProjectService" ref="projectServiceImpl" />-->
   
   
 	<bean id="ClassifyServiceImpl" class="com.yh.service.Impl.ClassityServiceImpl"></bean>

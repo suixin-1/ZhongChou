@@ -1,18 +1,12 @@
 package com.yh.pojo;
 
-
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class ProjectsExample implements Serializable{
-   
-	
-
-	protected String orderByClause;
+public class ProjectsExample {
+    protected String orderByClause;
 
     protected boolean distinct;
 
@@ -995,76 +989,6 @@ public class ProjectsExample implements Serializable{
 
         public Criteria andPsVideoNotBetween(String value1, String value2) {
             addCriterion("ps_video not between", value1, value2, "psVideo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPsStoryIsNull() {
-            addCriterion("ps_story is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPsStoryIsNotNull() {
-            addCriterion("ps_story is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPsStoryEqualTo(String value) {
-            addCriterion("ps_story =", value, "psStory");
-            return (Criteria) this;
-        }
-
-        public Criteria andPsStoryNotEqualTo(String value) {
-            addCriterion("ps_story <>", value, "psStory");
-            return (Criteria) this;
-        }
-
-        public Criteria andPsStoryGreaterThan(String value) {
-            addCriterion("ps_story >", value, "psStory");
-            return (Criteria) this;
-        }
-
-        public Criteria andPsStoryGreaterThanOrEqualTo(String value) {
-            addCriterion("ps_story >=", value, "psStory");
-            return (Criteria) this;
-        }
-
-        public Criteria andPsStoryLessThan(String value) {
-            addCriterion("ps_story <", value, "psStory");
-            return (Criteria) this;
-        }
-
-        public Criteria andPsStoryLessThanOrEqualTo(String value) {
-            addCriterion("ps_story <=", value, "psStory");
-            return (Criteria) this;
-        }
-
-        public Criteria andPsStoryLike(String value) {
-            addCriterion("ps_story like", value, "psStory");
-            return (Criteria) this;
-        }
-
-        public Criteria andPsStoryNotLike(String value) {
-            addCriterion("ps_story not like", value, "psStory");
-            return (Criteria) this;
-        }
-
-        public Criteria andPsStoryIn(List<String> values) {
-            addCriterion("ps_story in", values, "psStory");
-            return (Criteria) this;
-        }
-
-        public Criteria andPsStoryNotIn(List<String> values) {
-            addCriterion("ps_story not in", values, "psStory");
-            return (Criteria) this;
-        }
-
-        public Criteria andPsStoryBetween(String value1, String value2) {
-            addCriterion("ps_story between", value1, value2, "psStory");
-            return (Criteria) this;
-        }
-
-        public Criteria andPsStoryNotBetween(String value1, String value2) {
-            addCriterion("ps_story not between", value1, value2, "psStory");
             return (Criteria) this;
         }
 

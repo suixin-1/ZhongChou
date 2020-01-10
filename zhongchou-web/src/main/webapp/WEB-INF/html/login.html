@@ -30,19 +30,12 @@
 		var Tlist={"isTrue":isTrue,"username":username.value,"password":password.value};
 		
 		if(isTrue){
-			//alert("是邮箱");
 			//isTrue 为TRUE是邮箱  FALSE  是手机号
-			//alert(Tlist);
 			a("login",Tlist)
 			
-		/* obox.style.display="block";
-		obg.style.display="block"; */
-		// 用这个效果在IE6显示不全，因为body。html。document高度不全，那么就要，html，body{ width：100%； height100%；最只要是height；
-		//不满足要求上网找特特效}
-	}else{
-		alert("是手机号")
-		a("login",Tlist);
-	}
+		}else{
+			alert("你的邮箱格式不正确")
+		}
 		
 		
 		
@@ -87,22 +80,23 @@
                 <li><a href="gyzc-list.html">公益众筹</a></li>
                 <li><a href="cop.html">常见问题</a></li>
                 <li><a href="ly-list.html">众筹资讯</a></li>
-                <li><a href="new_info.html" style="">发布项目</a></li>
+                <li><a href="new_product.html" style="">发布项目</a></li>
             </ul>
         </div>
-        <div class="search">
+        <div class="search" style="left:664px;">
             <form action="">
                 <input type="text" class="search-txt" value="找项目">
                 <input type="submit" class="search-but" value="">
             </form>
         </div>
-        <div class="index-login">
+        <div class="index-login" id="index-login">
             <a class="index-login1" href="login.html">登录</a>
+            <span style="color: white;">|</span>
             <a href="reg.html">注册</a>
         </div>
     </div>
 </div>
-
+<script type="text/javascript" src="js/goindex.js"></script>
 <script>
     var d_var=$(".search .search-txt").val();
     $(".search .search-txt").focus(function(){
@@ -194,7 +188,7 @@
                 </div><!-- /.widget-main -->
                 <div class="toolbar clearfix">
                     <div>
-                        <a href="#" data-target="#forgot-box" class="forgot-password-link">
+                        <a href="retrievePassword.html" data-target="#forgot-box" class="forgot-password-link">
                             <i class="ace-icon fa fa-arrow-left"></i>
                             忘记密码
                         </a>

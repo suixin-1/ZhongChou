@@ -13,10 +13,8 @@
 </head>
 
 <body>
-
 <a href="index" id="goIndex" type="hidden"></a>
 <div id="header">
-
     <div class="heade-con">
         <div class="logo"><a href=""><img src="images/LOGO.png"/></a></div>
         <div class="nav posa">
@@ -25,20 +23,23 @@
                 <li><a href="gyzc-list.html">公益众筹</a></li>
                 <li><a href="cop.html">常见问题</a></li>
                 <li><a href="ly-list.html">众筹资讯</a></li>
-                <li><a href="new_info.html" style="">发布项目</a></li>
+                <li><a href="new_product.html" style="">发布项目</a></li>
             </ul>
         </div>
-        <div class="search">
+        <div class="search" style="left:664px;">
             <form action="">
                 <input type="text" class="search-txt" value="找项目">
                 <input type="submit" class="search-but" value="">
             </form>
         </div>
-        <div class="index-login">
+        <div class="index-login" id="index-login">
             <a href="login.html">登录</a>
+            <span style="color: white;">|</span>
             <a class="index-login1" href="reg.html">注册</a>
         </div>
     </div>
+    
+    <script type="text/javascript" src="js/goindex.js"></script>
 </div>
 <div class="login-container">
 
@@ -60,37 +61,28 @@
                 <fieldset>
                     <label class="block clearfix">
 														<span class="block input-icon input-icon-left">
-
 															<input type="text" class="form-control" placeholder="邮箱" id="usEmail" />
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
-
                     </label>
-                 
 
                     <label class="block clearfix">
 														<span class="block input-icon input-icon-left">
-
 															<input type="text" class="form-control" placeholder="用户名" id="usName" />
-
 															<i class="ace-icon fa fa-user"></i>
 														</span>
                     </label>
 
                     <label class="block clearfix">
 														<span class="block input-icon input-icon-left">
-
 															<input type="password" class="form-control" placeholder="密码" id="usPassword1" />
-
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
                     </label>
 
                     <label class="block clearfix">
 														<span class="block input-icon input-icon-left">
-
 															<input type="password" class="form-control" placeholder="确认密码" id="usPassword2" />
-
 															<i class="ace-icon fa fa-retweet"></i>
 														</span>
                     </label>
@@ -100,7 +92,6 @@
 															<input type="text" class="" placeholder="验证码" id="codes"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <button class="btn btn-default" onclick="sendCode()"><a>点击获取验证码</a></button>
 														</span>
-
                     </label>
                     <label class="block">
                         <input type="checkbox" class="ace" id="acc"/>
@@ -110,7 +101,6 @@
 														</span>
                     </label>
 
-
                     <div class="space-24"></div>
 
                     <div class="clearfix">
@@ -119,9 +109,7 @@
                             <span class="bigger-110">重置</span>
                         </button>
 
-
                         <button type="button" class="width-65 pull-right btn btn-sm btn-success" onclick="login()">
-
                             <span class="bigger-110">注册</span>
 
                             <i class="ace-icon fa fa-arrow-right icon-on-right"></i>

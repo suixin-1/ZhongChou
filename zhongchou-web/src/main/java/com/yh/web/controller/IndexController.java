@@ -1,7 +1,3 @@
-
-	
-
-
 package com.yh.web.controller;
 
 import java.io.IOException;
@@ -25,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.dubbo.common.json.JSON;
 import com.yh.mapper.QuestionotherMapper;
+import com.yh.pojo.Projects;
 import com.yh.pojo.Questionall;
 import com.yh.pojo.Questionother;
 import com.yh.pojo.User;
@@ -54,10 +51,39 @@ public class IndexController {
 	}
 	@RequestMapping("/index")
 	public String toindex(){
-
+		
+		
 		return "index";
 	}
+	//判断首页是否有登录
+	@RequestMapping(value="/gonnindex", produces = {"application/json;charset=UTF-8"})
+	@ResponseBody
+	public String gonnindex(HttpServletRequest req){
+		HttpSession session = req.getSession(false);
+		zhongchouResult result=zhongchouResult.build(200, "成功");
+		if(session!=null){
+			Object object = session.getAttribute("user");
+			
+			List<com.yh.pojo.User> list2 = castList(object,User.class);
+			
+			result = zhongchouResult.ok(200, "成功", list2);
+			if(list2.size()>0){
+				System.out.println(list2.get(0).getUsName());
+				result.setMsg("<a href='user.html'>欢迎，"+list2.get(0).getUsName()+"</a><span style='color: white;'>|</span><a href='loginOut'>lOut</a>");				
+			}
+			
+		}
+		String json="";
+		try {
+			json = JSON.json(result);
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		return json;
+	}
 	
+	//问题管理
 	@RequestMapping(value="/questionall", produces = {"application/json;charset=UTF-8"})
 	@ResponseBody
 	public String questionall(HttpServletRequest req){
@@ -130,6 +156,14 @@ public class IndexController {
 		return url;
 	}
 	
+//	@RequestMapping(value="/gologin")
+//	public String gologin(){
+//		return "login";
+//	}
+//	@RequestMapping(value="/toreg")
+//	public String toreg(){
+//		return "reg";
+//	}
 
 	//登录验证
 	@RequestMapping(value="/login", produces = {"application/json;charset=UTF-8"})
@@ -278,7 +312,7 @@ public class IndexController {
 				System.out.println(url);
 				zhongchouResult build=null;
 				try {
-					boolean b = sendMail(url,substring);
+					boolean b = sendMail(url,substring,"验证码");
 					if(b){
 						HttpSession session = req.getSession(false);
 						if(session==null){
@@ -305,8 +339,8 @@ public class IndexController {
 	
 	
 	//邮件发送方法
-	public static boolean  sendMail(String url,String code) throws Exception{
-		SendMail mail = new SendMail("575843404@qq.com", "cymqrvjwxxpfbbaj");
+	public static boolean  sendMail(String url,String code,String msg) throws Exception{
+		SendMail mail = new SendMail("3070979976@qq.com", "zrgioxlewjefdhbe");
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("mail.smtp.host", "smtp.qq.com");
 		map.put("mail.smtp.auth", "true");
@@ -333,7 +367,7 @@ public class IndexController {
 		mail.setFrom("AI");
  
 		// 邮件内容
-		mail.setContent("你的验证码为:<a>"+code+"</a>", "text/html; charset=UTF-8");
+		mail.setContent("你的"+msg+"为:<a>"+code+"</a>", "text/html; charset=UTF-8");
 
 		return mail.sendMessage(); // 是否发送成功
 	}
@@ -401,6 +435,99 @@ public class IndexController {
 			e.printStackTrace();
 		}
 		return json;
+	}
+	
+	
+	@RequestMapping(value="/to_new_product", produces = {"text/html;charset=UTF-8"})
+	@ResponseBody
+	public String new_product(HttpServletRequest req){
+		
+		HttpSession session = req.getSession(false);
+		zhongchouResult result=zhongchouResult.build(500, "请登录");
+		if(session!=null){
+			Object object = session.getAttribute("user");
+			
+			List<com.yh.pojo.User> list2 = castList(object,User.class);
+			
+			result = zhongchouResult.ok(500, "成功", list2);
+			if(list2!=null){
+				if(list2.size()>0){
+					System.out.println(list2.get(0).getUsName());
+					result.setStatus(200);
+					result.setMsg("<a href='user.html'>欢迎，"+list2.get(0).getUsName()+"</a><span style='color: white;'>|</span><a href='loginOut'>lOut</a>");				
+				}else{
+					System.out.println("请登录");
+				}				
+			}
+			
+		}
+		System.out.println("请登录");
+		String json="";
+		try {
+			json = JSON.json(result);
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		return json;
+	}
+	
+	//找回密码
+	@RequestMapping(value="/bo_retrievePassword", produces = {"text/html;charset=UTF-8"})
+	@ResponseBody
+	public String retrievePassword(HttpServletRequest req,String usEmail,String codes){
+		HttpSession session2 = req.getSession(false);
+		String code = (String)session2.getAttribute("code");
+		System.out.println(code+"--+++++++++++++++++++++++++++++++++++++++++++");
+		if(!code.equals(codes)){
+			zhongchouResult result = zhongchouResult.build(500, "验证码输入错误");
+			String json="";
+			try {
+				json = JSON.json(result);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return json;
+		}
+		
+		zhongchouResult result = userService.selectUserByEmail(usEmail);
+		
+		if(result.getStatus()==200){
+			User user = (User) result.getData();
+			String password = user.getUsPassword();
+			try {
+				boolean b = sendMail(usEmail,password,"密码");
+				if(b){
+					zhongchouResult result2 = zhongchouResult.build(200, "密码已发送至邮箱");
+					String json="";
+					try {
+						json = JSON.json(result2);
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+					return json;
+				}
+			} catch (Exception e) {
+				String json="";
+				try {
+					result.setMsg("验证码发送失败~");
+					json = JSON.json(result);
+				} catch (IOException e1) {			
+					e1.printStackTrace();
+				}	
+				return json;
+			}
+		}
+		String json="";
+		try {
+				json = JSON.json(result);
+		} catch (IOException e) {
+				
+				e.printStackTrace();
+		}
+		return json;
+		
 	}
   
 }

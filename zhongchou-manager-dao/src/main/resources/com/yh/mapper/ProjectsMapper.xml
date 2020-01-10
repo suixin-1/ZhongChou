@@ -15,7 +15,6 @@
     <result column="ps_money" property="psMoney" jdbcType="DOUBLE" />
     <result column="ps_days" property="psDays" jdbcType="INTEGER" />
     <result column="ps_video" property="psVideo" jdbcType="VARCHAR" />
-    <result column="ps_story" property="psStory" jdbcType="VARCHAR" />
     <result column="ps_support" property="psSupport" jdbcType="VARCHAR" />
     <result column="ps_repay" property="psRepay" jdbcType="VARCHAR" />
     <result column="ps_aboutme" property="psAboutme" jdbcType="VARCHAR" />
@@ -24,6 +23,9 @@
     <result column="ps_endtime" property="psEndtime" jdbcType="DATE" />
     <result column="ps_getmoney" property="psGetmoney" jdbcType="DOUBLE" />
     <result column="ps_getpeople" property="psGetpeople" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.yh.pojo.Projects" extends="BaseResultMap" >
+    <result column="ps_story" property="psStory" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -85,9 +87,28 @@
   </sql>
   <sql id="Base_Column_List" >
     ps_id, ps_us_id, ps_cust_name, ps_cust_phone, ps_cust_address, ps_pst_id, ps_file, 
-    ps_name, ps_goal, ps_address, ps_money, ps_days, ps_video, ps_story, ps_support, 
-    ps_repay, ps_aboutme, ps_type, ps_starttime, ps_endtime, ps_getmoney, ps_getpeople
+    ps_name, ps_goal, ps_address, ps_money, ps_days, ps_video, ps_support, ps_repay, 
+    ps_aboutme, ps_type, ps_starttime, ps_endtime, ps_getmoney, ps_getpeople
   </sql>
+  <sql id="Blob_Column_List" >
+    ps_story
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.yh.pojo.ProjectsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from projects
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yh.pojo.ProjectsExample" >
     select
     <if test="distinct" >
@@ -102,9 +123,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from projects
     where ps_id = #{psId,jdbcType=INTEGER}
   </select>
@@ -123,18 +146,18 @@
       ps_cust_phone, ps_cust_address, ps_pst_id, 
       ps_file, ps_name, ps_goal, 
       ps_address, ps_money, ps_days, 
-      ps_video, ps_story, ps_support, 
-      ps_repay, ps_aboutme, ps_type, 
-      ps_starttime, ps_endtime, ps_getmoney, 
-      ps_getpeople)
+      ps_video, ps_support, ps_repay, 
+      ps_aboutme, ps_type, ps_starttime, 
+      ps_endtime, ps_getmoney, ps_getpeople, 
+      ps_story)
     values (#{psId,jdbcType=INTEGER}, #{psUsId,jdbcType=INTEGER}, #{psCustName,jdbcType=VARCHAR}, 
       #{psCustPhone,jdbcType=VARCHAR}, #{psCustAddress,jdbcType=VARCHAR}, #{psPstId,jdbcType=INTEGER}, 
       #{psFile,jdbcType=VARCHAR}, #{psName,jdbcType=VARCHAR}, #{psGoal,jdbcType=VARCHAR}, 
       #{psAddress,jdbcType=VARCHAR}, #{psMoney,jdbcType=DOUBLE}, #{psDays,jdbcType=INTEGER}, 
-      #{psVideo,jdbcType=VARCHAR}, #{psStory,jdbcType=VARCHAR}, #{psSupport,jdbcType=VARCHAR}, 
-      #{psRepay,jdbcType=VARCHAR}, #{psAboutme,jdbcType=VARCHAR}, #{psType,jdbcType=INTEGER}, 
-      #{psStarttime,jdbcType=DATE}, #{psEndtime,jdbcType=DATE}, #{psGetmoney,jdbcType=DOUBLE}, 
-      #{psGetpeople,jdbcType=INTEGER})
+      #{psVideo,jdbcType=VARCHAR}, #{psSupport,jdbcType=VARCHAR}, #{psRepay,jdbcType=VARCHAR}, 
+      #{psAboutme,jdbcType=VARCHAR}, #{psType,jdbcType=INTEGER}, #{psStarttime,jdbcType=DATE}, 
+      #{psEndtime,jdbcType=DATE}, #{psGetmoney,jdbcType=DOUBLE}, #{psGetpeople,jdbcType=INTEGER}, 
+      #{psStory,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yh.pojo.Projects" >
     insert into projects
@@ -178,9 +201,6 @@
       <if test="psVideo != null" >
         ps_video,
       </if>
-      <if test="psStory != null" >
-        ps_story,
-      </if>
       <if test="psSupport != null" >
         ps_support,
       </if>
@@ -204,6 +224,9 @@
       </if>
       <if test="psGetpeople != null" >
         ps_getpeople,
+      </if>
+      <if test="psStory != null" >
+        ps_story,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -246,9 +269,6 @@
       <if test="psVideo != null" >
         #{psVideo,jdbcType=VARCHAR},
       </if>
-      <if test="psStory != null" >
-        #{psStory,jdbcType=VARCHAR},
-      </if>
       <if test="psSupport != null" >
         #{psSupport,jdbcType=VARCHAR},
       </if>
@@ -272,6 +292,9 @@
       </if>
       <if test="psGetpeople != null" >
         #{psGetpeople,jdbcType=INTEGER},
+      </if>
+      <if test="psStory != null" >
+        #{psStory,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -323,9 +346,6 @@
       <if test="record.psVideo != null" >
         ps_video = #{record.psVideo,jdbcType=VARCHAR},
       </if>
-      <if test="record.psStory != null" >
-        ps_story = #{record.psStory,jdbcType=VARCHAR},
-      </if>
       <if test="record.psSupport != null" >
         ps_support = #{record.psSupport,jdbcType=VARCHAR},
       </if>
@@ -350,7 +370,38 @@
       <if test="record.psGetpeople != null" >
         ps_getpeople = #{record.psGetpeople,jdbcType=INTEGER},
       </if>
+      <if test="record.psStory != null" >
+        ps_story = #{record.psStory,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update projects
+    set ps_id = #{record.psId,jdbcType=INTEGER},
+      ps_us_id = #{record.psUsId,jdbcType=INTEGER},
+      ps_cust_name = #{record.psCustName,jdbcType=VARCHAR},
+      ps_cust_phone = #{record.psCustPhone,jdbcType=VARCHAR},
+      ps_cust_address = #{record.psCustAddress,jdbcType=VARCHAR},
+      ps_pst_id = #{record.psPstId,jdbcType=INTEGER},
+      ps_file = #{record.psFile,jdbcType=VARCHAR},
+      ps_name = #{record.psName,jdbcType=VARCHAR},
+      ps_goal = #{record.psGoal,jdbcType=VARCHAR},
+      ps_address = #{record.psAddress,jdbcType=VARCHAR},
+      ps_money = #{record.psMoney,jdbcType=DOUBLE},
+      ps_days = #{record.psDays,jdbcType=INTEGER},
+      ps_video = #{record.psVideo,jdbcType=VARCHAR},
+      ps_support = #{record.psSupport,jdbcType=VARCHAR},
+      ps_repay = #{record.psRepay,jdbcType=VARCHAR},
+      ps_aboutme = #{record.psAboutme,jdbcType=VARCHAR},
+      ps_type = #{record.psType,jdbcType=INTEGER},
+      ps_starttime = #{record.psStarttime,jdbcType=DATE},
+      ps_endtime = #{record.psEndtime,jdbcType=DATE},
+      ps_getmoney = #{record.psGetmoney,jdbcType=DOUBLE},
+      ps_getpeople = #{record.psGetpeople,jdbcType=INTEGER},
+      ps_story = #{record.psStory,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -370,7 +421,6 @@
       ps_money = #{record.psMoney,jdbcType=DOUBLE},
       ps_days = #{record.psDays,jdbcType=INTEGER},
       ps_video = #{record.psVideo,jdbcType=VARCHAR},
-      ps_story = #{record.psStory,jdbcType=VARCHAR},
       ps_support = #{record.psSupport,jdbcType=VARCHAR},
       ps_repay = #{record.psRepay,jdbcType=VARCHAR},
       ps_aboutme = #{record.psAboutme,jdbcType=VARCHAR},
@@ -422,9 +472,6 @@
       <if test="psVideo != null" >
         ps_video = #{psVideo,jdbcType=VARCHAR},
       </if>
-      <if test="psStory != null" >
-        ps_story = #{psStory,jdbcType=VARCHAR},
-      </if>
       <if test="psSupport != null" >
         ps_support = #{psSupport,jdbcType=VARCHAR},
       </if>
@@ -449,7 +496,35 @@
       <if test="psGetpeople != null" >
         ps_getpeople = #{psGetpeople,jdbcType=INTEGER},
       </if>
+      <if test="psStory != null" >
+        ps_story = #{psStory,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where ps_id = #{psId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yh.pojo.Projects" >
+    update projects
+    set ps_us_id = #{psUsId,jdbcType=INTEGER},
+      ps_cust_name = #{psCustName,jdbcType=VARCHAR},
+      ps_cust_phone = #{psCustPhone,jdbcType=VARCHAR},
+      ps_cust_address = #{psCustAddress,jdbcType=VARCHAR},
+      ps_pst_id = #{psPstId,jdbcType=INTEGER},
+      ps_file = #{psFile,jdbcType=VARCHAR},
+      ps_name = #{psName,jdbcType=VARCHAR},
+      ps_goal = #{psGoal,jdbcType=VARCHAR},
+      ps_address = #{psAddress,jdbcType=VARCHAR},
+      ps_money = #{psMoney,jdbcType=DOUBLE},
+      ps_days = #{psDays,jdbcType=INTEGER},
+      ps_video = #{psVideo,jdbcType=VARCHAR},
+      ps_support = #{psSupport,jdbcType=VARCHAR},
+      ps_repay = #{psRepay,jdbcType=VARCHAR},
+      ps_aboutme = #{psAboutme,jdbcType=VARCHAR},
+      ps_type = #{psType,jdbcType=INTEGER},
+      ps_starttime = #{psStarttime,jdbcType=DATE},
+      ps_endtime = #{psEndtime,jdbcType=DATE},
+      ps_getmoney = #{psGetmoney,jdbcType=DOUBLE},
+      ps_getpeople = #{psGetpeople,jdbcType=INTEGER},
+      ps_story = #{psStory,jdbcType=LONGVARCHAR}
     where ps_id = #{psId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yh.pojo.Projects" >
@@ -466,7 +541,6 @@
       ps_money = #{psMoney,jdbcType=DOUBLE},
       ps_days = #{psDays,jdbcType=INTEGER},
       ps_video = #{psVideo,jdbcType=VARCHAR},
-      ps_story = #{psStory,jdbcType=VARCHAR},
       ps_support = #{psSupport,jdbcType=VARCHAR},
       ps_repay = #{psRepay,jdbcType=VARCHAR},
       ps_aboutme = #{psAboutme,jdbcType=VARCHAR},

@@ -107,13 +107,6 @@ public List<Projects> selectProjectsAll() {
 	return projectsMapper.selectByExample(example);
 }
 
-@Override
-public List<Projects> selectProjectsAll() {
-	ProjectsExample example = new ProjectsExample();
-	List<Projects> selectByExample = projectsMapper.selectByExample(example);
-	return selectByExample;
-}
-
 
 //查询待审核项目
 @Override

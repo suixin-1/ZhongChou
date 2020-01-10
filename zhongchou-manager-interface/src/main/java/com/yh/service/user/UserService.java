@@ -53,4 +53,11 @@ public interface UserService {
 	 */
 	zhongchouResult selectUserByNameAndPwd(String username,String password);
 
+
+	/**
+	 * 根据邮箱号  查询密码
+	 * @param usEmail 邮箱号
+	 */
+	zhongchouResult selectUserByEmail(String usEmail);
+
 }

@@ -89,6 +89,19 @@ public class UserServiceImpl implements UserService {
 		}
 		return zhongchouResult.ok(200, "登录成功", list);
 	}
+	
+	//根据邮箱查询密码
+	@Override
+	public zhongchouResult selectUserByEmail(String usEmail) {
+		UserExample example = new UserExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andUsEmailEqualTo(usEmail);
+		List<User> list = usermapper.selectByExample(example);
+		if(list.isEmpty()){
+			return zhongchouResult.build(500, "没有此账号");
+		}	
+		return zhongchouResult.ok(200, "查询成功", list.get(0));
+	}
 
 
 

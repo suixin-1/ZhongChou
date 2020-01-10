@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="css/base.css" type="text/css" />
 <link rel="stylesheet" href="css/headbott.css" type="text/css" />
 <link rel="stylesheet" href="css/product-list.css" type="text/css" />
+
+<script type="text/javascript" src="js/filter.js"></script>
 </head>
 
 <body>
@@ -30,23 +32,23 @@
 					<li><a class="vcolor" href="gyzc-list">公益众筹</a></li>
 					<li><a href="cop.html">常见问题</a></li>
 					<li><a href="ly-list.html">众筹资讯</a></li>
-					<li><a href="new_info.html" style="">发布项目</a></li>
+					<li><a href="new_product.html" style="">发布项目</a></li>
 				</ul>
 			</div>
-			<div class="search">
+			<div class="search" style="left:664px;">
 				<form action="">
 					<input type="text" class="search-txt" value="" placeholder="找项目">
 					<input type="submit" class="search-but" value="">
 				</form>
 			</div>
-			<div class="index-login">
+			<div class="index-login" id="index-login">
 
 				<a href="login.html">登录</a> <span style="color: white;">|</span> <a
 					href="user.html">注册</a>
 			</div>
 		</div>
 	</div>
-
+<script type="text/javascript" src="js/goindex.js"></script>
 	<div class="product-con">
 		<h1 class="product-con_tit">公益众筹</h1>
 		<div class="product-con_nav" id="zhanshi">
@@ -141,14 +143,17 @@
 			}, true);
 		</script> -->
 		 
-
-
+	
+		<style>
+		
+			.product-list-lpic>a>img{width:238px; height: 155px; }
+		</style>
 		
 
 		<div id="selectCLindexRecg" class="product-list-l" style="width:1040px;margin:auto">
 			<li v-for="b in items" class="zcz">
 				<div class="product-list-lpic">
-					<a href="product-detail.html"><img src="images/prr-dduu_27.jpg"
+					<a :href="'toproduct-detail?psId=' + b.psId "><img :src="b.psFile"
 						alt="" /></a>
 					<div class="product_one">	
 					众筹中	
@@ -160,7 +165,7 @@
 				</p>
 				<div class="product-list-lmin">
 					<dl>
-						<dt>{{b.psGetmoney/b.psMoney}}</dt>
+						<dt>{{ceils(b.psGetmoney/b.psMoney*100)}}%</dt>
 						<dd>达成率</dd>
 					</dl>
 					<dl>

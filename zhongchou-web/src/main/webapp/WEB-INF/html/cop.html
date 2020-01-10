@@ -24,7 +24,7 @@
                 <li><a href="gyzc-list.html">公益众筹</a></li>
                 <li><a href="cop.html"  class="vcolor">常见问题</a></li>
                 <li><a href="ly-list.html">众筹资讯</a></li>
-                <li><a href="new_info.html" style="">发布项目</a></li>
+                <li><a href="new_product.html" style="">发布项目</a></li>
             </ul>
         </div>
         <div class="search" style="left:664px;">
@@ -41,7 +41,7 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript" src="js/goindex.js"></script>
 
 <div id="cop">
    <div class="cop-mian">
@@ -97,9 +97,9 @@
 	        	var data = result.data;
 	        	for(var i=0;i<data.length;i++){
 	        		ceshi.append("<tr><td>"+data[i].questionid+"</td><td>"+data[i].questionname+"</td></tr>");*/
-		        	if(result.msg!="成功"){
+		        	/* if(result.msg!="成功"){
 	            		$("#index-login").html(result.msg);
-	            	}
+	            	} */
 	        	} 
 	        	new Vue({
 	        		el:"#cop",

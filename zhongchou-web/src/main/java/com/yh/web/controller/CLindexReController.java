@@ -38,7 +38,6 @@ private CLindexReService cLindexReService;
 	try {
 		 json = JSON.json(selectCLindexRe);
 	} catch (IOException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 		return json;
@@ -72,7 +71,6 @@ private CLindexReService cLindexReService;
 	try {
 		 json = JSON.json(selectByExample);
 	} catch (IOException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 		return json;
@@ -93,11 +91,14 @@ private CLindexReService cLindexReService;
 
 	@RequestMapping("/toproduct-detail")
 	public String productdetail(int psId,HttpServletRequest request, HttpServletResponse response){
+		String psid = request.getParameter("psId");
+		System.out.println("???????????????????????"+psid);
+/*		
 		String cookieName="psid";
 		String id=psId+"";
 	Cookie cookie = new Cookie(cookieName, id);
 	response.addCookie(cookie);
-		
+		*/
 		return "product-detail";
 	}
 
@@ -105,7 +106,10 @@ private CLindexReService cLindexReService;
 	@RequestMapping(value="/toproduct-detail2", produces = {"application/json;charset=UTF-8"})
 	@ResponseBody
 	public String productdetail2(HttpServletRequest request){
-		Projects projects = new Projects();
+		
+		//System.out.println();
+		
+		/*Projects projects = new Projects();
 		Cookie[] cookies = request.getCookies();
 		for (Cookie cookie : cookies) {
 			if(cookie.getName().equals("psid")){
@@ -113,9 +117,17 @@ private CLindexReService cLindexReService;
 				int id=Integer.parseInt(value);
 				projects.setPsId(id);
 			}
+		}*/
+		String string = request.getParameter("psId");
+		int id = 0;
+		if(string!=null || string!=""){
+			id=Integer.parseInt(string);
 		}
-		/*Projects projects = new Projects();
-		projects.setPsId(id);*/
+		
+		Projects projects = new Projects();
+		System.out.println(id+".0000000000000000000000000");
+		
+		projects.setPsId(id);
 		List<Projects> selectByExample = cLindexReService.selectParticulars(projects);
 		System.out.println(selectByExample.size()+"************************-------------------------------------");
 		zhongchouResult result = zhongchouResult.ok(200, "成功", selectByExample);
