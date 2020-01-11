@@ -15,7 +15,6 @@
 		<ul class="nav nav-sidebar">
             <li><a href="javascript:ToClick('selectAll')">所有项目*</a></li>
             <li><a href="javascript:ToClick('selectType')">项目审核</a></li>
-            <li><a href="javascript:ToClick('comment?page=1')">项目评论</a></li>
             <li><a href="javascript:ToClick('classify?page=1')">项目分类</a></li>
             <li><a href="javascript:ToClick('recommend?page=1')">项目推荐</a></li>
           </ul>
@@ -28,14 +27,11 @@
 		  
           <ul class="nav nav-sidebar">
 			<li><a href="javascript:ToClick('usermanage')">管理用户</a></li>
-            <li><a href="javascript:ToClick('usermoney')">用户资金</a></li>
-            <li><a href="javascript:ToClick('logsList')">用户日志</a></li>
             <li><a href="">实名审核</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="">新闻管理</a></li>
+            <!-- <li><a href="">众筹咨询</a></li> -->
             <li><a href="javascript:ToClick('parentQuestionall')">问题管理</a></li>
-            <li><a href="">管理日志</a></li>
           </ul>
 	</div>
 	<script type="text/javascript">

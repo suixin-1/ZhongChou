@@ -38,17 +38,17 @@ private UserMapper userMapper;
 private ProAMapper proAMapper;
 @Autowired
 private ProjectstypeMapper projectstypeMapper;
-@Override
-public List<ProjectA> selectAll(){
 
+public List<ProjectA> selectAll(){
+	System.out.println("================================");
 	return projectAMapper.selectAll();
 	
 }
-@Override
+
 public List<ProjectA> selectByKey(Condition c) {
 	return projectAMapper.selectByKey(c);
 }
-@Override
+
 public User selectById(int id) {
 	UserExample example = new UserExample();
 	com.yh.pojo.UserExample.Criteria createCriteria = example.createCriteria();
@@ -58,16 +58,16 @@ public User selectById(int id) {
 	
 	return list.get(0);
 }
-@Override
+
 public Projects findById(int id) {
 	ProjectsExample example = new ProjectsExample();
 	Criteria criteria = example.createCriteria();
-	criteria.andPsUsIdEqualTo(id);
+	criteria.andPsIdEqualTo(id);
 	List<Projects> list = projectsMapper.selectByExample(example);
 	return list.get(0);
 			//projectAMapper.findById(id);
 }
-@Override
+
 public ProA selectByPstId(int id) {
 	
 	ProAExample example = new ProAExample();
@@ -76,7 +76,7 @@ public ProA selectByPstId(int id) {
 	List<ProA> list = proAMapper.selectByExample(example);
 	return list.get(0);
 }
-@Override
+
 public Projectstype selectByUsId(int id) {
 	
 	ProjectstypeExample example = new ProjectstypeExample();
@@ -85,22 +85,22 @@ public Projectstype selectByUsId(int id) {
 	List<Projectstype> list = projectstypeMapper.selectByExample(example);
 	return list.get(0);
 }
-@Override
+
 public int updateById(int id) {
 	
 	return projectAMapper.updateById(id);
 }
-@Override
+
 public int updateByPsId(int id) {
 	
 	return projectAMapper.updateByPsId(id);
 }
-@Override
+
 public List<Comment> selectComment(int id) {
 	
 	return projectAMapper.selectComment(id);
 }
-@Override
+
 public List<Projects> selectProjectsAll() {
 	ProjectsExample example = new ProjectsExample();
 	

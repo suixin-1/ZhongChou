@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.yh.mapper.ProjectAMapper;
 import com.yh.pojo.Comment;
 import com.yh.pojo.Condition;
 import com.yh.pojo.ProA;
@@ -38,6 +39,9 @@ public class ProjectController {
 	
 	@Autowired
 	private ProjectstypeService projectstypeService;
+	
+	@Autowired
+	private ProjectAMapper projectAMapper;
 
 	@RequestMapping("/selectAll")
 	public String selectAll(HttpServletRequest res){
@@ -88,19 +92,19 @@ public class ProjectController {
 				if(pstName!="" || psName!="" ||usName !=""){
 					System.out.println("222222222222222222222222222");
 					System.out.println("------------------------------");
-					List<ProjectA> p= projectService.selectByKey(c);
+					List<ProjectA> p= projectAMapper.selectByKey(c);
 					PageInfo<ProjectA> pageInfo = new PageInfo<ProjectA>(p);
 					res.setAttribute("pb", pageInfo);
 					res.setAttribute("list", p);
-					return "products";
+					return "project/products";
 				}else{	
 					System.out.println("33333333333333333333333333");
-					List<ProjectA> selectAll = projectService.selectAll();
+					List<ProjectA> selectAll = projectAMapper.selectAll();
 					PageInfo<ProjectA> pageInfo = new PageInfo<ProjectA>(selectAll);
 					System.out.println(pageInfo);
 					res.setAttribute("pb", pageInfo);
 					res.setAttribute("list", selectAll);					
-					return "products";	
+					return "project/products";	
 				}	
 			}else{
 				if(psTyp.equals("众筹中")){
@@ -125,21 +129,22 @@ public class ProjectController {
 				}
 				System.out.println("444444444444444444444");
 				c.setPsType(Integer.parseInt(psTyp));
-				List<ProjectA> p= projectService.selectByKey(c);
+				List<ProjectA> p= projectAMapper.selectByKey(c);
 				PageInfo<ProjectA> pageInfo = new PageInfo<ProjectA>(p);
 				res.setAttribute("pb", pageInfo);
 				res.setAttribute("list", p);
-				return "products";	
+				return "project/products";	
 				
 			}	
 		}
 		System.out.println("55555555555555555555555555555555");
-			List<ProjectA> selectAll = projectService.selectAll();
+			//List<ProjectA> selectAll = projectService.selectAll();
+		List<ProjectA> selectAll = projectAMapper.selectAll();
 			PageInfo<ProjectA> pageInfo = new PageInfo<ProjectA>(selectAll);
 			res.setAttribute("pb", pageInfo);
 			res.setAttribute("list", selectAll);
 		
-		return "products";
+		return "project/products";
 		
 	}
 	
@@ -149,13 +154,15 @@ public class ProjectController {
 		String ids  = res.getParameter("id");
 		int id=Integer.parseInt(ids);
 		
+		//根据用户id查询project表
 		Projects findById = projectServiceImpl.findById(id);
-		
+		//根据用户id查user表
 		User selectById = projectServiceImpl.selectById(id);
-		
+		//根据用户id查proA表
 		ProA selectByPstId = projectServiceImpl.selectByPstId(id);
 		
 		Integer psPstId = findById.getPsPstId();
+		//根据用户id查projectType表
 		Projectstype selectByUsId = projectServiceImpl.selectByUsId(psPstId);
 		
 		res.setAttribute("fbd", findById);
@@ -163,7 +170,7 @@ public class ProjectController {
 		res.setAttribute("sbpd", selectByPstId);
 		res.setAttribute("sbud", selectByUsId);
 		
-		return "product-info1";	
+		return "project/product-info1";	
 	}
 	@RequestMapping("/selectType")
 	public String selectType(HttpServletRequest res){
@@ -200,7 +207,7 @@ public class ProjectController {
 		PageInfo<ProjectA> pageInfo = new PageInfo<ProjectA>(selectAll);
 		res.setAttribute("pb", pageInfo);
 		res.setAttribute("list", selectAll);
-		return "audit_status";
+		return "project/audit_status";
 		
 	}
 	@RequestMapping("/updateById")
@@ -219,7 +226,7 @@ public class ProjectController {
 			}
 		}
 		res.setAttribute("list", sd);
-		return "audit_status";
+		return "project/audit_status";
 		
 	}
 	@RequestMapping("/updateByPsId")
@@ -236,7 +243,7 @@ public class ProjectController {
 			}
 		}
 		res.setAttribute("list", sd);
-		return "audit_status";
+		return "project/audit_status";
 		
 	}
 	@RequestMapping("/selectSchedule")
@@ -249,7 +256,7 @@ public class ProjectController {
 					
 			res.setAttribute("fbd",findById );
 
-		return "project-schedule";
+		return "project/project-schedule";
 		
 	}
 @RequestMapping("/selectMessage")
@@ -260,7 +267,7 @@ public class ProjectController {
 	
 	Projects findById = projectServiceImpl.findById(id);
 	
-	User selectById = projectServiceImpl.selectById(id);
+	User selectById = projectServiceImpl.selectById(findById.getPsUsId());
 	
 	ProA selectByPstId = projectServiceImpl.selectByPstId(id);
 	
@@ -272,7 +279,7 @@ public class ProjectController {
 	res.setAttribute("sbpd", selectByPstId);
 	res.setAttribute("sbud", selectByUsId);
 	
-	return "project-message";	
+	return "project/project-message";	
 }
 @RequestMapping("/selectComment")
 

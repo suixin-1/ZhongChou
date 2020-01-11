@@ -35,13 +35,13 @@
 
 		<dubbo:service interface="com.yh.service.CLindex.CLindexReService" ref="CLindexReServiceImpl" />
 	<dubbo:service interface="com.yh.service.user.UserService" ref="userServiceImpl" />
-	<!--<dubbo:service interface="com.yh.service.ProjectService" ref="projectServiceImpl" />-->
+	<dubbo:service interface="com.yh.service.ProjectService" ref="projectServiceImpl" />
   
   
 	<bean id="ClassifyServiceImpl" class="com.yh.service.Impl.ClassityServiceImpl"></bean>
 	<dubbo:service interface="com.yh.service.ClassifyService" ref="ClassifyServiceImpl" />
-	<bean id="projectServiceImpl" class="com.yh.service.Impl.ProjectServiceImpl"></bean>
-	<dubbo:service interface="com.yh.service.ProjectService" ref="projectServiceImpl" />
+	<!-- <bean id="projectServiceImpl" class="com.yh.service.Impl.ProjectServiceImpl"></bean>
+	<dubbo:service interface="com.yh.service.ProjectService" ref="projectServiceImpl" /> -->
 	<bean id="selectProjectsByPsIdServiceImpl" class="com.yh.service.Impl.SelectProjectsByPsIdServiceImpl"></bean>
 	<dubbo:service interface="com.yh.service.SelectProjectsByPsIdService" ref="selectProjectsByPsIdServiceImpl" />
 

@@ -12,11 +12,13 @@
 <body>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h1 class="page-header">用户管理</h1>
-	<td><a href="javascript:ToClick('Toadduser')">添加</a></td>
 			
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<div class="panel-title">用户管理列表</div>
+						<div class="panel-title">用户管理列表
+							<!-- <a class="btn btn-primary" href="javascript:ToClick('Toadduser')">添加</a> -->
+						</div>
+						
 					</div>
 					<div class="panel-body">
 
@@ -33,9 +35,9 @@
 										<th>用户身份证</th>
 										<th>用户号码</th>
 										<th>用户地址</th>
-										<th>用户状态</th>
+										
 										<th>用户性别</th>
-										<th>随机码</th>
+										
 										<th>操作</th>
 									</tr>
 								</thead>
@@ -50,14 +52,14 @@
 									<TD>${usermanage.usIdcard }</TD>
 									<TD>${usermanage.usPhone }</TD>
 									<TD>${usermanage.usAddress }</TD>
-									<TD>${usermanage.usRole }</TD>
+									
 									<TD>${usermanage.usSex }</TD>
-									<TD>${usermanage.usCode }</TD>
+									
 
-									<td><a href="javascript:ToClick('updatauser?id=${usermanage.usId}')">详情/修改</a> <!--<a href="#" title="查看项目详情"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>-->
+									<td><a href="javascript:ToClick('updatauser?id=${usermanage.usId}')">详情</a> <!--<a href="#" title="查看项目详情"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>-->
 										<!--&nbsp;&nbsp;
                   	<a href="#" title="编辑项目信息"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>-->
-									<a href="javascript:ToClick('delectuser')?id=${usermanage.usId}">删除</a> <!--<a href="#" title="查看项目详情"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>-->
+									<!--<a href="#" title="查看项目详情"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>-->
 										<!--&nbs  p;&nbsp;
                   	<a href="#" title="编辑项目信息"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>-->
 									</td>

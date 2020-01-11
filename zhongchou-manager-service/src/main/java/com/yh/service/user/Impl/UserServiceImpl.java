@@ -40,16 +40,7 @@ public class UserServiceImpl implements UserService {
 		return selectByExample;
 	}
 
-	/**
-	 * 删除用户信息
-	 */
-	@Override
-	public Integer delectuser(Integer usId) {
-		
-		int deleteByExample = usermapper.deleteByPrimaryKey(usId);
-		return deleteByExample;
-	}
-
+	
 	/**
 	 * 
 	 * 查看用户信息

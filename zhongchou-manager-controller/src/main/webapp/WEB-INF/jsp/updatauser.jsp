@@ -28,14 +28,14 @@
                                                  <label for="u_usEmail" class="control-label col-lg-2">用户邮箱<span
                                                         class="required"> *</span></label>
                                                 <div class="col-lg-10">
-                                                    <input class="form-control" id="u_usEmail" name="usEmail" type="text" value="${usermanage.usEmail}" />
+                                                    <input class="form-control" id="u_usEmail" name="usEmail" type="text" value="${usermanage.usEmail}" disabled="disabled"/>
                                                 </div>
                                             </div>
                                             <div class="form-group ">
                                                 <label for="u_usName" class="control-label col-lg-2">用户姓名<span
                                                         class="required">*</span></label>
                                                 <div class="col-lg-10">
-                                                    <input class="form-control" id="u_usName" name="usName" type="text" value="${usermanage.usName}" />
+                                                    <input class="form-control" id="u_usName" name="usName" type="text" value="${usermanage.usName}"  disabled="disabled"/>
                                                 </div>
                                             </div>
                                             
@@ -43,15 +43,15 @@
                                                 <label for="u_usPassword" class="control-label col-lg-2">登录密码<span
                                                         class="required">*</span></label>
                                                 <div class="col-lg-10">
-                                                    <input class="form-control" id="u_usPassword" name="usPassword" type="text" value="${usermanage.usPassword}" />
+                                                    <input class="form-control" id="u_usPassword" name="usPassword" type="password" value="${usermanage.usPassword}" disabled="disabled" />
                                                 </div>
                                             </div>
 
-												 <div class="form-group ">
+											<div class="form-group ">
                                                 <label for="u_usMoney" class="control-label col-lg-2">账户余额<span
                                                         class="required">*</span></label>
                                                 <div class="col-lg-10">
-                                                    <input class="form-control" id="u_usMoney" name="usMoney" type="text" value="${usermanage.usMoney}" />
+                                                    <input class="form-control" id="u_usMoney" name="usMoney" type="text" value="${usermanage.usMoney}" disabled="disabled" />
                                                 </div>
                                             </div>
 											
@@ -59,7 +59,7 @@
                                                 <label for="u_usIdcardusIdcard" class="control-label col-lg-2">用户身份证号码<span
                                                         class="required">*</span></label>
                                                 <div class="col-lg-10">
-                                                    <input class="form-control" id="u_usIdcardusIdcard" name="usIdcardusIdcard" type="text" value="${usermanage.usIdcard}" />
+                                                    <input class="form-control" id="u_usIdcardusIdcard" name="usIdcardusIdcard" type="text" value="${usermanage.usIdcard}" disabled="disabled" />
                                                 </div>
                                             </div>
                                             
@@ -67,14 +67,14 @@
                                                 <label for="u_usPhone" class="control-label col-lg-2">手机号码<span
                                                         class="required">*</span></label>
                                                 <div class="col-lg-10">
-                                                    <input class="form-control" id="u_usPhone" name="usPhone" type="text" value="${usermanage.usPhone}" />
+                                                    <input class="form-control" id="u_usPhone" name="usPhone" type="text" value="${usermanage.usPhone}"  disabled="disabled"/>
                                                 </div>
-											
-												 <div class="form-group ">
+											</div>
+											<div class="form-group ">
                                                 <label for="u_usAddress" class="control-label col-lg-2">用户地址<span
                                                         class="required">*</span></label>
                                                 <div class="col-lg-10">
-                                                    <input class="form-control" id="u_usAddress" name="usAddress" type="text" value="${usermanage.usAddress}" />
+                                                    <input class="form-control" id="u_usAddress" name="usAddress" type="text" value="${usermanage.usAddress}"  disabled="disabled"/>
                                                 </div>
                                             </div>
 											
@@ -82,27 +82,29 @@
                                                 <label for="u_usRole" class="control-label col-lg-2">用户状态(0.未激活 1.已激活)<span
                                                         class="required">*</span></label>
                                                 <div class="col-lg-10">
-                                                    <input class="form-control" id="u_usRole" name="usRole" type="text" value="${usermanage.usRole}" />
+                                                    <input class="form-control" id="u_usRole" name="usRole" type="text" value="${usermanage.usRole}"  disabled="disabled"/>
                                                 </div>
                                             </div>
                                             
                                              <div class="form-group ">
                                                 <label for="u_sex" class="control-label col-lg-2">用户性别<span
                                                         class="required">*</span></label>
-                                                <div class="col-lg-10">
-                                                    <input class="form-control" id="u_ussex" name="ussex" type="text" value="${usermanage.usSex}" />
-                                                </div>
-                                            </div>
+												<div class="col-lg-10">
+													<input class="form-control" id="u_ussex" name="ussex"
+														type="text" value="${usermanage.usSex}" disabled="disabled" />
+												</div>
+											</div>
 											
 											 
 											
                                             <div class="form-group" style="text-align: right;">
-                                            </div>
-                                        </div>
+                                           
+                                       
                                         <!--aaaaaaaaaaaaa  -->
                                                 <div class="col-lg-offset-2 col-lg-10">
-                                                    <button class="btn btn-primary" type="button" onclick="javascript:ToClickSubmit('updatauser2')">保存</button>
+                                                    <button class="btn btn-primary" type="button" onclick="javascript:ToClick('usermanage')">返回列表</button>
                                                 </div>
+                                             </div>
                                     </div>
                                 </div>
                             </div>

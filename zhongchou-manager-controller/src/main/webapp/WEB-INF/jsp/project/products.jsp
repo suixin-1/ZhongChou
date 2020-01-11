@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>products</title>
+
 </head>
 <body>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="">
@@ -59,10 +60,6 @@
                   <th>序号</th>
                   <th>项目类型</th>
                   <th>项目名称</th>
-                  <th>项目进度</th>
-                  <th>开始日期</th>
-                  <th>结束日期</th>
-                  <th>已筹金额</th>
                   <th>发起人</th>
                   <th>操作</th>
                 </tr>
@@ -73,12 +70,6 @@
                   <td>${s.index+1}</td>
                   <td>${p.pstName}</td>
                   <td>${p.psName}</td>
-                  <td>
-                  <fmt:formatNumber type="number" value="${p.psGetmoney/p.psMoney*100}" pattern="0" maxFractionDigits="0"/>
-                  %</td>
-                  <td><fmt:formatDate value="${p.psStarttime}" pattern="yyyy-MM-dd" /></td>
-                  <td><fmt:formatDate value="${p.psEndtime}" pattern="yyyy-MM-dd" /></td>
-                  <td>${p.psGetmoney}</td>
                   <td>${p.usName}</td>
                   <td>
                   	<a href="javascript:ToClick('selectById?id=${p.usId}')">详情</a>
@@ -95,7 +86,7 @@
 									<TD><SPAN id=pagelink>
 											<DIV
 												style="LINE-HEIGHT: 20px; HEIGHT: 20px; TEXT-ALIGN: right">
-												共[<B>${pb.total}</B>]条记录,[<B id="pagesAll">${pb.pages}</B>]页
+												共[<B>${pb.total}</B>]条记录,共[<B id="pagesAll">${pb.pages}</B>]页
 												,每页显示
 													<select id="count" onchange="javascript:all_classity(1)">													
 														<c:choose>
@@ -124,7 +115,7 @@
 												</c:when>
 												</c:choose>
 												
-												<B>${pb.pageNum}</B>
+												,第[<B>${pb.pageNum}</B>]页,
 												
 												<c:choose>
 												<c:when test='${pb.pages>pb.pageNum }'>

@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
 </head>
 <body>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -64,9 +65,9 @@
 			              </tbody>
 			            </table>
 			          </div>
-			          <script type="text/javascript" src="js/jquery1.12.4.min.js" ></script>
-		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
-		<script type="text/javascript" src="js/countUp.js" ></script>
+			          <script type="text/javascript" src="../js/jquery1.12.4.min.js" ></script>
+		<script type="text/javascript" src="../js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="../js/countUp.js" ></script>
 		<script>
 			$(document).ready(function() {
 				

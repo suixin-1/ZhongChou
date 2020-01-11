@@ -30,10 +30,6 @@ public interface UserService {
 	 */
 	Integer InsterUser(User user);
 
-	/**
-	 * 删除用户信息
-	 */
-	Integer delectuser(Integer usId);
 	
 	/**
 	 * 查看用户信息

@@ -11,6 +11,8 @@
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/dashboard.css" />
+	<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/projects.js"></script>
 </head>
 
 <body>

@@ -18,7 +18,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="panel-title">
-                      <font color="red">${questionname}</font> |子问题列表  <a class="btn btn-primary" href="javascript:ToClick('ToaddQuestionother')">添加</a>
+                      <a href="javascript:ToClick('parentQuestionall')"> <font color="red">${questionname}</font></a> |子问题列表  <a class="btn btn-primary" href="javascript:ToClick('ToaddQuestionother')">添加</a>
                     </div>
                 </div>
                 <div class="panel-body">

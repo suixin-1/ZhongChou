@@ -28,6 +28,7 @@
                             </div>
                             &nbsp;&nbsp;
                             <button class="btn btn-default btn-primary pull-right" onclick="javascript:addQuestionall('addQuestionall')">添加</button>
+                            &nbsp;<button class="btn btn-default btn-primary pull-right" onclick="javascript:ToClick('parentQuestionall')" style="margin-right: 20px;">返回</button>
                         </div>
                     </div>
                 </div>
@@ -89,6 +90,8 @@
 				                console.log(e.responseText);
 				            } */
 						},true);
+					}else{
+						alert("请输入父问题的名字");
 					}
 	
 				}

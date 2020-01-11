@@ -39,11 +39,11 @@ public class ClassifyController {
 	
 		String pstDesc = request.getParameter("p_des");
 		String pstType2 = request.getParameter("p_status");
-		if(pstType2.equals("可用")){
+		/*if(pstType2.equals("可用")){
 			pstType2="0";
 		}else {
 			pstType2="1";
-		}
+		}*/
 		int pstType=Integer.parseInt(pstType2);
 		Projectstype record=new Projectstype();
 		record.setPstId(pstId);

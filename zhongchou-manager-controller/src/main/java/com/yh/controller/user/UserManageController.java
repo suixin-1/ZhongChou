@@ -124,17 +124,7 @@ public class UserManageController {
 		return"success";
 		
 	}
-	/**
-	 * 删除用户
-	 */
-	@RequestMapping("/delectuser")
-	public String delectuser(Integer id){
-		Integer delectuser = userService.delectuser(id);
-		if(delectuser!=1){
-			return "error";	
-		}
-		return"success";
-	}
+
 	
 	/**
 	 * 查看用户信息
@@ -152,48 +142,6 @@ public class UserManageController {
 	public String userupdata(){
 		return "updatauser";
 	}*/
-	
-
-	
-	
-	/**
-	 * 修改用户信息
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping("/updatauser2")
-	public String updatauser(HttpServletRequest request){
-		
-		String usEmail = request.getParameter("u_usEmail");
-		String usName = request.getParameter("u_usName");
-		String usPassword = request.getParameter("u_usPassword");
-		String usMoney = request.getParameter("u_usMoney");
-		Double money=Double.parseDouble(usMoney);
-		String usIdcard = request.getParameter("u_usIdcardusIdcard");
-		String usPhone = request.getParameter("u_usPhone");
-		String usAddress = request.getParameter("u_usAddress");
-		String usRole = request.getParameter("u_usRole");
-		int r=Integer.parseInt(usRole);
-		String usSex = request.getParameter("u_ussex");
-		
-	
-	
-		
-		User user1=new User();
-		user1.setUsEmail(usEmail);
-		user1.setUsName(usName);
-		user1.setUsPassword(usPassword);
-		user1.setUsMoney(money);
-		user1.setUsIdcard(usIdcard);
-		user1.setUsPhone(usPhone);
-		user1.setUsAddress(usAddress);
-		user1.setUsRole(r);
-		user1.setUsSex(usSex);
-	
-		Integer updatauser = userService.updatauser(user1);
-		request.setAttribute("usermanage", updatauser);
-		return "updatauser2";
-	}
 	
 
 }

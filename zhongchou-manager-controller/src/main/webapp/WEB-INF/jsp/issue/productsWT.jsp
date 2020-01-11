@@ -41,6 +41,7 @@
 	
                             &nbsp;&nbsp;
                             <button class="btn btn-default btn-primary pull-right" onclick="javascript:ToClickSubmit2('updateQuestionother')">保存</button>
+                            <button class="btn btn-default btn-primary pull-right" onclick="javascript:ToClick('ToQuestionother?questionid=${questionother.questionid }&questionname=${questionname}')" style="margin-right: 20px;">返回</button>
 		                        </div>
 		                    </div>
 		                </div>
