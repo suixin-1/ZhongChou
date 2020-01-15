@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	账号或密码有误，请重新输入！ <font color="red"> 页面将在三秒后返回登录页面</font>
-	<span style="font-size:18px;">   </span><span style="font-size:24px;"><meta http-equiv="refresh" content="3;URL=/tologin"> </span>
-	
+	<h1>你没有权限访问~~</h1>
 </body>
 </html>

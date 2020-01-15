@@ -22,7 +22,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<!--左侧导航栏start-->
-			<jsp:include page="left.jsp"></jsp:include>
+			<jsp:include page="${left}"></jsp:include>
 			<!--左侧导航栏end-->
 				<%-- <jsp:include page="${inpage}"></jsp:include> --%>
 				<div id="include" style="overflow-y:scroll;" ><jsp:include page="${inpage}"></jsp:include></div>

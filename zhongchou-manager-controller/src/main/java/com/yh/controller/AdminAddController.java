@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.yh.mapper.AdminMapper;
+import com.yh.mapper.JurisdictionMapper;
 import com.yh.pojo.Admin;
+import com.yh.pojo.JurisdictionExample;
+import com.yh.pojo.JurisdictionExample.Criteria;
 import com.yh.pojo.zhongchouResult;
 import com.yh.service.AdminAddService;
 import com.yh.service.AdminManageService;
@@ -22,6 +26,12 @@ import com.yh.service.AdminManageService;
 @Controller
 public class AdminAddController {
 
+	@Autowired
+	private AdminMapper adminMapper;
+	
+	@Autowired
+	private JurisdictionMapper jurisdictionMapper;
+	
 	@Autowired
 	private AdminAddService adminAddService;
 	
@@ -53,6 +63,27 @@ public class AdminAddController {
 		req.setAttribute("list", list);
 		return "account_admin";	
 	}
+	
+	
+	/**
+	 * 删除管理员
+	 */
+	@RequestMapping("/admindelete")
+	public String admindelete(HttpServletRequest req){
+		String adminid = req.getParameter("adminid");
+		int i = adminMapper.deleteByPrimaryKey(Integer.parseInt(adminid));
+		
+		JurisdictionExample example = new JurisdictionExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andJuAdIdEqualTo(Integer.parseInt(adminid));
+		int i2 = jurisdictionMapper.deleteByExample(example);
+		if(i>0 && i2>0){	
+			String string = findAllAdmin(req);
+			return string;
+		}
+		return "inde";
+	}
+	
 	
 
 /**

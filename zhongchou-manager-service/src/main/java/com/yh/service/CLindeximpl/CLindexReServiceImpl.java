@@ -47,7 +47,8 @@ public List<Projects> selectParticulars(Projects example) {
 	ProjectsExample example2 = new ProjectsExample();
 	Criteria criteria = example2.createCriteria();
 	criteria.andPsIdEqualTo(example.getPsId());
-	return projectsMapper.selectByExample(example2);
+	//.selectByExample(example2)
+	return projectsMapper.selectByExampleWithBLOBs(example2);
 }
 
 

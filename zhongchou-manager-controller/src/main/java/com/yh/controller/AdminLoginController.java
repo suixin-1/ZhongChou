@@ -1,6 +1,7 @@
 package com.yh.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,6 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.dubbo.common.json.JSON;
+import com.yh.mapper.AdminMapper;
+import com.yh.mapper.JurisdictionMapper;
+import com.yh.pojo.Admin;
+import com.yh.pojo.Jurisdiction;
+import com.yh.pojo.JurisdictionExample;
+import com.yh.pojo.JurisdictionExample.Criteria;
 import com.yh.pojo.zhongchouResult;
 import com.yh.service.AdminloginService;
 /**
@@ -24,12 +31,25 @@ public class AdminLoginController {
 	@Autowired
 	private AdminloginService adminloginService;
 	
+	@Autowired
+	private JurisdictionMapper jurisdictionMapper;
+	
+	@Autowired
+	private AdminMapper adminMapper;
+	
+	
 	@RequestMapping("/tologin")
 	public String tologin(){	
 		return "login";
 	}
 	
-
+	/**
+	 * 退出
+	 */
+	@RequestMapping("/login")
+	public String login(){
+		return "login";
+	}
 	
 /**
  * 	登录方法
@@ -44,9 +64,19 @@ public class AdminLoginController {
 		if(status==200){
 			model.addAttribute("admin", findAdmin);
 			model.addAttribute("inpage", "inde.jsp");
-			return "index";
+			
+			Admin ad = (Admin) findAdmin.getData();
+			Integer adminId = ad.getAdminId();
+			
+			JurisdictionExample example = new JurisdictionExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andJuAdIdEqualTo(adminId);
+			List<Jurisdiction> list = jurisdictionMapper.selectByExample(example);	
+			if(list.size()>0){
+				model.addAttribute("left",list.get(0).getJuName());
+				return "index";
+			}
 		}
-		
 		return "admin_login_error";	
 	}
 	
@@ -125,6 +155,55 @@ public class AdminLoginController {
 			result.setMsg("密码修改成功！");
 		}else{
 			result.setMsg("密码修改失败！");
+		}
+		String json = "";
+		try {
+			json = JSON.json(result);
+		} catch (IOException e) {
+		
+		}
+		return json;
+	}
+	
+	
+	
+	/**
+	 * 授权
+	 */
+	@RequestMapping("/toadminJurisdiction")
+	public String adminJurisdictions(HttpServletRequest req){
+		String adminid = req.getParameter("adminid");
+		Admin admin = adminMapper.selectByPrimaryKey(Integer.parseInt(adminid));
+		req.setAttribute("admin_ju_name", admin);
+		return "adminJurisdiction";
+	}
+	
+	/**
+	 * 执行授权
+	 */
+	@RequestMapping(value="/adminJurisdiction", produces = {"application/json;charset=UTF-8"})
+	@ResponseBody
+	public String adminJurisdiction(HttpServletRequest req){
+		String adminid = req.getParameter("adminId");
+		String quanxian = req.getParameter("quanxian");
+		System.out.println(adminid+quanxian);
+		
+		Jurisdiction jurisdiction = new Jurisdiction();
+		jurisdiction.setJuAdId(Integer.parseInt(adminid));
+		
+		
+		if(quanxian.equals("admin")){
+			jurisdiction.setJuName("left.jsp");
+		}else if(quanxian.equals("user")){
+			jurisdiction.setJuName("leftUser.jsp");
+		}
+		
+		int i = jurisdictionMapper.insert(jurisdiction);
+		zhongchouResult result = null;
+		if(i>0){
+			result = zhongchouResult.ok(200, "授权成功");
+		}else{
+			result = zhongchouResult.ok(500, "授权失败");
 		}
 		String json = "";
 		try {

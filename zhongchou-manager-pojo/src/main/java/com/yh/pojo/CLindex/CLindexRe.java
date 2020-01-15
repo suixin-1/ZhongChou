@@ -12,7 +12,7 @@ import java.util.Date;
 public class CLindexRe implements Serializable{
 private int	r_id;// 推荐表id
 private int	r_ps_id;//  项目表id
-	 
+private String ps_file;
 private String	ps_name;//  项目标题
 private double ps_money;// 筹资金额 总金额
 private double	ps_getmoney;//  项目已筹资金额
@@ -25,6 +25,12 @@ public int getR_id() {
 }
 public void setR_id(int r_id) {
 	this.r_id = r_id;
+}
+public String getPs_file() {
+	return ps_file;
+}
+public void setPs_file(String ps_file) {
+	this.ps_file = ps_file;
 }
 public int getR_ps_id() {
 	return r_ps_id;
@@ -76,10 +82,11 @@ public void setPs_starttime(Date ps_starttime) {
 }
 @Override
 public String toString() {
-	return "CLindexRe [r_id=" + r_id + ", r_ps_id=" + r_ps_id + ", ps_name=" + ps_name + ", ps_money=" + ps_money
-			+ ", ps_getmoney=" + ps_getmoney + ", ps_getpeople=" + ps_getpeople + ", ps_type=" + ps_type + ", ps_story="
-			+ ps_story + ", ps_starttime=" + ps_starttime + "]";
+	return "CLindexRe [r_id=" + r_id + ", r_ps_id=" + r_ps_id + ", ps_file=" + ps_file + ", ps_name=" + ps_name
+			+ ", ps_money=" + ps_money + ", ps_getmoney=" + ps_getmoney + ", ps_getpeople=" + ps_getpeople
+			+ ", ps_type=" + ps_type + ", ps_story=" + ps_story + ", ps_starttime=" + ps_starttime + "]";
 }
+
 
 
 

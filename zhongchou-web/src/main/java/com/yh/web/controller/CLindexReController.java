@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 /**
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.dubbo.common.json.JSON;
 import com.yh.pojo.Projects;
 import com.yh.pojo.ProjectsExample;
+import com.yh.pojo.User;
 import com.yh.pojo.zhongchouResult;
 import com.yh.pojo.ProjectsExample.Criteria;
 import com.yh.pojo.CLindex.CLindexRe;
@@ -107,6 +109,9 @@ private CLindexReService cLindexReService;
 	@ResponseBody
 	public String productdetail2(HttpServletRequest request){
 		
+		HttpSession session = request.getSession(false);
+		
+		
 		//System.out.println();
 		
 		/*Projects projects = new Projects();
@@ -131,6 +136,21 @@ private CLindexReService cLindexReService;
 		List<Projects> selectByExample = cLindexReService.selectParticulars(projects);
 		System.out.println(selectByExample.size()+"************************-------------------------------------");
 		zhongchouResult result = zhongchouResult.ok(200, "成功", selectByExample);
+		
+		
+		if(session!=null){
+			Object object = session.getAttribute("user");
+			
+			List<com.yh.pojo.User> list2 = IndexController.castList(object,User.class);
+			
+			if(list2.size()>0){
+				System.out.println(list2.get(0).getUsName());
+				result.setMsg("<a href='user.html'>欢迎，"+list2.get(0).getUsName()+"</a><span style='color: white;'>|</span><a href='loginOut'>lOut</a>");				
+			}
+			
+		}
+		
+		
 		String json="";
 	try {
 		 json = JSON.json(result);

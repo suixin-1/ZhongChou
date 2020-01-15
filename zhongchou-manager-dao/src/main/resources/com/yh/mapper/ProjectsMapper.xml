@@ -159,7 +159,10 @@
       #{psEndtime,jdbcType=DATE}, #{psGetmoney,jdbcType=DOUBLE}, #{psGetpeople,jdbcType=INTEGER}, 
       #{psStory,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.yh.pojo.Projects" >
+  <insert id="insertSelective" parameterType="com.yh.pojo.Projects">
+      <selectKey keyProperty="psId" order="AFTER" resultType="java.lang.Integer">
+	      SELECT LAST_INSERT_ID()
+	   </selectKey>
     insert into projects
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="psId != null" >

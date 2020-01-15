@@ -144,7 +144,7 @@ body{background: #f9f9f9;color:#5A5A5A}
             <ul>
                 <li class="curq2">
 					<ul id="ceshi">
-						<li v-for="item in items">{{item.psName}}</li>
+						<li v-for="item in items"><a :href="'toproduct-detail?psId='+item.psId">{{item.psName}}</a></li>
 					</ul>
 				</li>
                 <!-- <li>还有没有项目列表记录000000000</li> -->
@@ -167,6 +167,33 @@ body{background: #f9f9f9;color:#5A5A5A}
         
     </div>
     <script>
+    
+	    function name(url) {
+			
+			$.ajax({
+				//请求方式
+				type : "POST",
+				//请求的媒体类型
+				contentType : "text/html;charset=UTF-8",
+				//请求地址
+			/* 	url : "/GyzcTypebyid", */
+			    url :"/"+url,
+				//数据，json字符串
+				//data : JSON.stringify(list),
+				//请求成功
+				dataType : "json",
+				success : function(result) {
+					/* console.log(result.data); */
+					/* console.log(lookList.$data.items); */
+					lookList.$data.items=result.data;
+				 
+				}
+	
+			}, true);
+		}
+    
+    
+    
         $(document).ready(function(){
             $(".user-conr_tab li").click(function(){
             	

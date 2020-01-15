@@ -9,6 +9,7 @@ import com.yh.mapper.ProAMapper;
 import com.yh.mapper.ProjectAMapper;
 import com.yh.mapper.ProjectsMapper;
 import com.yh.mapper.ProjectstypeMapper;
+import com.yh.mapper.RepayMapper;
 import com.yh.mapper.UserMapper;
 import com.yh.pojo.Comment;
 import com.yh.pojo.Condition;
@@ -20,110 +21,126 @@ import com.yh.pojo.ProjectsExample;
 import com.yh.pojo.ProjectsExample.Criteria;
 import com.yh.pojo.Projectstype;
 import com.yh.pojo.ProjectstypeExample;
+import com.yh.pojo.Repay;
 import com.yh.pojo.User;
 import com.yh.pojo.UserExample;
 import com.yh.pojo.zhongchouResult;
 import com.yh.service.ProjectService;
 
 @Service
-public class ProjectServiceImpl implements ProjectService{
-@Autowired
-private ProjectAMapper projectAMapper;
+public class ProjectServiceImpl implements ProjectService {
+	@Autowired
+	private ProjectAMapper projectAMapper;
 
-@Autowired
-private ProjectsMapper projectsMapper;
-@Autowired
-private UserMapper userMapper;
-@Autowired
-private ProAMapper proAMapper;
-@Autowired
-private ProjectstypeMapper projectstypeMapper;
+	@Autowired
+	private ProjectsMapper projectsMapper;
+	@Autowired
+	private UserMapper userMapper;
+	@Autowired
+	private ProAMapper proAMapper;
+	@Autowired
+	private RepayMapper repayMapper;
+	@Autowired
+	private ProjectstypeMapper projectstypeMapper;
 
-public List<ProjectA> selectAll(){
-	System.out.println("================================");
-	return projectAMapper.selectAll();
-	
-}
+	public List<ProjectA> selectAll() {
+		System.out.println("================================");
+		return projectAMapper.selectAll();
 
-public List<ProjectA> selectByKey(Condition c) {
-	return projectAMapper.selectByKey(c);
-}
-
-public User selectById(int id) {
-	UserExample example = new UserExample();
-	com.yh.pojo.UserExample.Criteria createCriteria = example.createCriteria();
-	createCriteria.andUsIdEqualTo(id);
-	List<User> list = userMapper.selectByExample(example);
-	//如果没有值会报错
-	
-	return list.get(0);
-}
-
-public Projects findById(int id) {
-	Projects projects = projectsMapper.selectByPrimaryKey(id);
-
-	return projects;
-			//projectAMapper.findById(id);
-}
-
-public ProA selectByPstId(int id) {
-	
-	ProAExample example = new ProAExample();
-	com.yh.pojo.ProAExample.Criteria createCriteria = example.createCriteria();
-	createCriteria.andProAUsIdEqualTo(id);
-	List<ProA> list = proAMapper.selectByExample(example);
-	return list.get(0);
-}
-
-public Projectstype selectByUsId(int id) {
-	
-	ProjectstypeExample example = new ProjectstypeExample();
-	com.yh.pojo.ProjectstypeExample.Criteria createCriteria = example.createCriteria();
-	createCriteria.andPstIdEqualTo(id);
-	List<Projectstype> list = projectstypeMapper.selectByExample(example);
-	return list.get(0);
-}
-
-public int updateById(int id) {
-	
-	return projectAMapper.updateById(id);
-}
-
-public int updateByPsId(int id) {
-	
-	return projectAMapper.updateByPsId(id);
-}
-
-public List<Comment> selectComment(int id) {
-	
-	return projectAMapper.selectComment(id);
-}
-
-public List<Projects> selectProjectsAll() {
-	ProjectsExample example = new ProjectsExample();
-	
-	return projectsMapper.selectByExample(example);
-}
-
-
-//查询待审核项目
-@Override
-public List<ProjectA> selectByKeyByPsType() {
-	
-	return projectAMapper.selectByKeyByPsType();
-}
-//根据用户id查询项目
-@Override
-public zhongchouResult selectByUserId(Integer usId) {
-	ProjectsExample example = new ProjectsExample();
-	Criteria criteria = example.createCriteria();
-	criteria.andPsUsIdEqualTo(usId);
-	List<Projects> list = projectsMapper.selectByExample(example);
-	if(list.size()<=0){
-		return zhongchouResult.build(500, "你还没有发布项目");
 	}
-	return zhongchouResult.ok(200, "你的发布项目",list);
-}
 
+	public List<ProjectA> selectByKey(Condition c) {
+		return projectAMapper.selectByKey(c);
+	}
+
+	public User selectById(int id) {
+		UserExample example = new UserExample();
+		com.yh.pojo.UserExample.Criteria createCriteria = example.createCriteria();
+		createCriteria.andUsIdEqualTo(id);
+		List<User> list = userMapper.selectByExample(example);
+		// 如果没有值会报错
+
+		return list.get(0);
+	}
+
+	public Projects findById(int id) {
+		Projects projects = projectsMapper.selectByPrimaryKey(id);
+
+		return projects;
+		// projectAMapper.findById(id);
+	}
+
+	public ProA selectByPstId(int id) {
+
+		ProAExample example = new ProAExample();
+		com.yh.pojo.ProAExample.Criteria createCriteria = example.createCriteria();
+		createCriteria.andProAUsIdEqualTo(id);
+		List<ProA> list = proAMapper.selectByExample(example);
+		return list.get(0);
+	}
+
+	public Projectstype selectByUsId(int id) {
+
+		ProjectstypeExample example = new ProjectstypeExample();
+		com.yh.pojo.ProjectstypeExample.Criteria createCriteria = example.createCriteria();
+		createCriteria.andPstIdEqualTo(id);
+		List<Projectstype> list = projectstypeMapper.selectByExample(example);
+		return list.get(0);
+	}
+
+	public int updateById(int id) {
+
+		return projectAMapper.updateById(id);
+	}
+
+	public int updateByPsId(int id) {
+
+		return projectAMapper.updateByPsId(id);
+	}
+
+	public List<Comment> selectComment(int id) {
+
+		return projectAMapper.selectComment(id);
+	}
+
+	public List<Projects> selectProjectsAll() {
+		ProjectsExample example = new ProjectsExample();
+
+		return projectsMapper.selectByExample(example);
+	}
+
+	// 查询待审核项目
+	@Override
+	public List<ProjectA> selectByKeyByPsType() {
+
+		return projectAMapper.selectByKeyByPsType();
+	}
+
+	// 根据用户id查询项目
+	@Override
+	public zhongchouResult selectByUserId(Integer usId) {
+		ProjectsExample example = new ProjectsExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andPsUsIdEqualTo(usId);
+		List<Projects> list = projectsMapper.selectByExample(example);
+		if (list.size() <= 0) {
+			return zhongchouResult.build(500, "你还没有发布项目");
+		}
+		return zhongchouResult.ok(200, "你的发布项目", list);
+	}
+
+	@Override
+	public Integer insertProjects(Projects projects) {
+		
+		projectsMapper.insertSelective(projects);
+		System.out.println(projects.getPsId()+"---------------------");
+		return projects.getPsId();
+	}
+
+	@Override
+	public Integer insertRepay(Repay repay) {
+		int i = repayMapper.insertSelective(repay);
+		return i;
+	}
 
 }

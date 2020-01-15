@@ -33,13 +33,13 @@
                 <li><a href="new_product.html" style="">发布项目</a></li>
             </ul>
         </div>
-        <div class="search">
+        <div class="search" style="left:664px;">
             <form action="">
                 <input type="text" class="search-txt" value="找项目">
                 <input type="submit" class="search-but" value="">
             </form>
         </div>
-        <div class="index-login">
+        <div class="index-login" id="index_login">
             <a href="login.html">登录</a>
             
             
@@ -365,6 +365,11 @@
 		        			items:result.data
 		        		}
 		        	});
+		            
+		            if(result.msg.length>10){
+		            	$("#index_login").html(result.msg);
+		            }
+		            
 		            
 		            $("#ppp").html(result.data[0].psStory);
 		            

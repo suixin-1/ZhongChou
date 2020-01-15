@@ -30,15 +30,15 @@
 										<th>操作</th>
 									</tr>
 								</thead>
-								<c:forEach items="${list }" var="Admin">
+								<c:forEach items="${list }" var="Admin" varStatus="status">
 									<TR>
 										
-									<TD>${Admin.adminId }</TD>
+									<TD>${status.index+1}</TD>
 									<TD>${Admin.adminName }</TD>
 									<TD>${Admin.adminPassword }</TD>
 									<TD>
 									
-									<a href= "logsdelete?id=${logs.logId }" >删除</a></TD>
+									<a href= "javascript:ToClick('admindelete?adminid=${Admin.adminId }')" >删除</a> | <a href= "javascript:ToClick('toadminJurisdiction?adminid=${Admin.adminId}')" >权限</a></TD>
 										
 									</TR>
 

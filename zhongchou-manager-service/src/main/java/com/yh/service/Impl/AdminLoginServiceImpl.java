@@ -32,7 +32,7 @@ public class AdminLoginServiceImpl implements AdminloginService {
 		if(list.isEmpty()){
 			return zhongchouResult.build(500, "账号密码输入有误");
 		}
-
+		
 		return zhongchouResult.ok(200, list.get(0));
 	}
 /**

@@ -22,6 +22,7 @@
 		  <ul class="nav nav-sidebar">
             <li><a href="javascript:ToClick('admin/toadd_admin')">管理员添加</a></li>
             <li id="adminUsernameS"><a href="javascript:ToClick('admin/account_admin')">管理员账号</a></li>
+            
           </ul>
 		  
 		  

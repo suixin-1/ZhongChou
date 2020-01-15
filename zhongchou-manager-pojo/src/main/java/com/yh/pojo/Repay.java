@@ -1,6 +1,8 @@
 package com.yh.pojo;
 
-public class Repay {
+import java.io.Serializable;
+
+public class Repay implements Serializable{
     private Integer ryId;
 
     private Integer ryUsId;

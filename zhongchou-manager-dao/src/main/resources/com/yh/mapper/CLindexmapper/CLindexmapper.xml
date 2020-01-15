@@ -4,6 +4,7 @@
   <select id="selectCLindexRe" resultType="com.yh.pojo.CLindex.CLindexRe">
  
 SELECT 
+ps_file,
 r_id,
 r_ps_id,
 ps_name,

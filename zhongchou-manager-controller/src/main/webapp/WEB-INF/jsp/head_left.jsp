@@ -23,8 +23,8 @@
 				<ul class="nav navbar-nav navbar-right">
 		          	<li><a href="javascript:ToClick('inde')">首页</a></li>
 		          	<li><a href="#">欢迎,<span id="admin-id">${adminName}</span></a></li>
-		            <li><a href="javascript:ToClick('admin/setting_admin')" title="修改个人资料和密码的页面">设置</a></li>
-		            <li><a href="#" title="退出登录">退出</a></li>
+		            <li><a href="javascript:ToClick('admin/setting_admin')">设置</a></li>
+		            <li><a href="/login" title="退出登录">退出</a></li>
 		        </ul>
 			</div>
 		</div>

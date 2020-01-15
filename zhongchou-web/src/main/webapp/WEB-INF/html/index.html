@@ -93,13 +93,13 @@
             <p><a href="togyzc-list">更多<br>
                 项目</a></p>
         </div>
-        <div class="index-mrjx_min"><a href=""><img src="images/pruduct1_32.jpg" alt=""/></a></div>
+        <div class="index-mrjx_min"><a href="gyzc-list"><img src="images/pruduct1_32.jpg" alt=""/></a></div>
         <div  class="index-mrjx_right">
             <div id="CLselectCLindexRe" class="index-pruduct">
                 <ul>
 
-                    <li v-for="item in items">
-                        <div class="index-plidiv1"><a :href="'toproduct-detail?psId=' + item.R_ps_id "><img src="images/pruduct2_34.jpg" width="237px" height="155px" alt=""/></a>
+                    <li v-for="item in items"><!-- src="images/pruduct2_34.jpg" -->
+                        <div class="index-plidiv1"><a :href="'toproduct-detail?psId=' + item.R_ps_id "><img :src="item.ps_file" width="237px" height="155px" alt=""/></a>
                         <div class="index-p_dkz">{{item.ps_type}}</div>
 
                         </div>  <p>
@@ -131,7 +131,7 @@
             <div id="CLselectCLindexRe2" class="index-pruduct">
                 <ul>
                     <li v-for="a in items">
-                        <div class="index-plidiv1"><a :href="'toproduct-detail?psId=' + a.R_ps_id "><img src="images/pruduct2_34.jpg" width="237px" height="155px" alt=""/></a>
+                        <div class="index-plidiv1"><a :href="'toproduct-detail?psId=' + a.R_ps_id "><img :src="a.ps_file" width="237px" height="155px" alt=""/></a>
                         <div class="index-p_dkz">{{a.ps_type}}</div>
                         </div>  <p>
                         <a :href="'toproduct-detail?psId=' + a.R_ps_id">{{a.ps_name}}</a></p>
@@ -165,6 +165,7 @@
 	        url : "/selectCLindexRe",
 	        dataType:"json",
 	        success : function(result) {
+	        	console.log(result)
 	           var a=[2];
 	            a[0]=result[0];
 	            a[1]=result[1];
