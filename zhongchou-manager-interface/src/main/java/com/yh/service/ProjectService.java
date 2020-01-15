@@ -26,6 +26,8 @@ public interface ProjectService {
 	//查询待审核项目
 	List<ProjectA> selectByKeyByPsType();
 	
-	//根据用户id查询项目
+	/**
+	 * 根据用户id查询项目
+	 */
 	zhongchouResult selectByUserId(Integer usId);
 }

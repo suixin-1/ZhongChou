@@ -27,7 +27,7 @@
 		  
           <ul class="nav nav-sidebar">
 			<li><a href="javascript:ToClick('usermanage')">管理用户</a></li>
-            <li><a href="">实名审核</a></li>
+            <li><a href="javascript:ToClick('IdentityList')">实名审核</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <!-- <li><a href="">众筹咨询</a></li> -->

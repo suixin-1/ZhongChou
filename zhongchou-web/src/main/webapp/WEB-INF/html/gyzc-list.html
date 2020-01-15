@@ -18,7 +18,21 @@
 <link rel="stylesheet" href="css/product-list.css" type="text/css" />
 
 <script type="text/javascript" src="js/filter.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- <title>ajax局部刷新</title> -->
+<!-- <style type="text/css"> -->
+<!-- /* 	input{
+		width:250px;
+		height:25px;
+	} */ -->
+
+
+
 </head>
+
+
+
 
 <body>
 	<div id="header">
@@ -46,19 +60,23 @@
 				<a href="login.html">登录</a> <span style="color: white;">|</span> <a
 					href="user.html">注册</a>
 			</div>
-		</div>
+		</div>   
 	</div>
 <script type="text/javascript" src="js/goindex.js"></script>
 	<div class="product-con">
 		<h1 class="product-con_tit">公益众筹</h1>
 		<div class="product-con_nav" id="zhanshi">
-			 <ul> 
-				<li><a class="lnav_bg" href=""><i><img
-							src="images/ii_04.png" alt="" /></i>全部</a> <a v-for="item in items"
-					href="'GyzcByPsId?id=' + item.psPstId "><i><img
+			<ul  >
+				<li ><a class="lnav_bg" href=""><i><img 
+							src="images/ii_04.png" alt="" /></i>全部</a> 
+							<a v-for="item in items"  
+							:href="'javascript:name(\'GyzcTypebyid?id='+item.pstId+'\')'"
+							
+					    ><i ><img
 							src="images/ii_06.png" alt="" /></i>{{item.pstName}}</a></li>
 
-			 </ul> 
+			</ul>
+
        </div>
        
        	<script type="text/javascript">
@@ -87,62 +105,7 @@
 	</script>
 	 
 	</div>
-	<!-- 根据众筹id查询项目  -->
-	<!-- <div id="selectCLindexRecg1" class="product-list-l">
-			<li v-for="c in items" class="zc">
-				<div class="product-list-lpic">
-					<a href="product-detail.html"><img src="images/prr-dduu_27.jpg"
-						alt="" /></a>
-					<div class="product_one">	
-					众筹中	
-					</div>
-				</div>
-				<p>
-					<a href="">{{c.psName}}</a>
-				</p>
-				<div class="product-list-lmin">
-					<dl>
-						<dt>{{c.psGetmoney/b.psMoney}}</dt>
-						<dd>达成率</dd>
-					</dl>
-					<dl>
-						<dt>{{c.psGetmoney}}</dt>
-						<dd>已筹金额</dd>
-					</dl>
-					<dl>
-						<dt>{{c.psGetpeople}}</dt>
-						<dd>支持人数</dd>
-					</dl>
-				</div>
-			</li>
-		</div>
-		
-		<script type="text/javascript">
-			$.ajax({
-				//请求方式
-				type : "POST",
-				//请求的媒体类型
-				contentType : "text/html;charset=UTF-8",
-				//请求地址
-				url : "/GyzcByPsId",
-				//数据，json字符串
-				//data : JSON.stringify(list),
-				//请求成功
-				dataType : "json",
-				success : function(result) {
-					console.log(result.data);
-/* 					 if(b.psType=0){b.psType="待审核";}else if(b.psType=1){b.psType="待上架";}else if(b.psType=2){b.psType="众筹中";}else if(b.psType=3){b.psType="众筹成功";}else if(b.psType=4){b.psType="众筹失败";}else if(b.psType=5){b.psType="审核未通过"; }
- */					new Vue({
-						el : "#selectCLindexRecg1",
-						data : {
-							items : result.data
-						}
-					});
-				}
-
-			}, true);
-		</script> -->
-		 
+ 
 	
 		<style>
 		
@@ -181,125 +144,9 @@
 		</div>
 
 
-		<script type="text/javascript">
-			$.ajax({
-				//请求方式
-				type : "POST",
-				//请求的媒体类型
-				contentType : "text/html;charset=UTF-8",
-				//请求地址
-				url : "/GyzcList",
-				//数据，json字符串
-				//data : JSON.stringify(list),
-				//请求成功
-				dataType : "json",
-				success : function(result) {
-					console.log(result.data);
-/* 					 if(b.psType=0){b.psType="待审核";}else if(b.psType=1){b.psType="待上架";}else if(b.psType=2){b.psType="众筹中";}else if(b.psType=3){b.psType="众筹成功";}else if(b.psType=4){b.psType="众筹失败";}else if(b.psType=5){b.psType="审核未通过"; }
- */					new Vue({
-						el : "#selectCLindexRecg",
-						data : {
-							items : result.data
-						}
-					});
-				}
-
-			}, true);
-		</script>
 
 
-		<!-- <div id="pagination" class="product-ym">
-			<a class="product-ym_bg" href="#">1</a>
-			<a href="#">2</a>
-			<span>...</span>
-			<a href="#">43</a>
-			<a href="#">44</a> 
-			<a href="#">45</a> 
-			<a class="product-ym_xyy" href="#">下一页&gt;</a>
-
-		</div>
-	</div> -->
-	
-<!-- 	<script type="text/javascript">
-    
-    var pageOptions = {pageTotal:10,curPage:7,paginationId:''};
-    dynamicPagingFunc(pageOptions);
-    
-    function dynamicPagingFunc(pageOptions){
-        var pageTotal = pageOptions.pageTotal || 1;
-        var curPage = pageOptions.curPage||1;
-        var doc = document;
-        var paginationId = doc.getElementById(''+pageOptions.paginationId+'') || doc.getElementById('pagination');
-        var html = '';
-        if(curPage>pageTotal){
-            curPage =1;
-        }
-        /*总页数小于5，全部显示*/
-        if(pageTotal<=5){
-            html = appendItem(pageTotal,curPage,html);
-            paginationId.innerHTML = html;
-        }
-        /*总页数大于5时，要分析当前页*/
-        if(pageTotal>5){
-            if(curPage<=4){
-                html = appendItem(pageTotal,curPage,html);
-                paginationId.innerHTML = html;
-            }else if(curPage>4){
-                html = appendItem(pageTotal,curPage,html);
-                paginationId.innerHTML = html;
-            }
-        }
-    }
-    
-    function appendItem(pageTotal,curPage,html){
-        var starPage = 0;
-        var endPage = 0;
-        
-        html+='<a id="prevBtn">&lt;</a>';
-        
-        if(pageTotal<=5){
-            starPage = 1;
-            endPage = pageTotal;    
-        }else if(pageTotal>5 && curPage<=4){
-            starPage = 1;
-            endPage = 4;
-            if(curPage==4){
-                endPage = 5;
-            }
-        }else{
-            if(pageTotal==curPage){
-                starPage = curPage-3;
-                endPage = curPage;
-            }else{
-                starPage = curPage-2;
-                endPage = curPage+1;
-            }
-            html += '<a id="first">1</a><span>...</span>';
-        }
-        
-        for(let i = starPage;i <= endPage;i++){
-            if(i==curPage){
-                html += '<a id="first">'+i+'</a>';
-            }else{
-                html += '<a href="#">'+i+'</a>';
-            }
-        }
-        
-        if(pageTotal<=5){
-            html+='<a href="#" id="nextBtn">&gt;</a>';
-        }else{
-            if(curPage<pageTotal-2){ 
-                html += '<span>...</span>';
-            }
-            if(curPage<=pageTotal-2){
-                html += '<a href="#">'+pageTotal+'</a>';
-            }
-            html+='<a href="#" id="nextBtn">&gt;</a>';
-        }
-        return html;
-    }
-    
-</script> -->
+ 
 	
 	
 	<div id="bottom">
@@ -378,6 +225,59 @@
 
 
 
+
+		  <script type="text/javascript">
+  var lookList=null;
+			$.ajax({
+				//请求方式
+				type : "POST",
+				//请求的媒体类型
+				contentType : "text/html;charset=UTF-8",
+				//请求地址
+				url : "/GyzcList",
+				//数据，json字符串
+				//data : JSON.stringify(list),
+				//请求成功
+				dataType : "json",
+				success : function(result) {
+					console.log(result.data);
+/* 					 if(b.psType=0){b.psType="待审核";}else if(b.psType=1){b.psType="待上架";}else if(b.psType=2){b.psType="众筹中";}else if(b.psType=3){b.psType="众筹成功";}else if(b.psType=4){b.psType="众筹失败";}else if(b.psType=5){b.psType="审核未通过"; }
+ */					lookList= new Vue({
+						el : "#selectCLindexRecg",
+						data : {
+							items : result.data
+						}
+					});
+				}
+
+			}, true);
+			 
+		function name(url) {
+			
+			$.ajax({
+				//请求方式
+				type : "POST",
+				//请求的媒体类型
+				contentType : "text/html;charset=UTF-8",
+				//请求地址
+			/* 	url : "/GyzcTypebyid", */
+			    url :"/"+url,
+				//数据，json字符串
+				//data : JSON.stringify(list),
+				//请求成功
+				dataType : "json",
+				success : function(result) {
+					/* console.log(result.data); */
+					/* console.log(lookList.$data.items); */
+					lookList.$data.items=result.data;
+				 
+				}
+
+			}, true);
+		}
+		
+		
+		</script>
 
 
 

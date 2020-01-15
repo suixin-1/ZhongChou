@@ -60,11 +60,9 @@ public User selectById(int id) {
 }
 
 public Projects findById(int id) {
-	ProjectsExample example = new ProjectsExample();
-	Criteria criteria = example.createCriteria();
-	criteria.andPsIdEqualTo(id);
-	List<Projects> list = projectsMapper.selectByExample(example);
-	return list.get(0);
+	Projects projects = projectsMapper.selectByPrimaryKey(id);
+
+	return projects;
 			//projectAMapper.findById(id);
 }
 

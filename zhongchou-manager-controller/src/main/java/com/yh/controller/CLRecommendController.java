@@ -61,11 +61,19 @@ public class CLRecommendController {
 	}
 	
 	
-	@RequestMapping("/delRecommend")
+	@RequestMapping(value="/delRecommend", produces = {"application/json;charset=UTF-8"})
+	/*@RequestMapping("/delRecommend")*/
 	public String delRecommend(int r_id,HttpServletRequest request){
-		int deleteByPrimaryKey = CLR.deleteByPrimaryKey(r_id);
-		String selectRecommend = selectRecommend(request);
-		return selectRecommend;
+		
+		List<CLRecommend> selectRecommend2 = CLR.selectRecommend();
+		int size = selectRecommend2.size();
+		if(size>6){
+			int deleteByPrimaryKey = CLR.deleteByPrimaryKey(r_id);
+			String selectRecommend = selectRecommend(request);
+			return selectRecommend;
+		}
+		String selectRecommnd2 = selectRecommend(request);
+		return selectRecommnd2;
 	}
 	
 	@RequestMapping("/Addrecommend")

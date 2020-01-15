@@ -12,5 +12,11 @@
 			     <groupId>com.sun.mail</groupId>
 			     <artifactId>javax.mail</artifactId>
 			</dependency>
+			
+			
+		<dependency>
+		  <groupId>com.qiniu</groupId>
+		  <artifactId>qiniu-java-sdk</artifactId>
+		</dependency>
  </dependencies>
 </project>

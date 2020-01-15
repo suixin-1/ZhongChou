@@ -20,6 +20,7 @@ import com.yh.pojo.Projects;
 import com.yh.pojo.Projectstype;
 import com.yh.pojo.zhongchouResult;
 import com.yh.service.ClassifyService;
+import com.yh.service.GyzcService;
 import com.yh.service.ProjectService;
 import com.yh.service.SelectProjectsByPsIdService;
 
@@ -34,6 +35,9 @@ public class ProjectsController {
 	
 	@Autowired
 	private SelectProjectsByPsIdService SpbService;
+	
+	@Autowired
+	private GyzcService gyzcService;
 	
 	
 	@RequestMapping("gyzc-list")
@@ -103,52 +107,29 @@ public class ProjectsController {
 	}
 	
 	
-	/*@RequestMapping("toproduct-detail")
-	public String productdetail(){
-		
-		
-		return "product-detail";
-	}*/
-	
-	/*
-	@RequestMapping("/toproduct-detail")
-	public String productdetail(int psId,HttpServletRequest request, HttpServletResponse response){
-		String cookieName="psid";
-		String id=psId+"";
-		Cookie cookie = new Cookie(cookieName, id);
-		response.addCookie(cookie);
-		
-		return "product-detail";
-	}
-
-	
-	@RequestMapping(value="/toproduct-detail2", produces = {"application/json;charset=UTF-8"})
+	/**
+	 * 根据公益类型id查找公益类型名字
+	 */
+	@RequestMapping(value = "/GyzcTypebyid", produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
-	public String productdetail2(HttpServletRequest request){
-		Projects projects = new Projects();
-		Cookie[] cookies = request.getCookies();
-		for (Cookie cookie : cookies) {
-			if(cookie.getName().equals("psid")){
-				String value = cookie.getValue();
-				int id=Integer.parseInt(value);
-				projects.setPsId(id);
-			}
+	public String GyzcTypebyid(HttpServletRequest request,Integer id) throws Exception {
+		System.out.println(id);
+	/*	List<Projects> selectByPstId = gyzcService.selectByPstId(psPstId);*/
+        List<Projects> selectByPstId = gyzcService.selectByPstId(id);
+		String pspstid = request.getPathTranslated();
+		
+		System.out.println(selectByPstId+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		zhongchouResult result = zhongchouResult.ok(200, "成功", selectByPstId);
+		System.out.println(result+"------------------------------------------------------------------------");
+		String json = "";
+		try {
+			json = JSON.json(result);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		Projects projects = new Projects();
-		projects.setPsId(id);
-		List<Projects> selectByExample = projectService.selectProjectsAll();
-		//System.out.println(selectByExample.size()+"************************-------------------------------------");
-		zhongchouResult result = zhongchouResult.ok(200, "成功", selectByExample);
-		String json="";
-	try {
-		 json = JSON.json(result);
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
 		return json;
+
 	}
-	*/
-	
 
 }

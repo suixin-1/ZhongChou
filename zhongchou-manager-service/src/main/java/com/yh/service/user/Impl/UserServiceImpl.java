@@ -12,6 +12,8 @@ import com.yh.pojo.UserExample.Criteria;
 import com.yh.pojo.zhongchouResult;
 import com.yh.service.user.UserService;
 
+import qiniu.happydns.Record;
+
 @Service
 public class UserServiceImpl implements UserService {
 	/**
@@ -59,12 +61,19 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public Integer updatauser(User user) {
-		int updateByPrimaryKeySelective = usermapper.updateByPrimaryKey(user);
+		//修改方法需要改
+		//UserExample example = new UserExample();
+		//Criteria criteria = example.createCriteria();
+		//criteria.andUsIdEqualTo(user.getUsId());
+		//int updateByPrimaryKeySelective = usermapper.updateByExampleSelective(user, example);
+		//int updateByPrimaryKeySelective = usermapper.updateByPrimaryKey(user);
 	/*	UserExample example = new UserExample();
 		Criteria createCriteria = example.createCriteria();
-		createCriteria.andUsIdcardEqualTo(usId+"");
-		int updateByExample = usermapper.updateByExample(user,example);*/
-		return updateByPrimaryKeySelective;
+		createCriteria.andUsIdcardEqualTo(usId+"");*/
+		//int updateByExample = usermapper.updateByExample(user,example);
+		
+		int byPrimaryKeySelective = usermapper.updateByPrimaryKeySelective(user);
+		return byPrimaryKeySelective;
 	}
 	
 	//根据用户名和密码查询

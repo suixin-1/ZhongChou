@@ -437,7 +437,7 @@ public class IndexController {
 		return json;
 	}
 	
-	
+	//跳转到发布项目页面
 	@RequestMapping(value="/to_new_product", produces = {"text/html;charset=UTF-8"})
 	@ResponseBody
 	public String new_product(HttpServletRequest req){

@@ -49,5 +49,19 @@
         <dubbo:reference interface="com.yh.service.SelectProjectsByPsIdService" id="selectProjectsByPsIdService"></dubbo:reference>
        
         <dubbo:reference interface="com.yh.service.IssueService" id="issueService" />
+        
+        <dubbo:reference interface="com.yh.service.identity.IdentityService" id="identityService" />
+        
+        <dubbo:reference interface="com.yh.service.GyzcService" id="gyzcService" />
 
+	   <!-- 定义文件上传解析器 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设定默认编码 -->
+		<property name="defaultEncoding" value="utf-8"></property>
+		<!-- 设定文件上传的最大值5MB，5*1024*1024 -->
+		<property name="maxUploadSize" value="5242880"></property>
+				<!-- 上传文件的解析 -->
+		<property name="resolveLazily" value="true" />
+	</bean>
 </beans>

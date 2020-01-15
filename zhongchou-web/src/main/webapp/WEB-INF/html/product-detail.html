@@ -124,7 +124,7 @@
 						好善后处理、事件调查等相关工作。</p>-->
 
 					<h3>我的项目介绍</h3>
-					{{item.psStory}}
+					<p id="ppp"><!-- {{item.psStory}} --></p>
 					<!-- <p>
 						新华网湖北监利6月13日电（记者李鹏翔、梁建强）记者13日下午从“东方之星”号客轮翻沉事件前方指挥部新闻中心新闻发布会上获悉，经有关各方反复核实、逐一确认，“东方之星”号客轮上共有454人，其中成功获救12人，遇
 						难442人。公安部门依法依规、科学严谨对搜寻到的遗体DNA进行了比对，已确认442具为遇难人员遗体并移交给家属。至此，全部遇难者遗体均已找到。据此，决定自即日起搜救工作结束。有关部门和地方人民政府要继续认真细致做
@@ -191,13 +191,13 @@
 					<p class="loading-barcolo">项目截止时间：{{item.psEndtime}}</p>
 
 				</div>
-				<!--  <div class="loading-bzcz">
+				<div class="loading-bzcz">
                 <div class="loading-bzcz-1">
                 <span>支持￥0.01</span><i>已有<b>2</b>位支持者</i>
                 </div>
-                <a href="">支持￥0.01</a>
+                <a href="alipay" target="_blank">支持￥0.01</a>
             </div>
-            <div class="loading-bzcz">
+            <!--  <div class="loading-bzcz">
                 <div class="loading-bzcz-1">
                 <span>支持￥0.01</span><i>已有<b>2</b>位支持者</i>
                 </div>
@@ -365,6 +365,9 @@
 		        			items:result.data
 		        		}
 		        	});
+		            
+		            $("#ppp").html(result.data[0].psStory);
+		            
 		            }
 		         
 		        
