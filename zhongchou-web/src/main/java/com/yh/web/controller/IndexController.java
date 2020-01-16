@@ -382,6 +382,7 @@ public class IndexController {
 		user.setUsPassword(usPassword1);
 		user.setUsName(usName);
 		user.setUsCode(codes);
+		user.setUsRole(0);
 		HttpSession session2 = req.getSession(false);
 		String code = (String)session2.getAttribute("code");
 		System.out.println(code+"--+++++++++++++++++++++++++++++++++++++++++++");

@@ -242,7 +242,8 @@ private IssueService issueServiceImpl;
 	
 	
 	//实名认证提交
-	@RequestMapping("/shimingfile1")
+	@RequestMapping(value="/shimingfile1", produces = {"text/html;charset=UTF-8"})
+	@ResponseBody
 	public String shimingfile1(HttpServletRequest request){
 		
 		HttpSession session = request.getSession(false);
@@ -291,7 +292,16 @@ private IssueService issueServiceImpl;
 					
 					if(integer>0 && integer2>0){
 						System.out.println(integer+integer2);
-						return "new_product";
+						
+						zhongchouResult result = zhongchouResult.build(200, "正在审核");
+						
+						String json="";
+						try {
+							json = JSON.json(result);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						return json;
 					}	
 				}
 				//zhongchouResult = com.yh.pojo.zhongchouResult.ok(200, "用户信息", list2);

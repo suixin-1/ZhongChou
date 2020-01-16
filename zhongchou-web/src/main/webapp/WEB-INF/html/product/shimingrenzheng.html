@@ -25,7 +25,7 @@
 <!-- 实名认证 -->
         
         <div  class="my-form" style="width: 700px; margin-left: 180px; margin-top: 20px;" id="project_main">
-        	<div class="product-info-input"><b>用户名*：</b><input class="text" type="text" name="usName" id="usName" placeholder="请输入中文姓名，2-20个字符"  disabled="disabled"></div>
+        	<div class="product-info-input"><b>用户名*：</b><input class="text" type="text" name="usName" id="usName" placeholder="请输入中文姓名，2-20个字符" ></div>
         	<div class="product-info-input"><b>手机号*：</b><input class="text" type="text" id="usPhone" name="usPhone" placeholder="请输入手机号码"></div>
         	
         	<div class="product-info-input">
@@ -82,7 +82,10 @@
 	             	       //alert("err");
              	       		console.log(data.responseText)
              	       		var text = data.responseText;
-             	       		var tx = text.substring(5,text.length-6);
+             	       		
+             	       		var t1 = text.indexOf('>');
+             	       		
+             	       		var tx = text.substring(t1+1,text.length-6);
              	       		
              	       		console.log(tx);
 	         	        	var j = JSON.parse(tx)
@@ -153,7 +156,7 @@
         
         <script type="text/javascript">
    				//验证 页面的值	
-				/* $(document).ready(function() {
+				$(document).ready(function() {
 					$.ajax({
 						//请求方式
 				        type : "POST",
@@ -171,16 +174,16 @@
 				            console.log(result);
 				            if(result.data[0].usRole==0){
 				            	
-				            	alert(result.data[0].usName)
+				            	//alert(result.data[0].usName)
 				            	$("#usName").val(result.data[0].usName);
 				            	
-				         	/* /* new Vue({
+				         	 /* new Vue({
 				         		el : "#project_main",
 								data : {
 									items : result.data[0]
 								}
 				         
-				         	})
+				         	}) */
 				         	
 				            	//renzhengcommit();
 				            }else if(result.data[0].usRole==1){
@@ -190,7 +193,7 @@
 				        }
 					},true);
 					
-				}); */
+				});
    				
    				//认证提交
    				function renzhengcommit(){
@@ -198,13 +201,16 @@
    					var list = {"idCard":$("#idCard").val(),"Address":$("#Address").val(),"img1":$("#img1").attr('src'),"img2":$("#img2").attr('src'),"usPhone":$("#usPhone").val()};
    					$.ajax({
    				        type : "POST",
-   				        contentType: "text/html;charset=UTF-8",
+   				        //contentType: "text/html;charset=UTF-8",
    				        url : "/shimingfile1",
    				        data: list,
    				        dataType:"json",
    				        success:function(result) {
+   				        	
+   				        
    				            console.log(result);
-   				         document.getElementById("gonew_product").click();
+   				         window.location.reload();
+   				         
    				            //if(result.status==200){
    				            //$('#project_main').html(result.data);
    				            //}else if(result.status==500){
@@ -213,6 +219,7 @@
    				           // }
    				        }
    					},true);
+   					
    				}
    				
 </script>
