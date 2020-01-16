@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yh.mapper.CLRecommendMapper" >
+  <select id="selectRecommend" resultType="com.yh.pojo.CLRecommend">
+SELECT
+r_id,
+r_ps_id,
+ps_name,
+r_pst_id,
+pst_name
+ FROM recommend 
+ LEFT JOIN projects ON r_ps_id=ps_id 
+ LEFT JOIN projectstype ON r_pst_id=pst_id
+</select>
+   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from recommend
+    where r_id = #{r_id}
+  </delete>
+    <select id="selectAddRecommend" resultType="com.yh.pojo.CLAddrecommend">
+SELECT 
+ps_id,
+ps_name,
+pst_id,
+pst_name
+ FROM projects 
+ LEFT JOIN projectstype ON ps_pst_id=pst_id
+</select>
+<insert id="insert" parameterType="com.yh.pojo.CLRecommend" >
+
+
+insert into recommend (r_ps_id, r_pst_id)
+    values (#{r_ps_id},#{r_pst_id})
+    
+  </insert>
+  
+    <select id="selectaddRecommend" resultType="com.yh.pojo.CLRecommend">
+SELECT
+r_id,
+r_ps_id,
+ps_name,
+r_pst_id,
+pst_name
+ FROM recommend 
+ LEFT JOIN projects ON r_ps_id=ps_id 
+ LEFT JOIN projectstype ON r_pst_id=pst_id where r_ps_id=${r_ps_id}
+</select>
+  
+</mapper>

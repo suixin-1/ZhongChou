@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yh.mapper.CLindexmapper.CLindexmapper" >
+  <select id="selectCLindexRe" resultType="com.yh.pojo.CLindex.CLindexRe">
+ 
+SELECT 
+ps_file,
+r_id,
+r_ps_id,
+ps_name,
+ps_money,
+ps_getmoney,
+ps_getpeople,
+ps_type,
+ps_story,
+ps_starttime
+ FROM recommend 
+ LEFT JOIN 
+ projects on r_ps_id=ps_id
+ where 1=1
+ <if test="r_ps_id!=0">
+			and r_ps_id=#{r_ps_id}
+		</if>
+		
+ LIMIT 6
+</select>
+<!-- 	select  id as uid,username,password from user where 1=1
+		 <if test="id!=null">
+			and u.id=#{id}
+		</if> -->
+<select id="selectCLindexRejj" resultType="com.yh.pojo.CLindex.CLindexRe">
+SELECT 
+r_id,
+r_ps_id,
+ps_name,
+ps_money,
+ps_getmoney,
+ps_getpeople,
+ps_type,
+ps_story,
+ps_starttime
+FROM recommend 
+LEFT JOIN 
+projects on r_ps_id=ps_id
+where  ps_type =#{ps_type}       
+LIMIT 4   
+	</select> 
+</mapper>

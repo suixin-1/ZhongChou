@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yh.mapper.Selectbytypemapper" >
+ 
+ <select id="selectBytypeName" resultType="com.yh.pojo.Projectstype">
+ select pst_name pstName from projectstype where pst_type=${selectbytype}
+ </select>
+ 
+ <select id="selectByPstId" resultType="com.yh.pojo.Projects">
+	SELECT
+		ps_id psId,
+		ps_us_id psPstId,
+		ps_name psName,
+		ps_money psMoney,
+		ps_days psDays,
+		ps_type psType,
+		ps_starttime psStarttime,
+		ps_endtime psEndtime,
+		ps_getmoney psGetmoney,
+		ps_getpeople psGetpeople
+	FROM
+		projects
+	WHERE
+		ps_pst_id = #{id}
+	</select>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yh.mapper.IssueMapper" >
+
+<update id="insert" parameterType="com.yh.pojo.Draft"> 
+update user  set us_idcard=#{usIdcard},us_phone=#{usPhone},us_address=#{usAddress}  where us_id=#{usId}
+</update>
+<insert id="insert1" parameterType="com.yh.pojo.Draft"> 
+insert into projects(ps_us_id,ps_file, ps_cust_name,ps_cust_phone,ps_pst_id,ps_name,ps_goal,ps_address,ps_money,ps_days,ps_video,ps_story,ps_support,ps_repay,ps_aboutme,ps_type,ps_getpeople)
+values (#{usId},#{psFile},#{proAName},#{proAPhone},#{pstId},#{psName},#{psGoal},#{psAddress},#{psMoney},#{psDays},#{psVideo},#{psStory},#{psSupport},#{psRepay},#{psAboutme},0,#{psGetpeople})
+</insert>
+<insert id="insert2" parameterType="com.yh.pojo.Draft"> 
+insert into repay (ry_us_id,ry_type,ry_paymoney,ry_rule,ry_content,ry_number,ry_time)
+values (#{usId},#{ryType},#{ryPaymoney},#{ryRule},#{ryContent},#{ryNumber},#{ryTime})
+</insert>
+</mapper>

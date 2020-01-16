@@ -1,0 +1,218 @@
+ <style type="text/css">
+        #allmap {
+            width: 100%;
+            height: 300px;
+            border: solid 2px #000;
+        }
+    </style>
+    
+  
+	
+    
+	 <div class="product-table">
+        <div class="product-left">
+            <table class="table table-bordered">
+                <tr class="text-center">
+                 	<td class="title-td" style="cursor: pointer;" id="active" onclick="new_product()">实名认证</td>
+                    <td class="title-td" style="cursor: pointer;" onclick="toprojectXq('jibenxinxi')">基本信息</td>
+                    <td class="title-td" style="cursor: pointer;" onclick="toprojectXq('xiangmuxinxi')">项目信息</td>
+                    
+                </tr>
+            </table>
+        </div>
+    </div>
+
+<!-- 实名认证 -->
+        
+        <div  class="my-form" style="width: 700px; margin-left: 180px; margin-top: 20px;" id="project_main">
+        	<div class="product-info-input"><b>用户名*：</b><input class="text" type="text" name="usName" id="usName" placeholder="请输入中文姓名，2-20个字符"  disabled="disabled"></div>
+        	<div class="product-info-input"><b>手机号*：</b><input class="text" type="text" id="usPhone" name="usPhone" placeholder="请输入手机号码"></div>
+        	
+        	<div class="product-info-input">
+        		<b>身份证号*：</b><input class="text" id="idCard" name="idCard" type="text" placeholder="请输入你的身份证号">
+        	</div>
+        	<div class="product-info-input">
+        		<b>身份证正面*：</b>  <a onclick="$('#file1').click();">上传</a>
+        		<input id="file1" onchange="upload('file1','img1')" name="myfile" style="margin-left: 100px; margin-top:-20px; width: 100px;display: none" class="text" type="file">
+        		<b>身份证反面*：</b> <a onclick="$('#file2').click();">上传</a>
+        		<input id="file2" onchange="upload('file2','img2')" name="myfile" style="margin-left: 100px; margin-top:-20px; width: 100px; display: none" class="text" type="file">
+        		<br><img alt="" id="img1" src="" width="230px;" height="150px;"><img id="img2" alt="" src="" width="230px;" height="150px;">
+        	</div>
+        	<div class="product-info-input">
+        		
+        	</div>
+        	
+        	<div id="allmap"></div>
+		    <div id="r-result">
+		        城市名: <input id="cityName" type="text" style="width:100px; margin-right:10px;" />
+		        <input type="button" value="查询" onclick="theLocation()" />
+		        <b>地&nbsp;&nbsp;&nbsp;&nbsp;址&nbsp;：</b><input name="usAddress" id="Address" class="text" type="text" disabled="disabled" placeholder="地址" style="width: 300px;">
+		    </div>
+		    
+        	<script type="text/javascript">
+        	
+        		function upload(id,img){
+        			 $.ajaxFileUpload({  
+             	        type: "POST",  
+             	        url: "/importPicFile",  
+             	        //data:{picParams:text},//要传到后台的参数，没有可以不写  
+             	        secureuri : false,//是否启用安全提交，默认为false  
+             	        fileElementId:id,//文件选择框的id属性  
+             	        dataType: 'json',//服务器返回的格式  
+             	        async : false,  
+             	        success: function(data){
+             	        	alert("succ");
+             	        	
+             	        	
+             	        	
+             	        	console.log(data)
+             	        	
+             	        	if(data.status==200){
+             	        		alert(data.msg);
+             	        		$("#"+img).src(data.msg);
+             	        	}
+             	            /* if(data.result=='success'){  
+             	                //coding  
+             	            }else{  
+             	                //coding  
+             	            }  */ 
+             	        },  
+             	        //error: function (data, status, e){ 
+             	       	error: function (data){
+	             	       //alert("err");
+             	       		console.log(data.responseText)
+             	       		var text = data.responseText;
+             	       		var tx = text.substring(5,text.length-6);
+             	       		
+             	       		console.log(tx);
+	         	        	var j = JSON.parse(tx)
+	             	       //alert(j.msg);
+	         	        	if(j.status==200){
+	         	        	//	alert(data.msg);
+	         	        		$("#"+img).attr("src",j.msg );
+	         	        	}
+             	        }  
+             	    });
+        		}
+        	
+        	
+			    // 百度地图API功能
+			    var map = new BMap.Map("allmap");
+			    var point = new BMap.Point(116.331398, 39.897445);
+			    map.centerAndZoom(point, 12);
+			    var geoc = new BMap.Geocoder();
+			
+			    map.addEventListener("click", function (e) {
+			        var pt = e.point;
+			        geoc.getLocation(pt, function (rs) {
+			            var addComp = rs.addressComponents;
+			            
+			            var address = addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
+			            
+			            //alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+			           // alert(rs.point.lng + "," + rs.point.lat);	          
+				      $("#Address").val(address);			        	   
+			          // alert(address.substring(address.length-1));
+			           //alert($("#Address").val());
+			        });
+			    });
+			
+			    map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+			    map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+			    //根据城市名展示当前中心城市
+			    function theLocation() {
+			        var city = document.getElementById("cityName").value;
+			        if (city != "") {
+			            map.centerAndZoom(city, 11);      // 用城市名设置地图中心点
+			        }
+			    }
+			
+			</script>
+        	
+        	
+        	
+        	
+        	
+        	
+        	
+        	<!-- <img alt="" src="http://q3gkuynyz.bkt.clouddn.com/606faf469c284d5a8ead2ac3809d8041"> -->
+        	<!-- <div class="product-info-input">
+        		验证码
+                 <label class="block clearfix">
+						<span>
+							<input type="text" class="" placeholder="验证码" id="codes"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-default" onclick="sendCode()">点击获取验证码</button>
+						</span>
+                 </label>
+        	</div> -->
+        	<br>
+        	<div class="product-info-input">
+        		 <button class="btn btn-default btn-primary pull-right" onclick="renzhengcommit()" style="margin-right: 350px;">提交</button>
+        	</div>
+        </div>
+        
+        <script type="text/javascript">
+   				//验证 页面的值	
+				/* $(document).ready(function() {
+					$.ajax({
+						//请求方式
+				        type : "POST",
+				        //parseMimeType:"image/",
+				        //请求的媒体类型
+				        //contentType: "multipart/form-data;charset=UTF-8",
+				        //contentType:"application/json",
+				        //请求地址
+				        url : "/to_new_product",
+				        //数据，json字符串
+				        //data : file,
+				        //请求成功
+				        dataType:"json",
+				        success : function(result) {
+				            console.log(result);
+				            if(result.data[0].usRole==0){
+				            	
+				            	alert(result.data[0].usName)
+				            	$("#usName").val(result.data[0].usName);
+				            	
+				         	/* /* new Vue({
+				         		el : "#project_main",
+								data : {
+									items : result.data[0]
+								}
+				         
+				         	})
+				         	
+				            	//renzhengcommit();
+				            }else if(result.data[0].usRole==1){
+				            	$("#project_main").html("以实名");
+				            }
+				            //alert(isShiM)
+				        }
+					},true);
+					
+				}); */
+   				
+   				//认证提交
+   				function renzhengcommit(){
+   					
+   					var list = {"idCard":$("#idCard").val(),"Address":$("#Address").val(),"img1":$("#img1").attr('src'),"img2":$("#img2").attr('src'),"usPhone":$("#usPhone").val()};
+   					$.ajax({
+   				        type : "POST",
+   				        contentType: "text/html;charset=UTF-8",
+   				        url : "/shimingfile1",
+   				        data: list,
+   				        dataType:"json",
+   				        success:function(result) {
+   				            console.log(result);
+   				         document.getElementById("gonew_product").click();
+   				            //if(result.status==200){
+   				            //$('#project_main').html(result.data);
+   				            //}else if(result.status==500){
+   				            	//$('#project_main').html(result.data);
+   				            	//toprojectXq('shimingrenzheng');
+   				           // }
+   				        }
+   					},true);
+   				}
+   				
+</script>

@@ -1,0 +1,41 @@
+	 <div class="product-table">
+        <div class="product-left">
+            <table class="table table-bordered">
+                <tr class="text-center">
+                 	<td class="title-td" style="cursor: pointer;" id="active">实名认证</td>
+                    <td class="title-td" style="cursor: pointer;" onclick="projectToXq('jibenxinxi')">基本信息</td>
+                    <td class="title-td" style="cursor: pointer;" onclick="projectToXq('jibenxinxi')">项目信息</td>
+                    <td class="title-td" style="cursor: pointer;" onclick="projectToXq('jibenxinxi')">项目故事</td>
+                    <td class="title-td" style="cursor: pointer;" onclick="projectToXq('jibenxinxi')">回报设置</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+<!-- 实名认证 -->
+        
+        <div class="my-form">
+        	<div class="product-info-input">
+        		<b>身份证号*：</b><input class="text" type="text" placeholder="请输入你的身份证号">
+        	</div>
+        	<div class="product-info-input">
+        		<b>身份证正面*：</b><input style="margin-left: 100px; margin-top:-20px; width: 300px;" class="text" type="file" placeholder="给自己的项目起个漂亮的名字吧">
+        	</div>
+        	<div class="product-info-input">
+        		<b>身份证反面*：</b><input style="margin-left: 100px; margin-top:-20px; width: 300px;" class="text" type="file" placeholder="给自己的项目起个漂亮的名字吧">
+        	</div>
+        	<div class="product-info-input">
+        		<!--验证码-->
+                 <label class="block clearfix">
+						<span>
+							<input type="text" class="" placeholder="验证码" id="codes"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-default" onclick="sendCode()">点击获取验证码</button>
+						</span>
+                 </label>
+        	</div>
+        	<br>
+        	<div class="product-info-input">
+        		 <button class="btn btn-default btn-primary pull-right" onclick="" style="margin-right: 350px;">提交</button>
+        	</div>
+        </div>
+        

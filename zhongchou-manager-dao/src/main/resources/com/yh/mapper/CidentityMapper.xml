@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yh.mapper.CidentityMapper">
+	<update id="updateUser">
+		UPDATE `user` SET us_role=1 WHERE us_id=#{id}
+	</update>
+
+
+	<select id="selectByUsId" parameterType="int" resultType="com.yh.pojo.Identity">
+	SELECT
+		us_identity_id usIdentityId,
+		us_id usId,
+		us_identity_image1
+		usIdentityImage1,
+		us_identity_image2 usIdentityImage2
+	FROM
+		identity
+	WHERE
+		us_id = #{id}
+	</select>
+
+	<!-- 删除 -->
+	<delete id="deleteIdentity" parameterType="int">
+	DELETE
+		FROM
+		identity
+	WHERE
+		us_id = #{id}
+	</delete>
+</mapper>

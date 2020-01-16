@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yh.mapper.ProAMapper" >
+  <resultMap id="BaseResultMap" type="com.yh.pojo.ProA" >
+    <id column="pro_a_id" property="proAId" jdbcType="INTEGER" />
+    <result column="pro_a_us_id" property="proAUsId" jdbcType="INTEGER" />
+    <result column="pro_a_cust_name" property="proACustName" jdbcType="VARCHAR" />
+    <result column="pro_a_cust_phone" property="proACustPhone" jdbcType="VARCHAR" />
+    <result column="pro_a_pst_id" property="proAPstId" jdbcType="INTEGER" />
+    <result column="pro_a_cust_address" property="proACustAddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pro_a_id, pro_a_us_id, pro_a_cust_name, pro_a_cust_phone, pro_a_pst_id, pro_a_cust_address
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yh.pojo.ProAExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_a
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pro_a
+    where pro_a_id = #{proAId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pro_a
+    where pro_a_id = #{proAId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yh.pojo.ProAExample" >
+    delete from pro_a
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yh.pojo.ProA" >
+    insert into pro_a (pro_a_id, pro_a_us_id, pro_a_cust_name, 
+      pro_a_cust_phone, pro_a_pst_id, pro_a_cust_address
+      )
+    values (#{proAId,jdbcType=INTEGER}, #{proAUsId,jdbcType=INTEGER}, #{proACustName,jdbcType=VARCHAR}, 
+      #{proACustPhone,jdbcType=VARCHAR}, #{proAPstId,jdbcType=INTEGER}, #{proACustAddress,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yh.pojo.ProA" >
+    insert into pro_a
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="proAId != null" >
+        pro_a_id,
+      </if>
+      <if test="proAUsId != null" >
+        pro_a_us_id,
+      </if>
+      <if test="proACustName != null" >
+        pro_a_cust_name,
+      </if>
+      <if test="proACustPhone != null" >
+        pro_a_cust_phone,
+      </if>
+      <if test="proAPstId != null" >
+        pro_a_pst_id,
+      </if>
+      <if test="proACustAddress != null" >
+        pro_a_cust_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="proAId != null" >
+        #{proAId,jdbcType=INTEGER},
+      </if>
+      <if test="proAUsId != null" >
+        #{proAUsId,jdbcType=INTEGER},
+      </if>
+      <if test="proACustName != null" >
+        #{proACustName,jdbcType=VARCHAR},
+      </if>
+      <if test="proACustPhone != null" >
+        #{proACustPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="proAPstId != null" >
+        #{proAPstId,jdbcType=INTEGER},
+      </if>
+      <if test="proACustAddress != null" >
+        #{proACustAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yh.pojo.ProAExample" resultType="java.lang.Integer" >
+    select count(*) from pro_a
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pro_a
+    <set >
+      <if test="record.proAId != null" >
+        pro_a_id = #{record.proAId,jdbcType=INTEGER},
+      </if>
+      <if test="record.proAUsId != null" >
+        pro_a_us_id = #{record.proAUsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.proACustName != null" >
+        pro_a_cust_name = #{record.proACustName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proACustPhone != null" >
+        pro_a_cust_phone = #{record.proACustPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proAPstId != null" >
+        pro_a_pst_id = #{record.proAPstId,jdbcType=INTEGER},
+      </if>
+      <if test="record.proACustAddress != null" >
+        pro_a_cust_address = #{record.proACustAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pro_a
+    set pro_a_id = #{record.proAId,jdbcType=INTEGER},
+      pro_a_us_id = #{record.proAUsId,jdbcType=INTEGER},
+      pro_a_cust_name = #{record.proACustName,jdbcType=VARCHAR},
+      pro_a_cust_phone = #{record.proACustPhone,jdbcType=VARCHAR},
+      pro_a_pst_id = #{record.proAPstId,jdbcType=INTEGER},
+      pro_a_cust_address = #{record.proACustAddress,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yh.pojo.ProA" >
+    update pro_a
+    <set >
+      <if test="proAUsId != null" >
+        pro_a_us_id = #{proAUsId,jdbcType=INTEGER},
+      </if>
+      <if test="proACustName != null" >
+        pro_a_cust_name = #{proACustName,jdbcType=VARCHAR},
+      </if>
+      <if test="proACustPhone != null" >
+        pro_a_cust_phone = #{proACustPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="proAPstId != null" >
+        pro_a_pst_id = #{proAPstId,jdbcType=INTEGER},
+      </if>
+      <if test="proACustAddress != null" >
+        pro_a_cust_address = #{proACustAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pro_a_id = #{proAId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yh.pojo.ProA" >
+    update pro_a
+    set pro_a_us_id = #{proAUsId,jdbcType=INTEGER},
+      pro_a_cust_name = #{proACustName,jdbcType=VARCHAR},
+      pro_a_cust_phone = #{proACustPhone,jdbcType=VARCHAR},
+      pro_a_pst_id = #{proAPstId,jdbcType=INTEGER},
+      pro_a_cust_address = #{proACustAddress,jdbcType=VARCHAR}
+    where pro_a_id = #{proAId,jdbcType=INTEGER}
+  </update>
+</mapper>

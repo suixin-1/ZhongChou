@@ -1,0 +1,75 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<!-- 基本信息 -->
+	<!--头上表格-->
+	 <div class="product-table">
+        <div class="product-left">
+            <table class="table table-bordered">
+                <tr class="text-center">
+                 	<td class="title-td" style="cursor: pointer;" onclick="new_product()">实名认证</td>
+                    <td class="title-td" style="cursor: pointer;" onclick="toprojectXq('jibenxinxi')" id="active">基本信息</td>
+                    <td class="title-td" style="cursor: pointer;" onclick="toprojectXq('xiangmuxinxi')">项目信息</td>
+                    
+                </tr>
+            </table>
+        </div>
+    </div>
+
+<form id="jibenx">
+			<div class="my-form text-center">
+
+				<div class="product-input"><b>姓名*：</b><input class="text" type="text" placeholder="请输入中文姓名，2-20个字符" :value="items.usName"></div>
+				<div class="product-input"><b>身份证号*：</b><input class="text" type="text" placeholder="二代身份证，请输入数字或字母" :value="items.usIdcard"></div>
+				<div class="product-input"><b>手机号*：</b><input class="text" type="text" placeholder="请输入手机号码" :value="items.usPhone"></div>
+
+				
+			</div>
+			<div class="product-input" style="margin-left: 150px;">		
+					<b style="margin-left: 128px;">地址&nbsp;：</b><input class="text" type="text" placeholder="地址" :value="items.usAddress">
+
+			</div>
+			
+		</form>
+	<a type="hidden" href="new_product.html" id="togoshimingren"></a>
+		<script>
+		if(isShiM){			
+			$.ajax({
+				//请求方式
+		        type : "POST",
+		        //请求的媒体类型
+		        contentType: "text/html;charset=UTF-8",
+		        //请求地址
+		        url : "/Gojibenxinxi",
+		        //数据，json字符串
+		        //data : JSON.stringify(list),
+		        //请求成功
+		        dataType:"json",
+		        success : function(result) {
+		            console.log(result);
+		            if(result.status==200){
+		            	new Vue({
+							el : "#jibenx",
+							data : {
+								items : result.data
+							}
+						});
+		            	isJinB=true;
+		            }else if(result.status==500){
+		            	isJinB=false;
+		            }
+		            //alert(isShiM)
+		        }
+			},true);
+		}else{
+			alert("请进行实名认证");
+			document.getElementById("togoshimingren").click();
+			
+		}
+		
+		//为了首次验证
+		function new_product(){
+			document.getElementById("togoshimingren").click();
+		}
+		</script>
+		
+		

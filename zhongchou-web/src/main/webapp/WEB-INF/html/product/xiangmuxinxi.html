@@ -1,0 +1,317 @@
+<!-- <script type="text/javascript" src="js/ajaxfileupload.js"></script> -->
+<!-- 项目信息 -->
+
+<div class="product-table">
+	<div class="product-left">
+		<table class="table table-bordered">
+			<tr class="text-center">
+				<td class="title-td" style="cursor: pointer;"
+					onclick="toprojectXq('shimingrenzheng')">实名认证</td>
+				<td class="title-td" style="cursor: pointer;"
+					onclick="toprojectXq('jibenxinxi')">基本信息</td>
+				<td class="title-td" style="cursor: pointer;"
+					onclick="toprojectXq('xiangmuxinxi')" id="active">项目信息</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+
+
+<div class="my-form" style="padding-left: 191px;">
+	<div class="product-info-input">
+		<b>设置封面：</b> <input id="ImportPicInput"
+			onchange="sub1('ImportPicInput','imgp1')" name="myfile"
+			class="btn btn-success" type="file"
+			style="width: 80px; padding: 0px; display: none" /> <a
+			onclick="$('#ImportPicInput').click();"
+			style="border: solid 1px #000; background-color: #ccc; padding: 5px;">上传</a>
+		<img id="imgp1" alt="" src="" width="250px" height="150px">
+
+	</div>
+	<!-- <img alt="" src="http://q3gkuynyz.bkt.clouddn.com/db19939271d0489e848803bfc3c78c24"> -->
+
+	<div class="product-info-input">
+		<b>项目视频：</b> <input id="ImportPicInput2"
+			onchange="sub1('ImportPicInput2','imgp2')" name="myfile"
+			class="btn btn-success" type="file"
+			style="width: 100px; display: none" /> <a
+			onclick="$('#ImportPicInput2').click();"
+			style="border: solid 1px #000; background-color: #ccc; padding: 5px;">上传</a>
+
+		<video width="440" height="245" autoplay="autoplay"
+			controls="controls">
+			<source id="imgp2"
+				src="http://q3gkuynyz.bkt.clouddn.com/f03b5d2a84524da28875e9639c68e293"
+				type="video/mp4">
+			浏览器不支持
+			</source>
+		</video>
+	</div>
+	<div class="product-info-input">
+		<b>项目标题：</b><input id="ps_name" class="text" type="text"
+			placeholder="给自己的项目起个漂亮的名字吧" />
+	</div>
+	<div class="product-info-input">
+		<b>筹款目的：</b>
+		<textarea id="ps_goal" rows="2" placeholder="一句话介绍一下你的项目吧"
+			style="margin-left: 0px;"></textarea>
+	</div>
+
+	<div id="allmap"></div>
+	<div id="r-result">
+		城市名: <input id="cityName" type="text"
+			style="width: 100px; margin-right: 10px;" /> <input type="button"
+			value="查询" onclick="theLocation()" /> <b>地&nbsp;&nbsp;&nbsp;&nbsp;址&nbsp;：</b><input
+			name="usAddress" id="ps_Address" class="text" type="text"
+			placeholder="地址" style="width: 300px;">
+	</div>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=VoyH4CG745rjVcUCkgcCZF276kXMiG2E"></script>
+	<script type="text/javascript">
+		// 百度地图API功能
+		var map = new BMap.Map("allmap");
+		var point = new BMap.Point(116.331398, 39.897445);
+		map.centerAndZoom(point, 12);
+		var geoc = new BMap.Geocoder();
+
+		map.addEventListener("click", function(e) {
+			var pt = e.point;
+			geoc.getLocation(pt, function(rs) {
+				var addComp = rs.addressComponents;
+
+				var address = addComp.province + ", " + addComp.city + ", "
+						+ addComp.district + ", " + addComp.street + ", "
+						+ addComp.streetNumber;
+
+				//alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+				// alert(rs.point.lng + "," + rs.point.lat);	          
+				$("#ps_Address").val(address);
+				// alert(address.substring(address.length-1));
+				//alert($("#Address").val());
+			});
+		});
+
+		map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
+		map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
+		//根据城市名展示当前中心城市
+		function theLocation() {
+			var city = document.getElementById("cityName").value;
+			if (city != "") {
+				map.centerAndZoom(city, 11); // 用城市名设置地图中心点
+			}
+		}
+	</script>
+
+
+	<div class="product-info-input">
+		<b>筹资金额*：</b><input id="ps_money" class="text" type="text"
+			placeholder="输入你需要的金额，最少500元">元
+	</div>
+	<div class="product-info-input">
+		<b>筹资天数*：</b><input id="ps_days" class="text" type="text"
+			placeholder="">天
+	</div>
+
+	<div class="product-input" style="margin-left: 150px;">
+		<b style="">客服联系人*：</b> <input id="ps_cust_name" style="width: 150px;"
+			class="text" type="text" placeholder="客服联系人"> <b>客服电话*：</b><input
+			id="ps_cust_phone" style="width: 150px;" class="text" type="text"
+			placeholder="客服咨询电话">
+	</div>
+
+
+	<div class="product-select">
+		<div class="select-type" style="width: 500px;">
+			<b>公益类型*：</b> <select class="select-cla" id="selectEd">
+				<option v-for="item in items" :value="item.pstId">{{item.pstName}}</option>
+				<!-- <option>农业</option>
+							<option>娱乐</option>
+							<option>其他</option> -->
+			</select>
+			<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+						<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script> -->
+			<!-- 查询项目类型 -->
+			<script type="text/javascript">
+				$.ajax({
+					//请求方式
+					type : "POST",
+					//请求的媒体类型
+					//contentType: "text/html;charset=UTF-8",
+					//请求地址
+					url : "/Gyzc",
+					//数据，json字符串
+					//data : lists,
+					//请求成功
+					dataType : "json",
+					success : function(result) {
+						console.log(result);
+						if (result.status == 200) {
+							new Vue({
+								el : "#selectEd",
+								data : {
+									items : result.data
+								}
+							});
+						}
+					}
+				}, true);
+			</script>
+
+		</div>
+	</div>
+
+
+
+
+
+	<div style="width: 700px;">
+		<h3>项目故事</h3>
+		<br>
+		<div id="div1" style="width: 100%">
+			<p>请输入项目故事</p>
+		</div>
+
+
+	</div>
+	<a type="hidden" href="javascript:toprojectXq('xiangmuxinxi')"
+		id="togoxiangmuxinx"></a>
+	<script type="text/javascript" src="js/wangEditor.min.js"></script>
+	<script type="text/javascript">
+		var E = window.wangEditor
+		var editor = new E('#div1')
+		editor.create();
+		/*  document.getElementById('btn1').addEventListener('click', function () {
+		     // 读取 html
+		     alert(editor.txt.html())
+		 }, false)
+		
+		 document.getElementById('btn2').addEventListener('click', function () {
+		     // 读取 text
+		     alert(editor.txt.text())
+		 }, false) */
+	</script>
+
+
+
+	<!-- <form action="#"> -->
+	<div class="my-form">
+		<div class="back">
+			<b>回报类型：</b> <label class="radio-inline"> <input type="radio"
+				name="optionsRadiosinline" id="optionsRadios3" value="option1"
+				checked> <b>实物回报(回报需邮寄)</b>
+			</label>
+			<!-- <label class="radio-inline">
+			                        <input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"> <b>虚拟回报(回报无需邮寄)</b>
+			                    </label> -->
+		</div>
+		<div class="back">
+			<b>支持金额*：</b><input id="ry_paymoney" class="input-mon"
+				placeholder="输入需要用户支持的金额">元
+		</div>
+		<div class="back">
+			<b>具体规则*：</b>每 <input id="ry_number" class="input-per"
+				placeholder="此项必填"> 支持者抽出1名中奖者
+		</div>
+		<div class="back">
+			<b>回报内容：</b>
+			<div>
+				<textarea id="ry_content" rows="2" placeholder="一句话介绍一下你的项目吧"></textarea>
+			</div>
+		</div>
+		<!-- <div class="back"><b>人数上限：</b><input class="input-num" placeholder="0">个<small>"0"为不需要名额</small></div>
+			                <div class="back"><b>回报时间：</b><input class="input-num" placeholder="0">天<small>"0"为开奖后立即发送</small></div> -->
+		<div class="clear"></div>
+		<hr>
+		<a type="hidden" href="user.html" id="togorep"></a>
+		<!-- <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script> -->
+		<script type="text/javascript">
+			function ssbb() {
+				alert()
+			}
+
+			function xiangmusubmit() {
+				var lists = {
+					"ps_file" : $("#imgp1").attr('src'),
+					"ps_video" : $("#imgp2").attr('src'),
+					"ps_name" : $("#ps_name").val(),
+					"ps_goal" : $("#ps_goal").val(),
+					"ps_Address" : $("#ps_Address").val(),
+					"ps_money" : $("#ps_money").val(),
+					"ps_days" : $("#ps_days").val(),
+					"selectEd" : $("#selectEd").val(),
+					"ps_cust_name" : $("#ps_cust_name").val(),
+					"ps_cust_phone" : $("#ps_cust_phone").val(),
+					"ps_story" : editor.txt.html(),
+					"ry_paymoney" : $("#ry_paymoney").val(),
+					"ry_number" : $("#ry_number").val(),
+					"ry_content" : $("#ry_content").val()
+				};
+
+				console.log(lists);
+				$.ajax({
+					//请求方式
+					type : "POST",
+					//请求的媒体类型
+					//contentType: "text/html;charset=UTF-8",
+					//请求地址
+					url : "/xiangmusubmit",
+					//数据，json字符串
+					data : lists,
+					//请求成功
+					dataType : "json",
+					success : function(result) {
+						console.log(result);
+						if (result.status == 200) {
+							document.getElementById("togorep").click();
+						} else
+							(result.status == 500)
+						{
+							alert(result.msg);
+						}
+					}
+				}, true);
+			}
+
+			function sub1(id, src) {
+				$.ajaxFileUpload({
+					type : "POST",
+					url : "/importPicFile",
+					//data:{picParams:text},//要传到后台的参数，没有可以不写  
+					secureuri : false,//是否启用安全提交，默认为false  
+					fileElementId : id,//文件选择框的id属性  
+					dataType : 'json',//服务器返回的格式  
+					async : false,
+					success : function(data) {
+						if (data.result == 'success') {
+							//coding  
+						} else {
+							//coding  
+						}
+					},
+					error : function(data) {
+						console.log(data.responseText)
+						var text = data.responseText;
+						var tx = text.substring(5, text.length - 6);
+
+						console.log(tx);
+						var j = JSON.parse(tx)
+						//alert(j.msg);
+						if (j.status == 200) {
+							//	alert(data.msg);
+							$("#" + src).attr("src", j.msg);
+						}
+					}
+				});
+			}
+		</script>
+		<div class="text-center">
+			<button class="btn btn-primary" onclick="ssbb()">删除</button>
+			<button class="btn" onclick="xiangmusubmit()">保存</button>
+		</div>
+		<br>
+	</div>
+	<!--  </form> -->
+
+
+</div>
+

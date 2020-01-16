@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yh.mapper.IdentityMapper" >
+  <resultMap id="BaseResultMap" type="com.yh.pojo.Identity" >
+    <id column="us_identity_id" property="usIdentityId" jdbcType="INTEGER" />
+    <result column="us_id" property="usId" jdbcType="INTEGER" />
+    <result column="us_identity_image1" property="usIdentityImage1" jdbcType="VARCHAR" />
+    <result column="us_identity_image2" property="usIdentityImage2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    us_identity_id, us_id, us_identity_image1, us_identity_image2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yh.pojo.IdentityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from identity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from identity
+    where us_identity_id = #{usIdentityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from identity
+    where us_identity_id = #{usIdentityId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yh.pojo.IdentityExample" >
+    delete from identity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yh.pojo.Identity" >
+    insert into identity (us_identity_id, us_id, us_identity_image1, 
+      us_identity_image2)
+    values (#{usIdentityId,jdbcType=INTEGER}, #{usId,jdbcType=INTEGER}, #{usIdentityImage1,jdbcType=VARCHAR}, 
+      #{usIdentityImage2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yh.pojo.Identity" >
+    insert into identity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="usIdentityId != null" >
+        us_identity_id,
+      </if>
+      <if test="usId != null" >
+        us_id,
+      </if>
+      <if test="usIdentityImage1 != null" >
+        us_identity_image1,
+      </if>
+      <if test="usIdentityImage2 != null" >
+        us_identity_image2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="usIdentityId != null" >
+        #{usIdentityId,jdbcType=INTEGER},
+      </if>
+      <if test="usId != null" >
+        #{usId,jdbcType=INTEGER},
+      </if>
+      <if test="usIdentityImage1 != null" >
+        #{usIdentityImage1,jdbcType=VARCHAR},
+      </if>
+      <if test="usIdentityImage2 != null" >
+        #{usIdentityImage2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yh.pojo.IdentityExample" resultType="java.lang.Integer" >
+    select count(*) from identity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update identity
+    <set >
+      <if test="record.usIdentityId != null" >
+        us_identity_id = #{record.usIdentityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.usId != null" >
+        us_id = #{record.usId,jdbcType=INTEGER},
+      </if>
+      <if test="record.usIdentityImage1 != null" >
+        us_identity_image1 = #{record.usIdentityImage1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usIdentityImage2 != null" >
+        us_identity_image2 = #{record.usIdentityImage2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update identity
+    set us_identity_id = #{record.usIdentityId,jdbcType=INTEGER},
+      us_id = #{record.usId,jdbcType=INTEGER},
+      us_identity_image1 = #{record.usIdentityImage1,jdbcType=VARCHAR},
+      us_identity_image2 = #{record.usIdentityImage2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yh.pojo.Identity" >
+    update identity
+    <set >
+      <if test="usId != null" >
+        us_id = #{usId,jdbcType=INTEGER},
+      </if>
+      <if test="usIdentityImage1 != null" >
+        us_identity_image1 = #{usIdentityImage1,jdbcType=VARCHAR},
+      </if>
+      <if test="usIdentityImage2 != null" >
+        us_identity_image2 = #{usIdentityImage2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where us_identity_id = #{usIdentityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yh.pojo.Identity" >
+    update identity
+    set us_id = #{usId,jdbcType=INTEGER},
+      us_identity_image1 = #{usIdentityImage1,jdbcType=VARCHAR},
+      us_identity_image2 = #{usIdentityImage2,jdbcType=VARCHAR}
+    where us_identity_id = #{usIdentityId,jdbcType=INTEGER}
+  </update>
+</mapper>

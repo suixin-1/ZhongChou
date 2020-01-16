@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yh.mapper.ProjectAMapper">
+	
+	<select id="selectAll" resultType="com.yh.pojo.ProjectA">
+		    select
+		      ps_id psId,
+		      ps_name psName,
+		      pst_name pstName,
+		      ps_type psType,
+              ps_starttime psStarttime,
+              ps_endtime psEndtime,
+              ps_getmoney psGetmoney,
+              ps_money psMoney,
+              us_name usName,
+              ps_us_id usId
+
+		      from `projects` p left join `projectstype` pr on pr.pst_id=p.ps_pst_id  left join `user` `u` on  p.ps_us_id  = `u`.us_id 
+		  
+		  
+	</select>
+	<select id="selectByKey" resultType="com.yh.pojo.ProjectA" parameterType="com.yh.pojo.Condition">
+		    select
+		    	ps_id psId,
+		      ps_name psName,
+		      pst_name pstName,
+		      ps_type psType,
+              ps_starttime psStarttime,
+              ps_endtime psEndtime,
+              ps_getmoney psGetmoney,
+              ps_money psMoney,
+              us_name usName,
+              ps_us_id usId
+		      from `projects` p left join `projectstype` pr on pr.pst_id=p.ps_pst_id  left join `user` `u` on  p.ps_us_id  = `u`.us_id 
+		  
+		<where>
+			<if test="psName!=null and psName!=''" >
+				and ps_name like concat("%",#{psName},"%")
+			</if>
+		
+			<if test="usName!=null and usName!=''" >
+			and us_name = #{usName}
+			</if>
+		
+			<if test="pstName!=null and pstName!=0">
+			 and ps_pst_id = #{psPstId}
+			</if>
+			
+			<if test="psType!=null and psType!=''">
+			and ps_type = #{psType}
+			</if>
+			
+			
+			
+			<!-- <choose >
+                <when test="">
+                  and ps_name like concat("%",#{psName},"%")
+                </when>
+                <when test="usName!=null and usName!=''" >
+                  and us_name = #{usName}
+                </when>
+                <when test="pstName!=null and pstName!=0">
+                  and ps_pst_id = #{psPstId}
+                </when> 
+                <when test="psType!=null and psType!=''">
+                  and ps_type = #{psType}
+                </when>
+              </choose> -->
+			
+		</where>
+		  
+		  
+		  
+	</select>
+	
+	<!-- 查询待审核 -->
+	<select id="selectByKeyByPsType" resultType="com.yh.pojo.ProjectA">
+		    select
+		    	ps_id psId,
+		      ps_name psName,
+		      pst_name pstName,
+		      ps_type psType,
+              ps_starttime psStarttime,
+              ps_endtime psEndtime,
+              ps_getmoney psGetmoney,
+              ps_money psMoney,
+              us_name usName,
+              ps_us_id usId
+		      from `projects` p left join `projectstype` pr on pr.pst_id=p.ps_pst_id  left join `user` `u` on  p.ps_us_id  = `u`.us_id
+		      where ps_type = 0
+	</select>
+	
+	
+	
+	<update id="updateById">
+	update projects set ps_type=1 where ps_id=#{id}
+</update>
+<update id="updateByPsId">
+	update projects set ps_type=5 where ps_id=#{id}
+</update>
+<select id="selectComment" resultType="com.yh.pojo.Comment" >
+select  
+us_name name,
+cm_content comment
+from comments left join user on cm_us_id=us_id where cm_us_id=#{id}
+
+</select>
+</mapper>

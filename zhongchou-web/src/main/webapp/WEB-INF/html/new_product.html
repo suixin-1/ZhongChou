@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+	<link href="css/reg.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="css/base.css" type="text/css"/>
+	<link rel="stylesheet" href="css/headbott.css" type="text/css"/>
+	<link rel="stylesheet" href="css/index.css" type="text/css"/>
+	<link rel="stylesheet" href="css/ly-list.css" type="text/css"/>
+	<link rel="stylesheet" href="css/reg.css" type="text/css"/>
+	
+	<link rel="stylesheet" href="css/back.css" type="text/css"/>
+
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/ace.min.css" type="text/css"/>
+
+	  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+
+	
+	
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=VoyH4CG745rjVcUCkgcCZF276kXMiG2E"></script>
+	
+	<script type="text/javascript" src="js/jquery-1.42.min.js"></script>
+	<script type="text/javascript" src="js/ajaxfileupload.js"></script>
+	<title></title>
+	<style type="text/css">
+		#active{
+			background-color: #f00;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+<!--上部导航栏开始-->
+<div id="header">
+	<div class="heade-con">
+		<div class="logo"><a href=""><img src="images/LOGO.png"/></a></div>
+		<div class="nav posa">
+			<ul>
+				<li><a href="index.html">首页</a></li>
+				<li><a href="gyzc-list.html">公益众筹</a></li>
+				<li><a href="cop.html">常见问题</a></li>
+				<li><a href="ly-list.html">众筹资讯</a></li>
+				<li><a class="vcolor" href="new_product.html" style="">发布项目</a></li>
+			</ul>
+		</div>
+		<div class="search" style="left:664px;">
+			<form action="">
+				<input type="text" class="search-txt" value="" placeholder="找项目">
+				<input type="submit" class="search-but" value="">
+			</form>
+		</div>
+		<div class="index-login" id="index-login">
+
+			<a href="login.html">登录</a>
+			<span style="color: white;">|</span>
+			<a href="reg.html">注册</a>
+
+		</div>
+		<a href="login.html" id="goIndex" type="hidden"></a>
+		<a href="new_product.html" id="gonew_product" type="hidden"></a>
+		<script type="text/javascript">
+		//是否实名认证
+		var isShiM = false;
+		//是否以 填写基本信息
+		var isJinB = false;
+		//是否 填写项目信息
+		var isXiamgmuXX = false;
+		//是否 填写 项目故事
+		var isXiangMuGs = false;	
+		
+		$(document).ready(function() {
+			$.ajax({
+				//请求方式
+		        type : "POST",
+		        //请求的媒体类型
+		        contentType: "text/html;charset=UTF-8",
+		        //请求地址
+		        url : "to_new_product",
+		        //数据，json字符串
+		        //data : JSON.stringify(list),
+		        //请求成功
+		        dataType:"json",
+		        success : function(result) {
+		           // console.log(result);
+		            if(result.status==200){
+		            	$("#index-login").html(result.msg);
+		            	
+		            	//alert();
+		            	var role = result.data[0].usRole;
+		            	if(role==1){
+		            		//alert("已实名")
+		            		isShiM=true;
+		            		toprojectXq('shimingrenzheng');
+		            		
+		            		//$("#project_main").html("以实名");
+		            		setTimeout("ssa()",0);
+		            		
+		            	}else if(role==0){
+		            		
+		            		toprojectXq('shimingrenzheng');
+		            	
+		            		setTimeout("shenhepd()",0);
+	
+		            	}
+		            	
+		            }else if(result.status==500){
+		            	document.getElementById("goIndex").click();
+		            }
+		        }
+			},true);
+		});
+		
+		function ssa(){
+			alert("以实名")
+			$("#project_main").html("以实名");
+		}
+		
+		function toprojectXq(url){
+
+			//alert()
+			$.ajax({
+				//请求方式
+		        type : "POST",
+		        //请求的媒体类型
+		        contentType: "text/html;charset=UTF-8",
+		        //请求地址
+		        url : "/"+url,
+		        //数据，json字符串
+		        //data : JSON.stringify(list),
+		        //请求成功
+		        //dataType:"json",
+		        success : function(result) {
+		        	//console.log("ss")
+		           // console.log(result);
+		           //if(result.status==200){
+		            	$("#productMain").html(result);
+		            	//if(isShiM){
+		            		//$('#project_main').html('以实名认证');
+		            	//}
+		          // }
+		        }
+			},true);
+		}
+		
+		//审核判断
+		function shenhepd(){
+			$.ajax({
+		        type : "POST",
+		        contentType: "text/html;charset=UTF-8",
+		        url : "/isfshenhezhong",
+		        dataType:"json",
+		        success:function(result) {
+		            console.log(result);
+		            if(result.status==200){
+		            	$('#project_main').html(result.data);
+		            }else if(result.status==500){
+		            	
+		            	$.ajax({
+		    				//请求方式
+		    		        type : "POST",
+		    		        //请求的媒体类型
+		    		        contentType: "text/html;charset=UTF-8",
+		    		        //请求地址
+		    		        url : "/shimingrenzheng",
+		    		        //数据，json字符串
+		    		        //data : JSON.stringify(list),
+		    		        //请求成功
+		    		        //dataType:"json",
+		    		        success : function(result) { 
+		    		           $("#productMain").html(result);
+		    		        }
+		    			},true);
+		           	}
+		        }
+			},true);
+		}
+		
+		
+		</script>
+	</div>
+</div>
+<!--上不导航栏结束-->
+<!--中间核心-->
+<div class="product" id="productMain">
+	
+</div>
+
+<!-- <div class="product"> -->
+	<!--头上表格-->
+	 <!-- <div class="product-table">
+        <div class="product-left">
+            <table class="table table-bordered">
+                <tr class="text-center">
+                 	<td class="title-td" style="cursor: pointer;" id="active">实名认证</td>
+                    <td class="title-td" style="cursor: pointer;" onclick="projectToXq('jibenxinxi')">基本信息</td>
+                    <td class="title-td" style="cursor: pointer;">项目信息</td>
+                    <td class="title-td" style="cursor: pointer;">项目故事</td>
+                    <td class="title-td" style="cursor: pointer;">回报设置</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+	
+	
+	<div class="product-form" id="project_main">
+	
+			实名认证
+        
+        <div class="my-form">
+        	<div class="product-info-input">
+        		<b>身份证号*：</b><input class="text" type="text" placeholder="请输入你的身份证号">
+        	</div>
+        	<div class="product-info-input">
+        		<b>身份证正面*：</b><input style="margin-left: 100px; margin-top:-20px; width: 300px;" class="text" type="file" placeholder="给自己的项目起个漂亮的名字吧">
+        	</div>
+        	<div class="product-info-input">
+        		<b>身份证反面*：</b><input style="margin-left: 100px; margin-top:-20px; width: 300px;" class="text" type="file" placeholder="给自己的项目起个漂亮的名字吧">
+        	</div>
+        	<div class="product-info-input">
+        		验证码
+                 <label class="block clearfix">
+						<span>
+							<input type="text" class="" placeholder="验证码" id="codes"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-default" onclick="sendCode()">点击获取验证码</button>
+						</span>
+                  </label>
+        	</div>
+        	<br>
+        	<div class="product-info-input">
+        		 <button class="btn btn-default btn-primary pull-right" onclick="" style="margin-right: 350px;">提交</button>
+        	</div>
+        </div>
+	
+	
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+        上标题
+        表单
+        <form>
+            <div class="my-form">
+                <div class="product-info-input">
+                    <b>设置封面：</b>
+                    <input class="btn btn-success" type="file" style="width: 100px;"/> <a href="#" style="border: solid 1px #000; background-color: #ccc; padding: 5px;">上传</a>
+                    <input type="hidden">
+                </div>
+                <div class="product-info-input"><b>项目标题：</b><input class="text" type="text" placeholder="给自己的项目起个漂亮的名字吧"></div>
+                <div class="product-info-input"><b>筹款目的：</b><textarea rows="2" placeholder="一句话介绍一下你的项目吧"></textarea></div>
+                <div class="product-info-select">
+                    <div class="product-info-text"><b>项目地点：</b></div>
+                    <div class="product-info-select1">
+                        <select class="info-select1">
+                            <option>请选择</option>
+                        </select>
+                    </div>
+                    <div class="product-info-select2">
+                        <select class="info-select2">
+                            <option>请选择</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="product-info-input"><b>筹资金额：</b><input class="text" type="text" placeholder="输入你需要的金额，最少500元">元</div>
+                <div class="product-info-input"><b>筹资天数：</b><input class="text" type="text" placeholder="">天</div>
+            </div>
+        </form>
+        
+        
+        
+    </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	下部foem表单
+	<div class="product-form">
+		上标题
+		<div class="product-title">
+			<div class="my-h4">
+				<h4>发布项目详细信息</h4>
+			</div>
+			
+		</div>
+		<div class="clear"></div>
+		<hr>
+		选择机构个人
+		<div class="choose">
+			<table class="table table-bordered">
+				<tr class="text-center">
+					<td class="choose-td" style="background: #00aced">发布项目</td>
+				</tr>
+			</table>
+		</div>
+		表单
+		<form   action= "addProject" method="post">
+			<div class="my-form text-center">
+
+				<div class="product-input"><b>用户名*：</b><input class="text" type="text" placeholder="请输入中文姓名，2-20个字符" name="usName"></div>
+				<div class="product-input"><b>身份证号*：</b><input class="text" type="text" placeholder="二代身份证，请输入数字或字母" name="usIdcard"></div>
+				<div class="product-input"><b>手机号*：</b><input class="text" type="text" placeholder="请输入手机号码" name="usPhone"></div>
+				<div class="product-input"><b>客服联系人：</b><input class="text" type="text" placeholder="客服联系人" name="proAName"></div>
+				<div class="product-input"><b>客服咨询：</b><input class="text" type="text" placeholder="客服咨询电话" name="proAPhone"></div>
+				<div class="product-input"><b>用户地址*：</b><input class="text" type="text" placeholder="用户地址" name="usAddress"></div>
+			<div class="product-select">
+				<div class="select-type">
+						<select class="select-cla" name="pstName">
+						<option>请选择公益类型</option>
+						<option>支教助学</option>
+						<option>妇女家庭</option>
+						<option>绿色环保</option>
+						<option>动物保护</option>
+						<option>扶老助孤</option>
+						<option>儿童关爱</option>
+						
+						
+					</select>
+				</div>
+			</div>
+			
+                <div class="product-info-input"><b>项目标题：</b><input class="text" type="text" placeholder="给自己的项目起个漂亮的名字吧" name="psName"></div>
+                <div class="product-info-input"><b>筹款目的：</b><input class="text" type="text" placeholder="一句话介绍一下你的项目吧" name="psGoal"></div>
+                <div class="product-info-input"><b>项目地点：</b><input class="text" type="text" placeholder="具体位置" name="psAddress"></div>
+				
+                <div class="product-info-input"><b>项目金额：</b><input class="text" type="text" placeholder="请输入金额，最低500" name="psMoney">元</div>
+                <div class="product-info-input"><b>筹资天数：</b><input class="text" type="text" placeholder="" name="psDays">天</div>
+                
+                <div class="product-info-input"><b>项目图片：</b><input class="text" type="text" placeholder="" name="psFile"></div>
+                
+			   <div class="product-info-input"><b>宣传视频：</b><input class="text" type="text" placeholder="请输入视频地址" name="psVideo"></div>
+                <div class="product-info-input"><b>项目故事：</b><input class="text" type="text" placeholder="一句话介绍一下你的项目吧" name="psStory"></div>
+                 <div class="product-info-input"><b>更多支持：</b><input class="text" type="text" placeholder="一句话介绍一下你的项目吧" name="psSupport"></div>
+                <div class="product-info-input"><b>提供回报：</b><input class="text" type="text" placeholder="一句话介绍一下你的项目吧" name="psRepay"></div>
+                <div class="product-info-input"><b>关于我：</b><input class="text" type="text" placeholder="一句话介绍一下你的项目吧 " name="psAboutme"></div>
+				
+            
+			 
+               <div class="product-select">
+				<div class="select-type">
+					<select class="select-cla" name="ryType">
+						<option>请选择回报类型</option>
+						<option value=1>实物回报(回报需邮寄)</option>
+						<option value=0>虚拟回报(回报无需邮寄)</option>
+						
+					</select>
+				</div>
+			</div>
+                 <div class="product-info-input"><b>支持金额：</b><input class="text" type="text" placeholder="输入需要用户支持的金额 " name="ryPaymoney"></div>
+				 <div class="product-info-input"><b>具体规则：</b><input class="text" type="text" placeholder="此项必填：每x名支持者抽取一名中奖者 " name="ryRule"></div>
+				 <div class="product-info-input"><b>回报内容：</b><input class="text" type="text" placeholder="一句话介绍一下你的回报吧 " name="ryContent"></div>
+				 <div class="product-info-input"><b>人数上限：</b><input class="text" type="text" placeholder="0为不需要名额" name="ryNumber"></div>
+				 <div class="product-info-input"><b>回报时间：</b><input class="text" type="text" placeholder="0为开奖后立即发送 " name="ryTime"></div>
+              
+                
+           
+		
+		 </div>
+                <div class="text-center"><button type="submit" class="btn"  >发布 </button></div>
+</form >
+            </div>
+</div>
+ -->
+<!--底部开始-->
+<div id="bottom">
+	<div class="bottom-ggt"><a href=""><img src="images/bottbom_68.jpg" alt=""/></a></div>
+	<div class="zc-yqlink">
+		<ul>
+			<li><a href="">阿里巴巴集团</a></li>
+			<li><a href="">淘宝网</a></li>
+			<li><a href="">天猫</a></li>
+			<li><a href="">聚划算</a></li>
+			<li><a href="">全球速卖通</a></li>
+			<li><a href="">阿里巴巴国际交易市场</a></li>
+			<li><a href="">1688</a></li>
+			<li><a href="">阿里妈妈</a></li>
+			<li><a href="">阿里旅行</a></li>
+			<li><a href="">阿里云计算</a></li>
+			<li><a href="">阿里巴巴集团</a></li>
+			<li><a href="">淘宝网</a></li>
+			<li><a href="">天猫</a></li>
+			<li><a href="">聚划算</a></li>
+			<li><a href="">全球速卖通</a></li>
+			<li><a href="">阿里巴巴国际交易市场</a></li>
+			<li><a href="">1688</a></li>
+			<li><a href="">阿里妈妈</a></li>
+			<li><a href="">阿里云计算</a></li>
+		</ul>
+	</div>
+	<div class="footer-bd">
+
+		<a href=" ">关于淘宝</a>
+		<a href=" ">合作伙伴</a>
+		<a href=" ">营销中心</a>
+		<a href=" ">廉正举报</a>
+		<a href=" ">联系客服</a>
+		<a href=" ">开放平台</a>
+		<a href=" ">诚征英才</a>
+		<a href=" ">联系我们</a>
+		<a href=" ">网站地图</a>
+		<a href=" ">法律声明</a>　　　
+		<em>© 2003-2015 Taobao.com 版权所有</em><br>
+
+		<br>
+		<span>网络文化经营许可证：<a href=" ">浙网文[2013]0268-027号</a></span>
+		<b>|</b>
+		<span data-spm-protocol="i">增值电信业务经营许可证：<a href="">浙B2-20080224-1</a></span>
+		<b>|</b>
+		<span>信息网络传播视听节目许可证：1109364号</span>
+		<b>|</b>
+		<span>举报电话:0571-81683755</span>
+	</div>
+</div>
+</body>
+</html>
